@@ -33,7 +33,6 @@ app.post('/node', async(req, res) => {
     database: config_data.database
   })
 
-
   await client.connect()
   // search for the corresponding hash of the given key
   const query_result = await client.query('SELECT "Key" FROM public."Train" where "Hash" = \''+ gen_hash + '\'')
