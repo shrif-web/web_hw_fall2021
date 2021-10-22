@@ -1,11 +1,20 @@
+// importing the required libraries
 const express = require('express')
 const app = express()
-const port = 3000
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const crypto = require('crypto');
 
+// read static data from config file
+const config_data = require('./config/config.json');
+const { config } = require('process');
+// setting the port from config file
+const port = config_data.port
+
+// This function get a string as a key and calculate it's hash and
+// if the hash doesn't exist save the key and the hash in the database
 app.post('/node', async(req, res) => {
+  //distinguish the hash tupe
   const hash = crypto.createHash('sha256');
   //passing the data to be hashed
   data = hash.update(req.body.Input1, 'utf-8');
@@ -13,36 +22,42 @@ app.post('/node', async(req, res) => {
   gen_hash= data.digest('hex');
   //Printing the output on the console
   console.log("hash : " + gen_hash);
+  //Send the hash as the response
   res.send("hash : " + gen_hash);
 
+  // fill out the connection string 
   const { Client } = require('pg')
   const client = new Client({
-    user: 'postgres',
-    password: 'amir1379',
-    database: 'postgres'
+    user: config_data.user,
+    password: config_data.password,
+    database: config_data.database
   })
+
+
   await client.connect()
-  const res2 = await client.query('SELECT "Key" FROM public."Train" where "Hash" = \''+ gen_hash + '\'')
-  if(res2.rows.length === 0){
-    const res4 = await client.query('INSERT INTO "Train"("Key","Hash") VALUES (\'' + req.body.Input1 + '\',\''+gen_hash+'\')')    
+  // search for the corresponding hash of the given key
+  const query_result = await client.query('SELECT "Key" FROM public."Train" where "Hash" = \''+ gen_hash + '\'')
+  if(query_result.rows.length === 0){
+    await client.query('INSERT INTO "Train"("Key","Hash") VALUES (\'' + req.body.Input1 + '\',\''+gen_hash+'\')')    
 }
   await client.end()
 })
 
 app.get('/node', async(req, res) => {
+    // fill out the connection string 
     const { Client } = require('pg')
     const client = new Client({
-      user: 'postgres',
-      password: 'amir1379',
-      database: 'postgres'
+      user: config_data.user,
+      password: config_data.password,
+      database: config_data.database
     })
     await client.connect()
-    const res2 = await client.query('SELECT "Key" FROM public."Train" where "Hash" = \''+ req.query.Input1 + '\'')
-    if(res2.rows.length === 0){
+    const query_result = await client.query('SELECT "Key" FROM public."Train" where "Hash" = \''+ req.query.Input1 + '\'')
+    if(query_result.rows.length === 0){
       // const res4 = await client.query('INSERT INTO "Train"("Key","Hash") VALUES (\'' + req.params.Input1 + '\',\''+gen_hash+'\')')    
         res.send('No record!')
     } else{
-        res.send(res2.rows[0].Key)
+        res.send(query_result.rows[0].Key)
     }
     await client.end()
 })
