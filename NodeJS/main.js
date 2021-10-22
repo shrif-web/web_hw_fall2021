@@ -1,8 +1,12 @@
 const express = require('express')
 const app = express()
 const port = 3000
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+//import sha256 from 'crypto-js/sha256';
+//const sha256 = 
 
-app.get('/node', async(req, res) => {
+app.post('/node', async(req, res) => {
   /*
   const { Client } = require('pg')
   const client = new Client()
