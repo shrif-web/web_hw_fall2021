@@ -1,0 +1,1 @@
+docker run --name Container_HW1_HTMLPage -v ~/Desktop/HW/default.conf:/etc/nginx/conf.d/default.conf:ro  -p 8080:80 -d hw1_html_webpage
