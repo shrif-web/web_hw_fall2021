@@ -3,8 +3,8 @@ const app = express()
 const port = 3000
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-//import sha256 from 'crypto-js/sha256';
-//const sha256 = 
+const crypto = require('crypto');
+const hash = crypto.createHash('sha256');
 
 app.post('/node', async(req, res) => {
   /*
@@ -16,9 +16,16 @@ app.post('/node', async(req, res) => {
   res.send(res2.rows[0].name)
   */
   //res.send('Hello World!')
-  res.send(req.body.Input1)
+  //res.send(req.body.Input1)
   //const hash = crypto.createHash('sha256').update(pwd).digest('base64');
   //await client.end()
+
+  //passing the data to be hashed
+  data = hash.update(req.body.Input1, 'utf-8');
+  //Creating the hash in the required format
+  gen_hash= data.digest('hex');
+  //Printing the output on the console
+  console.log("hash : " + gen_hash);
 })
 
 app.listen(port, () => {
