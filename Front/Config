@@ -1,0 +1,1 @@
+docker build -t hw1_html_webpage:latest .
