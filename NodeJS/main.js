@@ -26,6 +26,7 @@ app.post('/node', async(req, res) => {
   gen_hash= data.digest('hex');
   //Printing the output on the console
   console.log("hash : " + gen_hash);
+  res.send("hash : " + gen_hash);
 })
 
 app.listen(port, () => {
