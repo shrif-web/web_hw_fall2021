@@ -30,7 +30,6 @@ app.post('/node', async(req, res) => {
 })
 
 app.get('/node', async(req, res) => {
-
     const { Client } = require('pg')
     const client = new Client({
       user: 'postgres',
@@ -38,16 +37,15 @@ app.get('/node', async(req, res) => {
       database: 'postgres'
     })
     await client.connect()
-    const res2 = await client.query('SELECT "Key" FROM public."Train" where "Hash" = \''+ req.params.Input1 + '\'')
+    const res2 = await client.query('SELECT "Key" FROM public."Train" where "Hash" = \''+ req.query.Input1 + '\'')
     if(res2.rows.length === 0){
       // const res4 = await client.query('INSERT INTO "Train"("Key","Hash") VALUES (\'' + req.params.Input1 + '\',\''+gen_hash+'\')')    
         res.send('No record!')
     } else{
-        res.send(res2.rows[0].key)
+        res.send(res2.rows[0].Key)
     }
-    console.log(req.params)
     await client.end()
-  })
+})
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
