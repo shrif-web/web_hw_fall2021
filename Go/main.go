@@ -13,14 +13,13 @@ import (
 
 func NewSHA256(data []byte) []byte {
 	hash := sha256.Sum256(data)
-
 	return hash[:]
 }
 
 func main() {
 	r := gin.Default()
-	//r.GET("/go", func(c *gin.Context) {
-	r.GET("/node", func(c *gin.Context) {	
+	r.GET("/go", func(c *gin.Context) {
+	//r.GET("/node", func(c *gin.Context) {	
 		Input := c.Query("Input1") // shortcut for c.Request.URL.Query().Get("lastname")
 		//PGUSER=postgres PGPASSWORD=Arsalan995384 PGDATABASE=DB_First PGPORT=5432
 		// connStr := "user=postgres password=Arsalan995384 sslmode=disable dbname=DB_First"
@@ -40,8 +39,8 @@ func main() {
 			c.String(http.StatusOK, "Hello %s", Key)
 		}
 	})
-	// r.POST("/go", func(c *gin.Context) {
-	r.POST("/node", func(c *gin.Context) {		
+	r.POST("/go", func(c *gin.Context) {
+	//r.POST("/node", func(c *gin.Context) {		
 		Key := c.PostForm("Input1") // shortcut for c.Request.URL.Query().Get("lastname")
 		// deleted
 		// h := sha256.New()
@@ -53,19 +52,19 @@ func main() {
 		// deleted
 		// h.Write([]byte(Input))
 
-
 		//PGUSER=postgres PGPASSWORD=Arsalan995384 PGDATABASE=DB_First PGPORT=5432
 		// connStr := "user=postgres password=Arsalan995384 sslmode=disable dbname=DB_First"
 		connStr := "user=postgres password=amir1379 sslmode=disable dbname=My_db"
 		db, err := sql.Open("postgres", connStr)
 		if err != nil {
 			log.Fatal(err)
+			//log.Print(err)
 		}
 		//rows, err := db.Query("SELECT \"Key\" FROM public.\"Train\" where \"Hash\" = '$1'", Input)
-		//var Key string
+		var Key_t string
 		//rows, err := db.Query("SELECT name FROM users WHERE age = $1", age)
 		// err2 := db.QueryRow("SELECT \"Key\" FROM public.\"Train\" where \"Hash\" = '" + fmt.Sprintf("%x", h.Sum(nil)) + "'").Scan(&Key)
-		err2 := db.QueryRow("SELECT \"Key\" FROM public.\"Train\" where \"Hash\" = '" + hash + "'").Scan(&Key)
+		err2 := db.QueryRow("SELECT \"Key\" FROM public.\"Train\" where \"Hash\" = '" + hash + "'").Scan(&Key_t)
 		if err2 != nil {
 			// err3 := db.QueryRow("INSERT INTO \"Train\"(\"Key\",\"Hash\") VALUES ('" + Input + "','" + fmt.Sprintf("%x", h.Sum(nil)) + "')")
 			err3 := db.QueryRow("INSERT INTO \"Train\"(\"Key\",\"Hash\") VALUES ('" + Key + "','" + hash + "')")
@@ -79,5 +78,4 @@ func main() {
 		c.String(http.StatusOK, "%s",  hash )
 	})
 	r.Run(":9090")
-
 }
