@@ -3,9 +3,8 @@ package main
 import (
 	"crypto/sha256"
 	"database/sql"
+	"fmt"
 
-	//"fmt"
-	b64 "encoding/base64"
 	"log"
 	"net/http"
 
@@ -28,24 +27,34 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		var Key sql.NullString
 		rows, _ := db.Query("SELECT count(\"Key\") FROM public.\"Train\" where \"Hash\" = '" + Input + "'")
 		i := 0
 		for rows.Next() {
 			rows.Scan(&i)
 		}
 		log.Print(i)
-		log.Print("SELECT count(\"Key\") FROM public.\"Train\" where \"Hash\" = '" + Input + "'")
+		rows.Close()
+
+		rows, _ = db.Query("SELECT \"Key\" FROM public.\"Train\" where \"Hash\" = '" + Input + "'")
+		var k string
+		for rows.Next() {
+			rows.Scan(&k)
+		}
+		log.Print(k)
+
 		if i == 0 {
 			c.String(http.StatusOK, "No Record Found!")
 			//log.Fatal(err2)
 		} else {
-			c.String(http.StatusOK, "Hello %s", Key)
+			c.String(http.StatusOK, "Hello %s", k)
 		}
 	})
 	r.POST("/go", func(c *gin.Context) {
 		Key := c.PostForm("Input1") // shortcut for c.Request.URL.Query().Get("lastname")
-		hash := b64.StdEncoding.EncodeToString(NewSHA256([]byte(Key)))
+		// hash := b64.StdEncoding.EncodeToString(NewSHA256([]byte(Key))) // Erfan Wrong Casting
+		h := sha256.New()
+		h.Write([]byte(Key))
+		hash := fmt.Sprintf("%x", h.Sum(nil))
 		connStr := "user=postgres password=Arsalan995384 sslmode=disable dbname=DB_First"
 		//connStr := "user=postgres password=amir1379 sslmode=disable dbname=My_db"
 		db, err := sql.Open("postgres", connStr)
@@ -78,7 +87,6 @@ func main() {
 				log.Fatal(err3)
 			}
 		}
-		c.String(http.StatusOK, "%s", hash)
 	})
 	r.Run(":9090")
 }
