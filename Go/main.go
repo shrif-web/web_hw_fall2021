@@ -4,18 +4,11 @@ import (
 	"crypto/sha256"
 	"database/sql"
 	"fmt"
-
 	"log"
 	"net/http"
-
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
 )
-
-func NewSHA256(data []byte) []byte {
-	hash := sha256.Sum256(data)
-	return hash[:]
-}
 
 func main() {
 	r := gin.Default()
@@ -51,7 +44,7 @@ func main() {
 	})
 	r.POST("/go", func(c *gin.Context) {
 		Key := c.PostForm("Input1") // shortcut for c.Request.URL.Query().Get("lastname")
-		// hash := b64.StdEncoding.EncodeToString(NewSHA256([]byte(Key))) // Erfan Wrong Casting
+
 		h := sha256.New()
 		h.Write([]byte(Key))
 		hash := fmt.Sprintf("%x", h.Sum(nil))
@@ -61,18 +54,6 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-
-		/*
-			rows, _ := db.Query("SELECT \"Key\" FROM public.\"Train\" where \"Hash\" = '" + hash + "'")
-
-			//defer rows.Close()
-				i := 0
-				for rows.Next() {
-					i = i + 1
-				}
-				log.Print(i)
-				log.Print(hash)
-		*/
 		rows, _ := db.Query("SELECT count(\"Key\") FROM public.\"Train\" where \"Hash\" = '" + hash + "'")
 		i := 0
 		for rows.Next() {
