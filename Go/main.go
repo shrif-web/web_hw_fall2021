@@ -28,9 +28,15 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		var Key string
-		err2 := db.QueryRow("SELECT \"Key\" FROM public.\"Train\" where \"Hash\" = '" + Input + "'").Scan(&Key)
-		if err2 == nil {
+		var Key sql.NullString
+		rows, _ := db.Query("SELECT count(\"Key\") FROM public.\"Train\" where \"Hash\" = '" + Input + "'")
+		i := 0
+		for rows.Next() {
+			rows.Scan(&i)
+		}
+		log.Print(i)
+		log.Print("SELECT count(\"Key\") FROM public.\"Train\" where \"Hash\" = '" + Input + "'")
+		if i == 0 {
 			c.String(http.StatusOK, "No Record Found!")
 			//log.Fatal(err2)
 		} else {
@@ -45,14 +51,30 @@ func main() {
 		db, err := sql.Open("postgres", connStr)
 		if err != nil {
 			log.Fatal(err)
-			//log.Print(err)
 		}
-		var Key_t string
-		err2 := db.QueryRow("SELECT \"Key\" FROM public.\"Train\" where \"Hash\" = '" + hash + "'").Scan(&Key_t)
-		if err2 != nil {
+
+		/*
+			rows, _ := db.Query("SELECT \"Key\" FROM public.\"Train\" where \"Hash\" = '" + hash + "'")
+
+			//defer rows.Close()
+				i := 0
+				for rows.Next() {
+					i = i + 1
+				}
+				log.Print(i)
+				log.Print(hash)
+		*/
+		rows, _ := db.Query("SELECT count(\"Key\") FROM public.\"Train\" where \"Hash\" = '" + hash + "'")
+		i := 0
+		for rows.Next() {
+			rows.Scan(&i)
+			log.Print(i)
+		}
+		if i == 1 {
+			c.String(http.StatusOK, "%s", hash)
+		} else {
 			err3 := db.QueryRow("INSERT INTO \"Train\"(\"Key\",\"Hash\") VALUES ('" + Key + "','" + hash + "')")
 			if err3 == nil {
-				// log.Print(err2.Err())
 				log.Fatal(err3)
 			}
 		}
