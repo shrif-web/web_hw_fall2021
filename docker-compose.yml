@@ -4,13 +4,15 @@ services:
     build: ./Go/ 
     container_name: golang_container
 
-  wwww.node.com:
+  www.node.com:
     build: NodeJS/
     container_name: node_container
 
   www.nginx.com:
     image: nginx
     container_name: frontend-nginx
+    ports: 
+      - "80:80"
     volumes:
         - ./Front/.:/usr/share/nginx/html
         - ./Nginx/default.conf:/etc/nginx/conf.d/default.conf 
