@@ -87,8 +87,8 @@
                         data: {
                             Input1: input
                             },
-                        success: function (response) {
-                            alert("Data: " + response);
+                        success: function (req) {
+                            alert("Data: " + req.response);
                         },
                         error: function (error) {
                             console.log(error);
