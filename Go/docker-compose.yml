@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+ web: 
+   image: hw1_golang
+   ports: 
+    - "9090:9090"
+   init: true
+   container_name: golang_container
+   networks:
+        testnet:
+          ipv4_address: 172.0.2.10
+networks:
+  testnet:
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.0.2.10/24

@@ -1,17 +1,12 @@
-# syntax=docker/dockerfile:1
-
-FROM golang:1.16-alpine
-
+FROM golang:latest as development
+# Add a work directory
 WORKDIR /app
-
-COPY go.mod ./
-COPY go.sum ./
+# Cache and install dependencies
+COPY go.mod go.sum ./
 RUN go mod download
-
-COPY *.go ./
-
-RUN go build -o /docker-go-hash
-
+# Copy app files
+COPY . .
+# Expose port
 EXPOSE 9090
-
-CMD [ "/docker-go-hash" ]
+# Start app
+CMD [ "go", "run", "main.go" ]
