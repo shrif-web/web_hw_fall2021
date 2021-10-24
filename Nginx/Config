@@ -3,3 +3,7 @@ docker build -t hw1_html_webpage:latest .
 docker run --name Container_HW1_HTMLPage -d  hw1_html_webpage
 
 docker run --name Container_HW1_HTMLPage -p 8080:80 -d hw1_html_webpage
+
+docker-compose up -d
+
+docker-compose down
