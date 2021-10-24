@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+ web: 
+   image: hw1_nodejs
+   ports: 
+    - "3000:3000"
+   init: true
+   container_name: nodejs_container
+   networks:
+        testnet:
+          ipv4_address: 172.0.1.10
+networks:
+  testnet:
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.0.1.10/24
