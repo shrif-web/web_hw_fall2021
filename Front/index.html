@@ -1,5 +1,6 @@
 <html>
     <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <title>
             The first homework
         </title>
@@ -60,16 +61,32 @@
                 justify-content: center;
             }
         </style>
+        <script>
+            function nodejs(){
+                if(document.querySelector('input[name="noderadio"]:checked').value == "Encode"){
+                    var input = document.getElementById("nodeinput").value ;
+                    $.post("http://localhost:3000/node",
+                    {
+                    Input1: input
+                    },
+                    function(data,status){
+                    alert("Data: " + data + "\nStatus: " + status);
+                    });
+                }
+            }
+        </script>
     </head>
     <body>
         <div class="Group">
             <fieldset>
                 <legend>NodeJS Sha256</legend>
                 <form method = "post" action = "node/"> 
-                    <input type = "text" name = "Input1" placeholder = "String" required> 
+                    <input type = "text" id = "nodeinput" name = "Input1" placeholder = "String" required> 
                     <br>
-                    <input type="radio" name="func" value="Encode" checked /> Encode <input type="radio" name="func" value="Decode" /> Decode
-                    <input type = "submit" name = "Submit1" value = "Submit"> 
+                    <input type="radio" name="noderadio" id = "noderadio" value="Encode" checked /> Encode 
+                    <input type="radio" name="noderadio" id = "noderadio" value="Decode" /> Decode
+                    <input type = "button" Onclick = "nodejs()" value = "Submit"> 
+                    <span id="noderes"> </span>
                 </form>
             </fieldset>
             <fieldset>
