@@ -42,7 +42,7 @@
             fieldset input[type=radio]{
                 margin-top: 4%;
             }
-            fieldset input[type=submit]{
+            fieldset input[type=button]{
                 display: block;
                 width: 50%;
                 margin-top: 10px;
@@ -62,31 +62,17 @@
             }
         </style>
         <script>
-            function nodejs(){
+            function nodejs(method_type){
                 if(document.querySelector('input[name="noderadio"]:checked').value == "Encode"){
-                    var input = document.getElementById("nodeinput").value ;
-                    $.ajax({
-                        url: 'http://localhost:3000/node',            
-                        method: 'POST',
-                        type: 'dataType',
-                        crossDomain: true,
-                        headers: {  'Access-Control-Allow-Origin': '*' },
-                        data: {
-                            Input1: input
-                            },
-                        success: function (response) {
-                            document.getElementById('noderes').innerHTML = response;
-                        },
-                        error: function (error) {
-                            console.log(error);
-                        }
-                    });
+                    var Method = 'Post'
                 }
                 if(document.querySelector('input[name="noderadio"]:checked').value == "Decode"){
-                    var input = document.getElementById("nodeinput").value ;
+                    var Method = 'Get'
+                }
+                var input = document.getElementById("nodeinput").value ;
                     $.ajax({
                         url: 'http://localhost:3000/node',            
-                        method: 'Get',
+                        method: Method,
                         type: 'dataType',
                         crossDomain: true,
                         headers: {  'Access-Control-Allow-Origin': '*' },
@@ -100,7 +86,6 @@
                             console.log(error);
                         }
                     });
-                }
             }
         </script>
     </head>
@@ -108,22 +93,23 @@
         <div class="Group">
             <fieldset>
                 <legend>NodeJS Sha256</legend>
-                <form method = "post" action = "node/"> 
+                <form method = "post"> 
                     <input type = "text" id = "nodeinput" name = "Input1" placeholder = "String" required> 
                     <br>
                     <input type="radio" name="noderadio" id = "noderadio" value="Encode" checked /> Encode 
-                    <input type="radio" name="noderadio" id = "noderadio" value="Decode" checked /> Decode
+                    <input type="radio" name="noderadio" id = "noderadio" value="Decode" /> Decode
                     <input type = "button" Onclick = "nodejs()" value = "Submit"> 
                     <span id="noderes"> </span>
                 </form>
             </fieldset>
             <fieldset>
                 <legend>GoLang Sha256</legend>
-                <form method = "post" action = "node/"> 
+                <form method = "post"> 
                     <input type = "text" name = "Input1" placeholder = "String" required> 
                     <br>
-                    <input type="radio" name="func" value="Encode" checked /> Encode <input type="radio" name="func" value="Decode" /> Decode
-                    <input type = "submit" name = "Submit1" value = "Submit"> 
+                    <input type="radio" name="func" value="Encode" checked /> Encode
+                    <input type="radio" name="func" value="Decode" checked /> Decode
+                    <input type = "button" name = "Submit1" value = "Submit"> 
                 </form>
             </fieldset>
         </div>
