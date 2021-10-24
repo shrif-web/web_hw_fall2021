@@ -49,7 +49,7 @@ func main() {
 			return
 		}
 
-		connStr := "user=admin dbname=test-db password=admin sslmode=disable"
+		connStr := "host=www.pg.com user=admin dbname=test-db password=admin sslmode=disable"
 		db, err := sql.Open("postgres", connStr)
 		if err != nil {
 			log.Fatal(err)
@@ -61,6 +61,7 @@ func main() {
 		if err2 != nil {
 			c.JSON(http.StatusOK, gin.H{
 				"response": "No record found",
+				"err": err2.Error()
 			})
 		} else {
 			c.JSON(http.StatusOK, gin.H{
@@ -83,7 +84,7 @@ func main() {
 		h := sha256.New()
 		h.Write([]byte(Key))
 		hash := fmt.Sprintf("%x", h.Sum(nil))
-		connStr := "user=admin dbname=test-db password=admin sslmode=disable"
+		connStr := "host=www.pg.com user=admin dbname=test-db password=admin sslmode=disable"
 
 		db, err := sql.Open("postgres", connStr)
 		if err != nil {

@@ -1,15 +1,29 @@
 version: '3.7'
 services:
+  www.pg.com: 
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+    volumes: 
+          # copy the sql script to create tables
+          - ./postgres/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    container_name: postgres_container 
+
   www.go.com: 
     build: ./Go/ 
+    restart: always
     container_name: golang_container
 
   www.node.com:
     build: NodeJS/
+    restart: always
     container_name: node_container
 
   www.nginx.com:
     image: nginx
+    restart: always
     container_name: frontend-nginx
     ports: 
       - "80:80"
