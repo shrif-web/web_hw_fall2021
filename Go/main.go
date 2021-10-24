@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
 )
@@ -14,60 +15,69 @@ func main() {
 	r := gin.Default()
 	r.GET("/go", func(c *gin.Context) {
 		Input := c.Query("Input1")
-		connStr := "user=postgres password=Arsalan995384 sslmode=disable dbname=DB_First"
-		//connStr := "user=postgres password=amir1379 sslmode=disable dbname=My_db"
+
+		connStr := "user=admin dbname=test-db password=admin sslmode=disable"
 		db, err := sql.Open("postgres", connStr)
 		if err != nil {
 			log.Fatal(err)
 		}
-		rows, _ := db.Query("SELECT count(\"Key\") FROM public.\"Train\" where \"Hash\" = '" + Input + "'")
-		i := 0
-		for rows.Next() {
-			rows.Scan(&i)
-		}
-		log.Print(i)
-		rows.Close()
 
-		rows, _ = db.Query("SELECT \"Key\" FROM public.\"Train\" where \"Hash\" = '" + Input + "'")
-		var k string
-		for rows.Next() {
-			rows.Scan(&k)
-		}
-		log.Print(k)
+		var Key sql.NullString
 
-		if i == 0 {
-			c.String(http.StatusOK, "No Record Found!")
-			//log.Fatal(err2)
+		err2 := db.QueryRow("SELECT \"Key\" FROM public.\"Train\" where \"Hash\" = '" + Input + "'").Scan(&Key)
+		if err2 != nil {
+			c.JSON(http.StatusOK, gin.H{
+				"response": "No record found",
+			})
 		} else {
-			c.String(http.StatusOK, "Hello %s", k)
+			c.JSON(http.StatusOK, gin.H{
+				"response": Key.String,
+			})
 		}
+
 	})
+
 	r.POST("/go", func(c *gin.Context) {
 		Key := c.PostForm("Input1") // shortcut for c.Request.URL.Query().Get("lastname")
+
+		if len(Key) < 8 {
+			c.JSON(http.StatusOK, gin.H{
+				"response": "Input needs to be 8 character at least!",
+			})
+			return
+		}
 
 		h := sha256.New()
 		h.Write([]byte(Key))
 		hash := fmt.Sprintf("%x", h.Sum(nil))
-		connStr := "user=postgres password=Arsalan995384 sslmode=disable dbname=DB_First"
-		//connStr := "user=postgres password=amir1379 sslmode=disable dbname=My_db"
+		connStr := "user=admin dbname=test-db password=admin sslmode=disable"
+
 		db, err := sql.Open("postgres", connStr)
 		if err != nil {
 			log.Fatal(err)
 		}
-		rows, _ := db.Query("SELECT count(\"Key\") FROM public.\"Train\" where \"Hash\" = '" + hash + "'")
-		i := 0
-		for rows.Next() {
-			rows.Scan(&i)
-			log.Print(i)
+
+		var Rows sql.NullInt64
+		err1 := db.QueryRow("SELECT count(\"Key\") FROM public.\"Train\" where \"Hash\" = '" + hash + "'").Scan(&Rows)
+		if err1 != nil {
+			log.Fatal(err1)
 		}
-		if i == 1 {
-			c.String(http.StatusOK, "%s", hash)
+
+		if Rows.Int64 > 0 {
+			c.JSON(http.StatusOK, gin.H{
+				"response": hash,
+			})
 		} else {
 			err3 := db.QueryRow("INSERT INTO \"Train\"(\"Key\",\"Hash\") VALUES ('" + Key + "','" + hash + "')")
 			if err3 == nil {
 				log.Fatal(err3)
 			}
+			c.JSON(http.StatusOK, gin.H{
+				"response": hash,
+			})
+
 		}
+
 	})
-	r.Run(":9090")
+	r.Run(":9091")
 }
