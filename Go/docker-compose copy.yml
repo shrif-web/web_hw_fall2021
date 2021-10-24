@@ -4,6 +4,8 @@ services:
    image: hw1_golang
    init: true
    container_name: golang_container
+   ports: 
+    - "9090:9090"
    networks:
         testnet:
           ipv4_address: 172.0.2.10
