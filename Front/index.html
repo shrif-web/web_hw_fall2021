@@ -81,7 +81,25 @@
                             console.log(error);
                         }
                     });
-                
+                }
+                if(document.querySelector('input[name="noderadio"]:checked').value == "Decode"){
+                    var input = document.getElementById("nodeinput").value ;
+                    $.ajax({
+                        url: 'http://localhost:3000/node',            
+                        method: 'Get',
+                        type: 'dataType',
+                        crossDomain: true,
+                        headers: {  'Access-Control-Allow-Origin': '*' },
+                        data: {
+                            Input1: input
+                            },
+                        success: function (response) {
+                            alert("Data: " + response);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
                 }
             }
         </script>
@@ -94,7 +112,7 @@
                     <input type = "text" id = "nodeinput" name = "Input1" placeholder = "String" required> 
                     <br>
                     <input type="radio" name="noderadio" id = "noderadio" value="Encode" checked /> Encode 
-                    <input type="radio" name="noderadio" id = "noderadio" value="Decode" /> Decode
+                    <input type="radio" name="noderadio" id = "noderadio" value="Decode" checked /> Decode
                     <input type = "button" Onclick = "nodejs()" value = "Submit"> 
                     <span id="noderes"> </span>
                 </form>

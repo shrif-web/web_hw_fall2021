@@ -1,6 +1,7 @@
 {
     "port": 3000,
     "user": "postgres",
-    "password": "Arsalan995384",
-    "database": "DB_First"
+    "password": "admin",
+    "database": "test_db"
 }
+
