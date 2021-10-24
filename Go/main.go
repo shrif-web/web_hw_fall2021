@@ -42,6 +42,13 @@ func main() {
 	r.GET("/go", func(c *gin.Context) {
 		Input := c.Query("Input1")
 
+		if len(Input) < 8 {
+			c.JSON(http.StatusOK, gin.H{
+				"response": "Input needs to be 8 character at least!",
+			})
+			return
+		}
+
 		connStr := "user=admin dbname=test-db password=admin sslmode=disable"
 		db, err := sql.Open("postgres", connStr)
 		if err != nil {
