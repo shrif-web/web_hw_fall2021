@@ -58,7 +58,6 @@ app.post('/node', async(req, res) => {
 })
 
 app.get('/node', async(req, res) => {
-<<<<<<< HEAD
 
   if (req.query.Input1.length < 8){
     res.json({response: "Input needs to be 8 character at least!"});
@@ -81,25 +80,6 @@ app.get('/node', async(req, res) => {
       res.json({response: query_result.rows[0].Key})
   }
   await client.end()
-=======
-    // fill out the connection string 
-    const { Client } = require('pg')
-    const client = new Client({
-      
-      user: config_data.user,
-      password: config_data.password,
-      database: config_data.database
-    })
-    await client.connect()
-    const query_result = await client.query('SELECT "Key" FROM public."Train" where "Hash" = \''+ req.query.Input1 + '\'')
-    if(query_result.rows.length === 0){
-      // const res4 = await client.query('INSERT INTO "Train"("Key","Hash") VALUES (\'' + req.params.Input1 + '\',\''+gen_hash+'\')')    
-        res.json({response: "No record found!"})
-    } else{
-        res.json({response: query_result.rows[0].Key})
-    }
-    await client.end()
->>>>>>> 1255120db02b7ed7261a63cbd981b1c16bf1471e
 })
 
 app.listen(port, () => {
