@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+ web: 
+   image: hw1_html_webpage
+   ports: 
+        - "80:80"
+   init: true
+   container_name: frontend-nginx
+   networks:
+     dockernet:
+      ipv4_address: 172.20.0.2
