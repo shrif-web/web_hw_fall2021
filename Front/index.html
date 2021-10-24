@@ -94,7 +94,7 @@
             <fieldset>
                 <legend>NodeJS Sha256</legend>
                 <form method = "post"> 
-                    <input type = "text" id = "nodeinput" name = "Input1" placeholder = "String" required> 
+                    <input type = "text" id = "nodeinput" name = "Input1" placeholder = "String" minlength="8" required> 
                     <br>
                     <input type="radio" name="noderadio" id = "noderadio" value="Encode" checked /> Encode 
                     <input type="radio" name="noderadio" id = "noderadio" value="Decode" /> Decode
@@ -105,7 +105,7 @@
             <fieldset>
                 <legend>GoLang Sha256</legend>
                 <form method = "post"> 
-                    <input type = "text" name = "Input1" placeholder = "String" required> 
+                    <input type = "text" name = "Input1" placeholder = "String" minlength="8" required> 
                     <br>
                     <input type="radio" name="func" value="Encode" checked /> Encode
                     <input type="radio" name="func" value="Decode" checked /> Decode
