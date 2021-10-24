@@ -12,6 +12,7 @@
                 -moz-background-size: cover;
                 -o-background-size: cover;
                 background-attachment:fixed;
+                background-size: cover;
             }
             fieldset{
                 max-width: 40%;
@@ -52,12 +53,10 @@
                 border-radius: 4px;
                 border:none;
                 background-color: rgb(102, 102, 102);
-                color: black;
+                color: white;
             }
             .Group{
-                align-items: center;
                 display: flex;
-                align-items: center;
                 justify-content: center;
             }
         </style>
@@ -69,7 +68,7 @@
                 <form method = "post" action = "node/"> 
                     <input type = "text" name = "Input1" placeholder = "String" required> 
                     <br>
-                    <input type="radio" name="func" value="Code" checked /> Encode <input type="radio" name="func" value="Code" /> Decode
+                    <input type="radio" name="func" value="Encode" checked /> Encode <input type="radio" name="func" value="Decode" /> Decode
                     <input type = "submit" name = "Submit1" value = "Submit"> 
                 </form>
             </fieldset>
@@ -78,7 +77,7 @@
                 <form method = "post" action = "node/"> 
                     <input type = "text" name = "Input1" placeholder = "String" required> 
                     <br>
-                    <input type="radio" name="func" value="Code" checked /> Encode <input type="radio" name="func" value="Code" /> Decode
+                    <input type="radio" name="func" value="Encode" checked /> Encode <input type="radio" name="func" value="Decode" /> Decode
                     <input type = "submit" name = "Submit1" value = "Submit"> 
                 </form>
             </fieldset>
