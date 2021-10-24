@@ -4,10 +4,26 @@
             The first homework
         </title>
         <style>
+            body{
+                background-image: url('cool-background.png');
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
             fieldset{
-                max-width: 400px;
+                max-width: 40%;
+                min-width: 30%;
                 padding: 2%;
                 margin-top: 3%;
+                border-radius: 5px;
+                background-color: #ffffff90;
+            }
+            fieldset legend{
+                position: relative;
+                top: -10px;
+                color: white;
+                font-size: larger;
+                font-style: bold;
             }
             fieldset input[type=text]{
                 width: 94%;
@@ -17,6 +33,9 @@
                 border-color:rgb(102, 102, 102);
                 background-color: #ffffffff;
                 color: white;
+            }
+            fieldset input[type=radio]{
+                margin-top: 4%;
             }
             fieldset input[type=submit]{
                 display: block;
@@ -33,6 +52,10 @@
                 color: white;
             }
             .Group{
+                align-items: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
         </style>
     </head>
@@ -43,6 +66,7 @@
                 <form method = "post" action = "node/"> 
                     <input type = "text" name = "Input1" placeholder = "String" required> 
                     <br>
+                    <input type="radio" name="func" value="Code" checked /> Encode <input type="radio" name="func" value="Code" /> Decode
                     <input type = "submit" name = "Submit1" value = "Submit"> 
                 </form>
             </fieldset>
@@ -51,6 +75,7 @@
                 <form method = "post" action = "node/"> 
                     <input type = "text" name = "Input1" placeholder = "String" required> 
                     <br>
+                    <input type="radio" name="func" value="Code" checked /> Encode <input type="radio" name="func" value="Code" /> Decode
                     <input type = "submit" name = "Submit1" value = "Submit"> 
                 </form>
             </fieldset>
