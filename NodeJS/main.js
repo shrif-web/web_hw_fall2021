@@ -42,6 +42,7 @@ app.post('/node', async(req, res) => {
   // fill out the connection string 
   const { Client } = require('pg')
   const client = new Client({
+    host: "www.pg.com",
     user: config_data.user,
     password: config_data.password,
     database: config_data.database
@@ -60,6 +61,7 @@ app.get('/node', async(req, res) => {
     // fill out the connection string 
     const { Client } = require('pg')
     const client = new Client({
+      host: "www.pg.com",
       user: config_data.user,
       password: config_data.password,
       database: config_data.database
