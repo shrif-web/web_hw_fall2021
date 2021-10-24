@@ -3,9 +3,15 @@ services:
  web: 
    image: hw1_html_webpage
    ports: 
-        - "80:80"
+    - "80:80"
    init: true
    container_name: frontend-nginx
    networks:
-     dockernet:
-      ipv4_address: 172.20.0.2
+        testnet:
+          ipv4_address: 172.0.0.10
+networks:
+  testnet:
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.0.0.10/24
