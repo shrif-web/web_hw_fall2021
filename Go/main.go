@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
 )
@@ -67,6 +68,7 @@ func main() {
 			if err3 == nil {
 				log.Fatal(err3)
 			}
+			c.String(http.StatusOK, "%s", hash)
 		}
 	})
 	r.Run(":9090")

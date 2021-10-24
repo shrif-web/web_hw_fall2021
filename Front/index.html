@@ -75,7 +75,7 @@
                             Input1: input
                             },
                         success: function (response) {
-                            alert("Data: " + response);
+                            document.getElementById('noderes').innerHTML = response;
                         },
                         error: function (error) {
                             console.log(error);
@@ -95,7 +95,7 @@
                     <br>
                     <input type="radio" name="noderadio" id = "noderadio" value="Encode" checked /> Encode 
                     <input type="radio" name="noderadio" id = "noderadio" value="Decode" /> Decode
-                    <input type = "button" Onclick = "nodejs()" value = "Submit"> 
+                    <input type = "button" Onclick = "nodejs()" value = "Submit"> <br />
                     <span id="noderes"> </span>
                 </form>
             </fieldset>
