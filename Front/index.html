@@ -62,18 +62,26 @@
             }
         </style>
         <script>
-            function nodejs(method_type){
-                if(document.querySelector('input[name="noderadio"]:checked').value == "Encode"){
-                    var Method = 'Post'
+            function handleserver(typestr){
+                if(typestr == 'node'){
+                    var Port = 3000;
+                    var input = document.getElementById("nodeinput").value 
+                    var input2 = document.querySelector('input[name="noderadio"]:checked').value == "Encode"
+                } else {
+                    var Port = 9090;
+                    var input = document.getElementById("goinput").value 
+                    var input2 = document.querySelector('input[name="goradio"]:checked').value == "Encode"
                 }
-                if(document.querySelector('input[name="noderadio"]:checked').value == "Decode"){
+                if(input2){
+                    var Method = 'Post'
+                } else {
                     var Method = 'Get'
                 }
-                var input = document.getElementById("nodeinput").value ;
+                if(input.length >= 8) {
                     $.ajax({
-                        url: 'http://localhost:3000/node',            
+                        url: 'http://localhost:'+Port+'/'+typestr,            
                         method: Method,
-                        type: 'dataType',
+                        type: 'Json',
                         crossDomain: true,
                         headers: {  'Access-Control-Allow-Origin': '*' },
                         data: {
@@ -86,6 +94,9 @@
                             console.log(error);
                         }
                     });
+                } else {
+                    alert('Theres is not enough characters.');
+                }
             }
         </script>
     </head>
@@ -98,18 +109,18 @@
                     <br>
                     <input type="radio" name="noderadio" id = "noderadio" value="Encode" checked /> Encode 
                     <input type="radio" name="noderadio" id = "noderadio" value="Decode" /> Decode
-                    <input type = "button" Onclick = "nodejs()" value = "Submit"> 
+                    <input type = "button" Onclick = "handleserver('node')" value = "Submit"> 
                     <span id="noderes"> </span>
                 </form>
             </fieldset>
             <fieldset>
                 <legend>GoLang Sha256</legend>
                 <form method = "post"> 
-                    <input type = "text" name = "Input1" placeholder = "String" minlength="8" required> 
+                    <input type = "text" name = "Input1" id = "goinput" placeholder = "String" minlength="8" required> 
                     <br>
-                    <input type="radio" name="func" value="Encode" checked /> Encode
-                    <input type="radio" name="func" value="Decode" checked /> Decode
-                    <input type = "button" name = "Submit1" value = "Submit"> 
+                    <input type="radio" name="goradio" value="Encode" checked /> Encode
+                    <input type="radio" name="goradio" value="Decode" /> Decode
+                    <input type = "button" Onclick = "handleserver('go')" value = "Submit"> 
                 </form>
             </fieldset>
         </div>
