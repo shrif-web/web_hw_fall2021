@@ -5,6 +5,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const crypto = require('crypto');
 
+var cors = require('cors')
+app.use(cors())
+
+
 // read static data from config file
 const config_data = require('./config/config.json');
 const { config } = require('process');

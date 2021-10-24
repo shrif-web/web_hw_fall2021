@@ -65,13 +65,23 @@
             function nodejs(){
                 if(document.querySelector('input[name="noderadio"]:checked').value == "Encode"){
                     var input = document.getElementById("nodeinput").value ;
-                    $.post("http://localhost:3000/node",
-                    {
-                    Input1: input
-                    },
-                    function(data,status){
-                    alert("Data: " + data + "\nStatus: " + status);
+                    $.ajax({
+                        url: 'http://localhost:3000/node',            
+                        method: 'POST',
+                        type: 'dataType',
+                        crossDomain: true,
+                        headers: {  'Access-Control-Allow-Origin': '*' },
+                        data: {
+                            Input1: input
+                            },
+                        success: function (response) {
+                            alert("Data: " + response);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
                     });
+                
                 }
             }
         </script>
