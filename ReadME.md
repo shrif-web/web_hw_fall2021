@@ -5,11 +5,11 @@
 - Amirhosein Javadi
 
 ## **Frontend**
-The left box uses NodeJS and the right one uses GoLang to send data. NodeJS uses method Post and GoLang uses method Get. Each box has two radio-button for encoding and decoding.
+The left box uses NodeJS and the right one uses GoLang to send data. Both NodeJS and GoLang uses method Get for ecoding and Post for decoding. Each box has two radio-button for encoding and decoding.
 
 If user want to get Hash of it's ID, we check lenght of ID and if lenght is smaller than eight, we responde: 'Theres is not enough characters', otherwise we respond it's Hash and save this (ID,Hash) in database.
 
-If user wand to decode it's Hash, we search our database for this response and return it's ID if there is one. 
+If user want to decode it's Hash, we search our database for this response and return it's ID if there is one. 
 
 ![This is an image](./Results/Frontend.jpg)
 
@@ -31,7 +31,7 @@ We first send authentication message to database. This message contain include u
 > 
 > sql.Open("postgres", connStr)
 
-If user asked for ID of its Hash (method=get), we seach database with this command:
+If user asked for ID of it's Hash (method=get), we seach database with this command:
 > db.QueryRow("SELECT \"Key\" FROM public.\"Train\" where \"Hash\" = '" + Input + "'").Scan(&Key)
 
 If we had error, it means that we don't have any data with the given Hash and we will responde "No record found", otherwise we will respond the user's key.
@@ -58,10 +58,16 @@ Then we read static data from config file and setting the port from config file
 > 
 > const port = config_data.port
 
-Otherthings are implemented like Nginx that was described before.
+Otherthings are implemented like Golang that was described before.
 
 ## **Postgres**
-For creating a new table with name "Train" with two column "Key" and "Hash":
+First of all we use this command to create a postgres in docker: 
+> docker run --name docker-postgres -e POSTGRES_USER=admin  -e POSTGRES_PASSWORD=admin -d -p 5432:5432 postgres 
+
+This will create a database and the user is admin and password is admin too.
+
+For creating a new table with name "Train" with two column "Key" and "Hash" we use this script or create the table using pg admin:
+
 > CREATE TABLE IF NOT EXISTS "Train" (
 > 
 >    "Key" varchar(250) NOT NULL,
@@ -69,3 +75,5 @@ For creating a new table with name "Train" with two column "Key" and "Hash":
 >    "Hash" varchar(250) NOT NULL);
 
 ## **Nginx**
+
+We use Nginx as a reverse proxy. That means it redirect 
