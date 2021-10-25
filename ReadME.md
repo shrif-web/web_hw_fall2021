@@ -10,7 +10,7 @@
 3. Run main.js in Node folder.
 4. Run main.go in Go folder.
 
-Note : We have implemented dockerizing of Go, Node, Postgres, Nginx (with dynamic html insite) in Dockerize branch. [Sockerize](https://github.com/arsalanfiroozi/Web_HomeWorks/tree/Dockerize) we also develop a automatic branch for run.
+Note : We have implemented dockerizing of Go, Node, Postgres, Nginx (with dynamic html insite) in Dockerize branch. [Dockerize](https://github.com/arsalanfiroozi/Web_HomeWorks/tree/Dockerize) we also develop a automatic branch for run.
 
 Main effort of this group was focused on dockerizing.
 
