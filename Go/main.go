@@ -40,7 +40,7 @@ func main() {
 	r.Use(CORS)
 
 	r.GET("/go", func(c *gin.Context) {
-		Input := c.Param("Input1")
+		Input := c.Query("Input1")
 
 		if len(Input) < 8 {
 			c.JSON(http.StatusOK, gin.H{
