@@ -20,7 +20,6 @@ var init = new Boolean(true);
 // This function get a string as a key and calculate it's hash and
 // if the hash doesn't exist save the key and the hash in the database
 app.post('/node', async(req, res) => {
-
   if (req.body.Input1.length < 8){
     res.json({response: "Input needs to be 8 character at least!"});
     return
@@ -65,7 +64,6 @@ app.post('/node', async(req, res) => {
 })
 
 app.get('/node', async(req, res) => {
-
   if (req.query.Input1.length < 8){
     res.json({response: "Input needs to be 8 character at least!"});
     return
@@ -78,6 +76,12 @@ app.get('/node', async(req, res) => {
     password: config_data.password,
   })
   await client.connect()
+  // create a new database for the first time
+  if (init){
+    const create_db1 = await client.query('CREATE DATABASE "test-db" WITH OWNER = admin ENCODING = \'UTF8\' CONNECTION LIMIT = -1;')
+    const create_table2 = await client.query('CREATE TABLE public."Train"("Key" character varying,"Hash" character varying,PRIMARY KEY ("Key"));ALTER TABLE IF EXISTS public."Train" OWNER to admin;')
+    init = false
+  }
   const query_result = await client.query('SELECT "Key" FROM public."Train" where "Hash" = \''+ req.query.Input1 + '\'')
   if(query_result.rows.length === 0){
     // const res4 = await client.query('INSERT INTO "Train"("Key","Hash") VALUES (\'' + req.params.Input1 + '\',\''+gen_hash+'\')')    
