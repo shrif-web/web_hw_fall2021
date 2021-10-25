@@ -4,6 +4,8 @@ services:
    image: nginx
    init: true
    container_name: frontend-nginx
+   ports: 
+      - "80:80"
    volumes:
       - ../Front/.:/usr/share/nginx/html
       - ./default.conf:/etc/nginx/conf.d/default.conf 
