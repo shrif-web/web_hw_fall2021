@@ -77,3 +77,6 @@ For creating a new table with name "Train" with two column "Key" and "Hash" we u
 ## **Nginx**
 
 We use Nginx as a reverse proxy. That means it redirect 
+
+## **Load Results**
+### **Golang Method**
