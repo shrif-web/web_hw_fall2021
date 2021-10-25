@@ -39,7 +39,7 @@ If we had error, it means that we don't have any data with the given Hash and we
 If user wants to Insert its ID and Hash (method=post), we first make the Hash of user's ID with sha256 method. Then we send this query to database to save this (ID,Hash).
 > db.QueryRow("INSERT INTO \"Train\"(\"Key\",\"Hash\") VALUES ('" + Key + "','" + hash + "')")
 
-## **Nginx**
+## **NodeJS**
 We create an application with express library and create hash with crypto library.
 > const express = require('express')
 > 
