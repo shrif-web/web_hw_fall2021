@@ -49,7 +49,7 @@ func main() {
 			return
 		}
 
-		connStr := "user=admin password=admin sslmode=disable"
+		connStr := "host=www.pg.com user=admin password=admin sslmode=disable"
 		db, err := sql.Open("postgres", connStr)
 		if err != nil {
 			log.Fatal(err)
@@ -84,7 +84,7 @@ func main() {
 		h := sha256.New()
 		h.Write([]byte(Key))
 		hash := fmt.Sprintf("%x", h.Sum(nil))
-		connStr := "user=admin password=admin sslmode=disable"
+		connStr := "host=www.pg.com user=admin password=admin sslmode=disable"
 
 		db, err := sql.Open("postgres", connStr)
 		if err != nil {
