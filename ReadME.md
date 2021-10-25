@@ -4,6 +4,16 @@
 - Erfan Nosrati
 - Amirhosein Javadi
 
+## **Run**
+1. Create a postgres container with a database called test-db and username and password = admin with portforwarding (-p 5432:5432)
+2. Run docker compose file in Nginx folder.
+3. Run main.js in Node folder.
+4. Run main.go in Go folder.
+
+Note : We have implemented dockerizing of Go, Node, Postgres, Nginx (with dynamic html insite) in Dockerize branch. Since configuration of Nginx failed, We coudn't have load test from the app.
+
+Main effort of this group was focused on dockerizing.
+
 ## **Frontend**
 The left box uses NodeJS and the right one uses GoLang to send data. Both NodeJS and GoLang uses method Get for ecoding and Post for decoding. Each box has two radio-button for encoding and decoding.
 
