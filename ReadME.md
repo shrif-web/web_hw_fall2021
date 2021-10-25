@@ -80,3 +80,11 @@ We use Nginx as a reverse proxy. That means it redirect
 
 ## **Load Results**
 ### **Golang Method**
+**Request per second:**
+![This is an image](./Results/Go_rps.jpg)
+
+**Responce time:**
+![This is an image](./Results/Go_rp_time.jpg)
+
+**Numbers of users:**
+![This is an image](./Results/Go_Num_users.jpg)
