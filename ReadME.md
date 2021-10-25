@@ -88,3 +88,13 @@ We use Nginx as a reverse proxy. That means it redirect
 
 **Numbers of users:**
 ![This is an image](./Results/Go_Num_users.jpg)
+
+### **NodeJS Method**
+**Request per second:**
+![This is an image](./Results/Node_rps.jpg)
+
+**Responce time:**
+![This is an image](./Results/Node_rp_time.jpg)
+
+**Numbers of users:**
+![This is an image](./Results/Node_Num_users.jpg)
