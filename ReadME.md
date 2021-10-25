@@ -68,3 +68,4 @@ For creating a new table with name "Train" with two column "Key" and "Hash":
 >    
 >    "Hash" varchar(250) NOT NULL);
 
+## **Nginx**
