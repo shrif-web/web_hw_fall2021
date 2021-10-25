@@ -59,3 +59,12 @@ Then we read static data from config file and setting the port from config file
 > const port = config_data.port
 
 Otherthings are implemented like Nginx that was described before.
+
+## **Postgres**
+For creating a new table with name "Train" with two column "Key" and "Hash":
+> CREATE TABLE IF NOT EXISTS "Train" (
+> 
+>    "Key" varchar(250) NOT NULL,
+>    
+>    "Hash" varchar(250) NOT NULL);
+
