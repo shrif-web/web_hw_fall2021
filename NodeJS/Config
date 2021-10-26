@@ -1,0 +1,5 @@
+npm init
+npm install crypto-js
+npm install cors
+
+ docker build . -t hw1_nodejs
