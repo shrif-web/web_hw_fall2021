@@ -11,7 +11,8 @@ Implementation is based on dockerfiles in each directory in order to build the i
 
 # Run the project 
 
-By these commands you can run the project after cloning. 
+By these commands you can run the project after cloning. <br>
+Stop sevices running on port 80 like:
 > sudo service apace2 stop
 
 > docker ps -q | xargs docker rm -f
@@ -45,10 +46,12 @@ Locust :
     ![image](Images/Node_CPU3.png)
 
 
-* Go:
+* Go: 
     ![image](Images/Go_RPS.png)
     ![image](Images/Go_RT.png)
     ![image](Images/Go_NU.png)
     ![image](Images/Go_CPU1.png)
     ![image](Images/Go_CPU2.png)
     ![image](Images/Go_CPU3.png)
+    <br>
+We expected that CPU usage should increase by Request per Second.
