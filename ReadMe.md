@@ -28,3 +28,5 @@ Database is based on postgres and is automaticly created(Db, Tables) on the firs
 [Frontend](/Front/ReadMe.md) : Code is described in the folder.
 
 [NodeJS](/NodeJS/ReadMe.md) : Code is described in the folder.
+
+[Golang](/Go/ReadMe.md) : Code is described in the folder.
