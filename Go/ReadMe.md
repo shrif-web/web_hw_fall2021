@@ -1,4 +1,4 @@
-# **NodeJS**
+# **Golang**
 
 Gin framework is used in NodeJS app.<br>
 "crypto/sha256" library is used for making hash.<br>
