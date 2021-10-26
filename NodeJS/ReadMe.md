@@ -1,7 +1,7 @@
 # **NodeJS**
 
-Express framework is used in NodeJS app.
-Crypto library is used for making hash.
+Express framework is used in NodeJS app.<br>
+Crypto library is used for making hash.<br>
 Cors library is used to prevent the error 'CORS'(Cross Origin Resource Sharing) which leads to block all the requests from Nginx(Ajax) and NodeJS.
 
 Application port and database specification is written in 'config/config.json'.
