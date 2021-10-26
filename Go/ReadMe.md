@@ -13,3 +13,11 @@ All responses from this app is based on Json format.
 In the first run of this app a series of sql syntaxes is run to make the database ready to work.(By using bool variable 'Init')
 
 Input is checked whether it's length is below 8 or not and appropriate respones are returned.
+
+We added the headers to enable CORS:
+> c.Header("Access-Control-Allow-Origin", "*")
+c.Header("Access-Control-Allow-Methods", "*") 
+c.Header("Access-Control-Allow-Headers", "*")
+c.Header("Content-Type", "application/json")
+>
+
