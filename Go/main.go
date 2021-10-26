@@ -55,6 +55,15 @@ func main() {
 			log.Fatal(err)
 		}
 
+		var rows_db sql.NullInt64
+
+		db.QueryRow("SELECT count(*) AS result FROM pg_database WHERE datname='test-db'").Scan(&rows_db)
+		log.Print("number of rows" + fmt.Sprint(rows_db.Int64))
+		if rows_db.Int64 == 0 {
+			db.Query("CREATE DATABASE \"test-db\" WITH OWNER = admin ENCODING = 'UTF8' CONNECTION LIMIT = -1;")
+			db.Query("CREATE TABLE public.\"Train\"(\"Key\" character varying,\"Hash\" character varying,PRIMARY KEY (\"Key\"));ALTER TABLE IF EXISTS public.\"Train\" OWNER to admin;")
+		}
+
 		var Key sql.NullString
 
 		err2 := db.QueryRow("SELECT \"Key\" FROM public.\"Train\" where \"Hash\" = '" + Input + "'").Scan(&Key)
@@ -89,6 +98,14 @@ func main() {
 		db, err := sql.Open("postgres", connStr)
 		if err != nil {
 			log.Fatal(err)
+		}
+
+		var rows_db sql.NullInt64
+
+		db.QueryRow("SELECT count(*) AS result FROM pg_database WHERE datname='test-db'").Scan(&rows_db)
+		if rows_db.Int64 == 0 {
+			db.Query("CREATE DATABASE \"test-db\" WITH OWNER = admin ENCODING = 'UTF8' CONNECTION LIMIT = -1;")
+			db.Query("CREATE TABLE public.\"Train\"(\"Key\" character varying,\"Hash\" character varying,PRIMARY KEY (\"Key\"));ALTER TABLE IF EXISTS public.\"Train\" OWNER to admin;")
 		}
 
 		var Rows sql.NullInt64
