@@ -37,7 +37,7 @@ sha is forwarded to node server.<br>
 
 # Challenges
 By this documentation from Nginx site, never ever put '/' at the end of the address you're trying to forward.
-![this is an image](../Images/Nginx-doc.jpg)
+![this is an image](../Images/Nginx-doc.jpg)<br>
 Not observing this rule leads to <i><b>having appropriate response to Get requests but a 301 Error on Post requests.</b></i>
 
 Never ever put '/' at the end of 'proxy_pass' for Golang server. Otherwise you would have 404 not found error.
