@@ -4,7 +4,7 @@ Gin framework is used in NodeJS app.<br>
 "crypto/sha256" library is used for making hash.<br>
 A function called 'CORS' is written to prevent the error 'CORS'(Cross Origin Resource Sharing) which leads to block all the requests from Nginx(Ajax) and NodeJS.
 
-Application port is 3000 and database specification is written in connection string.
+Application port is 9090 and database specification is written in connection string.
 
 In the case of sending a post or get request without appropriate inputs, there would be a 'Input needs to be 8 character at least!' response.
 
