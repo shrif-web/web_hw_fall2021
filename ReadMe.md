@@ -32,3 +32,23 @@ Database is based on postgres and is automaticly created(Db, Tables) on the firs
 [Golang](/Go/ReadMe.md) : Code is described in the folder.
 
 [Nginx](/Nginx/ReadMe.md) : Code is described in the folder.
+
+Locust :
+3 different rate of requests are used for testing the Go server and NodeJS server.
+
+* Node:
+    ![image](Images/Node_RPS.png)
+    ![image](Images/Node_RT.png)
+    ![image](Images/Node_NU.png)
+    ![image](Images/Node_CPU1.png)
+    ![image](Images/Node_CPU2.png)
+    ![image](Images/Node_CPU3.png)
+
+
+* Go:
+    ![image](Images/Go_RPS.png)
+    ![image](Images/Go_RT.png)
+    ![image](Images/Go_NU.png)
+    ![image](Images/Go_CPU1.png)
+    ![image](Images/Go_CPU2.png)
+    ![image](Images/Go_CPU3.png)
