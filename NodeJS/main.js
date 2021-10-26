@@ -54,17 +54,17 @@ app.post('/node', async(req, res) => {
   })
 
   await client.connect()
-  // create a new database for the first time
-  if (init){
-    const create_db1 = await client.query('CREATE DATABASE "test-db" WITH OWNER = admin ENCODING = \'UTF8\' CONNECTION LIMIT = -1;')
-    const create_table2 = await client.query('CREATE TABLE public."Train"("Key" character varying,"Hash" character varying,PRIMARY KEY ("Key"));ALTER TABLE IF EXISTS public."Train" OWNER to admin;')
-    init = false
+  const data_base_state =  await client.query('SELECT 1 AS result FROM pg_database WHERE datname=\'test-db\'')
+  
+  if (data_base_state.rows.length === 0){
+    await client.query('CREATE DATABASE "test-db" WITH OWNER = admin ENCODING = \'UTF8\' CONNECTION LIMIT = -1;')
+    await client.query('CREATE TABLE public."Train"("Key" character varying,"Hash" character varying,PRIMARY KEY ("Key"));ALTER TABLE IF EXISTS public."Train" OWNER to admin;')
   }
   // search for the corresponding hash of the given key
   const query_result = await client.query('SELECT "Key" FROM public."Train" where "Hash" = \''+ gen_hash + '\'')
   if(query_result.rows.length === 0){
     await client.query('INSERT INTO "Train"("Key","Hash") VALUES (\'' + req.body.Input1 + '\',\''+gen_hash+'\')')    
-}
+  }
   await client.end()
 })
 
@@ -86,12 +86,14 @@ app.get('/node', async(req, res) => {
     password: config_data.password,
   })
   await client.connect()
-  // create a new database for the first time
-  if (init){
-    const create_db1 = await client.query('CREATE DATABASE "test-db" WITH OWNER = admin ENCODING = \'UTF8\' CONNECTION LIMIT = -1;')
-    const create_table2 = await client.query('CREATE TABLE public."Train"("Key" character varying,"Hash" character varying,PRIMARY KEY ("Key"));ALTER TABLE IF EXISTS public."Train" OWNER to admin;')
-    init = false
+
+  const data_base_state =  await client.query('SELECT 1 AS result FROM pg_database WHERE datname=\'test-db\'')
+  
+  if (data_base_state.rows.length === 0){
+    await client.query('CREATE DATABASE "test-db" WITH OWNER = admin ENCODING = \'UTF8\' CONNECTION LIMIT = -1;')
+    await client.query('CREATE TABLE public."Train"("Key" character varying,"Hash" character varying,PRIMARY KEY ("Key"));ALTER TABLE IF EXISTS public."Train" OWNER to admin;')
   }
+
   const query_result = await client.query('SELECT "Key" FROM public."Train" where "Hash" = \''+ req.query.Input1 + '\'')
   if(query_result.rows.length === 0){
     // const res4 = await client.query('INSERT INTO "Train"("Key","Hash") VALUES (\'' + req.params.Input1 + '\',\''+gen_hash+'\')')    
