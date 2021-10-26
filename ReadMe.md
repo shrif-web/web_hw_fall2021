@@ -12,6 +12,7 @@ Implementation is based on dockerfiles in each directory in order to build the i
 # Run the project 
 
 By these commands you can run the project after cloning. 
+Stop sevices running on port 80 like:
 > sudo service apace2 stop
 
 > docker ps -q | xargs docker rm -f
