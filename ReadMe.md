@@ -1,12 +1,28 @@
+# **HW1 Web Programming**
+
+- Amirhosein Javadi
+- Arsalan Firoozi 
+- Erfan Nosrati
 # Dockerize the project
 
-In this branch we automate all the processes to build the project. 
-<br/>
-For this perpose we write a Dockerfile in each directory and a docker-compose in the root directory to orchestrate this Dockerfiles.
+In this branch we've automated all the processes to build the project.(Dockerizing Golang, NodeJS, Postgress, Nginx services)
+<br/><br>
+Implementation is based on dockerfiles in each directory in order to build the image and a docker-compose file in the branch folder to run containers in a network; So that containers can communicate. 
 
 # Run the project 
 
-To run this project we just need to run this simple command in the root: 
+By these commands you can run the project after cloning. 
+> sudo service apace2 stop
+
+> docker ps -q | xargs docker rm -f
+
 > docker-compose up -d -- build
 
-in this project the database will be build automaticly using sql queries.
+This command can stop the project.
+> docker-compose down 
+
+Database is based on postgres and is automaticly created(Db, Tables) on the first request to Go server or NodeJS server.
+
+# Report
+
+[Frontend](/Front/ReadMe.md) : Code is described in the folder.
