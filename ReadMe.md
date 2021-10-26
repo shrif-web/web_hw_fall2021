@@ -37,6 +37,13 @@ Database is based on postgres and is automaticly created(Db, Tables) on the firs
 Locust :
 3 different rate of requests are used for testing the Go server and NodeJS server.
 
+* Node + Go(Post + Get):
+    ![image](Images/Main_RPS.png)
+    ![image](Images/Main_RT.png)
+    ![image](Images/Main_NU.png)
+    ![image](Images/Main_CPU1.png)
+    ![image](Images/Main_CPU2.png)
+
 * Node:
     ![image](Images/Node_RPS.png)
     ![image](Images/Node_RT.png)
