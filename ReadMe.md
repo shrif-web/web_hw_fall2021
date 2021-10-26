@@ -54,4 +54,4 @@ Locust :
     ![image](Images/Go_CPU2.png)
     ![image](Images/Go_CPU3.png)
     <br>
-We expected that CPU usage should increase by Request per Seconds.
+We expected that CPU usage should increase by Request per Second.
