@@ -46,10 +46,12 @@ Locust :
     ![image](Images/Node_CPU3.png)
 
 
-* Go:
+* Go: 
     ![image](Images/Go_RPS.png)
     ![image](Images/Go_RT.png)
     ![image](Images/Go_NU.png)
     ![image](Images/Go_CPU1.png)
     ![image](Images/Go_CPU2.png)
     ![image](Images/Go_CPU3.png)
+    <br>
+We expected that CPU usage should increase by Request per Seconds.
