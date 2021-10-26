@@ -19,4 +19,4 @@ Encoding includes responding the Hash and save it in database if not exist.
 
 If user want to decode it's Hash, we search th database for this response and return it's ID found otherwise 'no record response'.
 
-
+CSS is used to make page beauty.
