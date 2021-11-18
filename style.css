@@ -6,3 +6,33 @@
     font-family: Bnazanin !important;
     font-size: 1.1rem;
   }
+.my_navbar{
+  width: 100%;
+  /* position: fixed; */
+}
+#changer{
+  margin-left: 5%;
+}
+
+.header{
+  background-image: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,117,1) 50%, rgba(0,212,255,0.5) 90%), url('img/bg.png');
+}
+.headerinner{
+  display: flex;
+}
+.headerinner img{
+  padding: 10%;
+  opacity: 50%;
+}
+.textt{
+  direction: rtl;
+  clear: right;
+  color: #ffffff;
+  padding: 10%;
+  width: 50%;
+  overflow: hidden;
+}
+.imagg{
+  width: 50%;
+  overflow: hidden;
+}
