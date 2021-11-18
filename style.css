@@ -1,0 +1,8 @@
+@font-face {
+    font-family: Bnazanin;
+    src: url(BNazanin.TTF);
+  }
+* {
+    font-family: Bnazanin !important;
+    font-size: 1.1rem;
+  }
