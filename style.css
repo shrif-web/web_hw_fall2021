@@ -96,7 +96,7 @@
   position: relative;
   width: 100%;
   height: 50rem;
-  background: rgb(68, 68, 68);
+  background: #273036;
 }
 
 .slider-img{
@@ -115,7 +115,186 @@
   width: 40px;
   height: 40px;
   padding: 0px 20px 0px 0px;
-  background: rgb(236, 134, 0);
+  background: rgb(255, 255, 255);
   opacity: 1;
+}
+
+/* contact us */
+.p-contact-us{
+  display: inline;
+  width: 30%;
+  background-color: #273036; 
+  font-size: 55px;
+  font-weight: bold;
+  color: cornsilk; 
+  left: 0;
+  top: 0;
+  padding: 0px 0px 0px 200px;
+}
+.p-contact-us-color{
+  display: inline;
+  width: 30%;
+  background-color: #273036; 
+  font-size: 55px;
+  font-weight: bold;
+  color: rgb(235, 173, 2); 
+  left: 0; 
+  top: 0;
+  padding: 0px 0px 0px 170px;
+}
+
+.p-contact-us-color:hover{
+  background-color: #273036; 
+  font-size: 80px;
+  font-weight: bold;
+  color: rgb(235, 173, 2); 
+  left: 0; 
+  top: 0;
+  padding: 0px 0px 0px 170px;
+}
+
+.ContactUsContainer{
+  width: auto;
+  height: 500px;
+  top: 0 ;
+  padding:  0px 0px ;
+  background-color: #273036;
   z-index: -1;
+}
+
+.socialmedia{
+  position: relative;
+  background-color: #273036;
+  color: #fff;
+  display: inline;
+  float:right;
+  width: 75px;
+  height: 75px;
+  margin-right: 25px;
+}
+
+.socialmedia:hover{
+  position: relative;
+  background-color: gold;
+  color: #fff;
+  display: inline;
+  float:right;
+  width: 75px;
+  height: 75px;
+  margin-right: 25px;
+}
+
+/* mobile contact us */
+.p-contact-us-mobile{
+  background-color: #273036; 
+  font-size: 40px;
+  font-weight: bold;
+  color: cornsilk; 
+  margin: 0 auto;   
+  padding: 0px 0px 0px 200px;
+}
+.p-contact-us-color-mobile{
+  background-color: #273036; 
+  font-size: 40px;
+  font-weight: bold;
+  color: rgb(235, 173, 2); 
+  margin: 0 auto;
+  padding: 0px 0px 0px 170px;
+}
+
+.p-contact-us-color-mobile:hover{
+  background-color: #273036; 
+  font-size: 60px;
+  font-weight: bold;
+  color: rgb(235, 173, 2); 
+  margin: 0 auto;
+  padding: 0px 0px 0px 170px;
+}
+
+.socialmedia-mobile{
+  position: relative;
+  background-color: #273036;
+  color: #fff;
+  display: inline;
+  width: 75px;
+  height: 75px;
+  margin-right: 25px;
+}
+
+.socialmedia-mobile:hover{
+  position: relative;
+  background-color: gold;
+  color: #fff;
+  display: inline;
+  width: 75px;
+  height: 75px;
+  margin-right: 25px;
+}
+
+.img-mobile-contact{
+  margin: auto;
+  padding-top: 15px;
+  padding-left: 35%;
+}
+
+.p-mobile-contact{
+  padding-top: 10%;
+  padding-left: 25%;
+  }
+
+
+
+
+
+
+
+  /*  */
+
+
+
+.container {
+    position: relative;
+    margin: 0 auto;
+    width: auto;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+
+.imageOne {
+  position: absolute;
+  padding: 0px 0px;
+  width: auto;
+  height: 10px;
+  z-index: -2;
+}
+
+.imageTwo {
+  position: absolute;
+  padding-top: 40px;
+  padding-left: 40px;
+  width: auto;
+  height: 10px;
+  z-index: -1;
+}
+
+.imagethree {
+  position: absolute;
+  padding-top: 80px;
+  padding-left: 80px;
+  width: auto;
+  height: 10px;
+  z-index: 0;
+}
+
+.imageOne:hover {
+  z-index: 4;
+}
+
+.imageTwo:hover {
+  z-index: 4;
+}
+
+.imagethree {
+  z-index: 1;
 }
