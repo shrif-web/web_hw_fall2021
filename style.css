@@ -6,6 +6,15 @@
     font-family: Bnazanin !important;
     font-size: 1.1rem;
   }
+.cards_phone{
+  display: none;
+}
+.header_phone{
+  display: none;
+}
+.cards_phone{
+  display: none;
+}
 .my_navbar{
   width: 100%;
   position: fixed;
@@ -13,7 +22,6 @@
 #changer{
   margin-left: 5%;
 }
-
 .header{
   background-image: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,117,1) 50%, rgba(0,212,255,0.5) 90%), url('img/bg.png');
   background-position: right;
@@ -170,10 +178,23 @@ td{
   position: absolute;
   background-color: red;
   padding: 2%;
-  left: 0;
+  left: -15%;
   transform-origin: top right;
   border-radius: 5px;
   -ms-transform: rotate(-90deg); /* IE 9 */
   -webkit-transform: rotate(-90deg); /* Safari */
   transform: rotate(-90deg);
+}
+
+@media screen and (max-width : 600px){
+  .cards{
+    display: none;
+  }
+  .header{
+    display: none;
+  }
+  .cards{
+    display: none;
+  }
+  
 }
