@@ -121,15 +121,13 @@
 
 /* contact us */
 .p-contact-us{
-  display: inline;
+  display: inlin;
   width: 30%;
   background-color: #273036; 
   font-size: 55px;
   font-weight: bold;
   color: cornsilk; 
-  left: 0;
-  top: 0;
-  padding: 0px 0px 0px 200px;
+  margin-left: 0px;
 }
 .p-contact-us-color{
   display: inline;
@@ -138,9 +136,7 @@
   font-size: 55px;
   font-weight: bold;
   color: rgb(235, 173, 2); 
-  left: 0; 
-  top: 0;
-  padding: 0px 0px 0px 170px;
+  margin-left: 0px;
 }
 
 .p-contact-us-color:hover{
@@ -148,12 +144,14 @@
   font-size: 80px;
   font-weight: bold;
   color: rgb(235, 173, 2); 
-  left: 0; 
-  top: 0;
-  padding: 0px 0px 0px 170px;
+  margin-left: 0px;
 }
 
 .ContactUsContainer{
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
   width: auto;
   height: 500px;
   top: 0 ;
@@ -243,19 +241,13 @@
   }
 
 
+#StackDesktop{
+  position: relative;
+}
 
-
-
-
-
-  /*  */
-
-
-
-.container {
-    position: relative;
-    margin: 0 auto;
-    width: auto;
+.container-stack {
+    position: absolute;
+    display: block;
     padding-left: 100px;
     padding-right: 100px;
 }
@@ -263,36 +255,32 @@
 
 .imageOne {
   position: absolute;
-  padding: 0px 0px;
   width: auto;
-  height: 10px;
   z-index: -2;
 }
 
 .imageTwo {
   position: absolute;
-  padding-top: 40px;
-  padding-left: 40px;
+  margin-top: 40px;
+  margin-left: 40px;
   width: auto;
-  height: 10px;
   z-index: -1;
 }
 
 .imagethree {
   position: absolute;
-  padding-top: 80px;
-  padding-left: 80px;
+  margin-top: 80px;
+  margin-left: 80px;
   width: auto;
-  height: 10px;
   z-index: 0;
 }
 
 .imageOne:hover {
-  z-index: 4;
+  z-index: 2;
 }
 
 .imageTwo:hover {
-  z-index: 4;
+  z-index: 2;
 }
 
 .imagethree {
