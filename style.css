@@ -19,7 +19,7 @@
   height: 100%;
   position: absolute;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .fall-item img {
   display: block;
@@ -40,6 +40,7 @@
   padding: 0px 30px;
 }
 .fall-effect .mask {
+  border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.575);
   top: -200px;
   padding: 0px 10px;
@@ -68,6 +69,7 @@
 }
 
 .fall-effect:hover .mask {
+  border-radius: 5px;
   -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
   filter: alpha(opacity=100);
   opacity: 1;
@@ -249,6 +251,7 @@
 
 #StackDesktop{
   position: relative;
+  display: flex;
 }
 
 .container-stack {
@@ -490,4 +493,35 @@ td{
 #GalleryInDesktop{
   margin-left: 20%;
   margin-right: 20%;
+  background-color: white;
+  padding: 5px;
+}
+.row {
+  /* border-width: 1px; */
+  border: solid;
+  border-radius: 5px;
+  box-shadow: 3px 3px;
+}
+
+#cnt svg:hover{
+  padding: 1px;
+  fill:gold;
+  transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+}
+#cnt svg{
+  padding: 1px;
+  fill:#ffffffa0;
+  transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+}
+
+#StackDesktop #Gal{
+  width: 40%;
+  direction: rtl;
+  
 }
