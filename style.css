@@ -246,8 +246,7 @@
 .p-mobile-contact{
   padding-top: 10%;
   padding-left: 25%;
-  }
-
+}
 
 #StackDesktop{
   position: relative;
@@ -260,7 +259,6 @@
     padding-left: 100px;
     padding-right: 100px;
 }
-
 
 .imageOne {
   position: absolute;
@@ -295,16 +293,6 @@
 .imagethree {
   z-index: 1;
 }
-
-.cards_phone{
-  display: none;
-}
-.header_phone{
-  display: none;
-}
-.cards_phone{
-  display: none;
-}
 .my_navbar{
   z-index: 10;
   width: 100%;
@@ -313,19 +301,17 @@
 #changer{
   margin-left: 5%;
 }
+
 .header{
   background-image: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,117,1) 50%, rgba(0,212,255,0.5) 90%), url('img/bg.png');
   background-position: right;
   background-repeat: no-repeat;
 }
-.headerinner{
-  display: flex;
+.header_phone{
+  background-image: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,117,1) 50%, rgba(0,212,255,0.5) 90%), url('img/bg.png');
+  background-repeat: no-repeat;
 }
-.headerinner img{
-  padding: 10%;
-  opacity: 50%;
-}
-.textt{
+.header .headerinner .textt{
   direction: rtl;
   clear: right;
   color: #ffffff;
@@ -333,8 +319,12 @@
   width: 50%;
   overflow: hidden;
 }
-.imagg{
-  width: 50%;
+.header_phone .headerinner .textt{
+  margin-right: 20%;
+  direction: rtl;
+  clear: right;
+  color: #ffffff;
+  padding: 10%;
   overflow: hidden;
 }
 
@@ -373,7 +363,7 @@ td{
   vertical-align: middle;
 }
 
-.card-main{
+.cards .card-main{
   position: relative;
   top:0px;
   width: 28%;
@@ -390,7 +380,24 @@ td{
   -webkit-transition-duration: 0.2s;
   -moz-transition-duration: 0.2s;
 }
-.card-childs{
+.cards_phone .card-main{
+  direction: rtl;
+  position: relative;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5%;
+  box-shadow: 10px 10px 5px #aaaaaa;
+  /*border: solid;
+  border-width: thick;
+  border-color: #00000017;*/
+  border-radius: 5px;
+  transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+}
+
+.cards .card-childs{
   position: relative;
   top:0px;
   height: 50%;
@@ -405,7 +412,21 @@ td{
   -webkit-transition-duration: 0.2s;
   -moz-transition-duration: 0.2s;
 }
-.card-childs:hover{
+.cards_phone .card-childs{
+  direction: rtl;
+  position: relative;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 10px 10px 5px #aaaaaa;
+  margin-bottom: 5%;
+  border-color: #00000017;
+  border-radius: 5px;
+  transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+}
+.cards .card-childs:hover{
   position: relative;
   top:-20px;
   width: 30%;
@@ -415,7 +436,7 @@ td{
   -webkit-transition-duration: 0.2s;
   -moz-transition-duration: 0.2s;
 }
-.card-main:hover{
+.cards .card-main:hover{
   position: relative;
   top:-20px;
   width: 30%;
@@ -428,6 +449,7 @@ td{
 .card-childs .content{
   height: 50%;
   background-color: rgb(50, 154, 240);
+  border-radius: 5px 5px 0 0;
   color: white;
   padding-top: 6%;
   padding-bottom: 6%;
@@ -440,6 +462,7 @@ td{
 .card-main .content{
   height: 50%;
   background-color: rgb(240, 50, 145); 
+  border-radius: 5px 5px 0 0;
   color: white;
   padding-top: 6%;
   padding-bottom: 6%;
@@ -449,7 +472,7 @@ td{
   -webkit-transition-duration: 0.2s;
   -moz-transition-duration: 0.2s;
 }
-.card-childs .content2{
+ .card-childs .content2{
   height: 50%;
   padding-top: 6%;
   padding-bottom: 6%;
@@ -475,19 +498,6 @@ td{
   -ms-transform: rotate(-90deg); /* IE 9 */
   -webkit-transform: rotate(-90deg); /* Safari */
   transform: rotate(-90deg);
-}
-
-@media screen and (max-width : 600px){
-  .cards{
-    display: none;
-  }
-  .header{
-    display: none;
-  }
-  .cards{
-    display: none;
-  }
-  
 }
 
 #GalleryInDesktop{
@@ -523,5 +533,61 @@ td{
 #StackDesktop #Gal{
   width: 40%;
   direction: rtl;
-  
+}
+
+.navbar-light .navbar-toggler {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.offcanvas-title {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+.nav-item{
+  margin-right: 0;
+  margin-left: auto;
+}
+
+@media screen and (max-width : 2000px){
+  .cards{
+    display: flex;
+  }
+  .header{
+    display: block;
+  }
+  .my_navbar{
+    display: block;
+  }
+  .cards_phone{
+    display: none;
+  }
+  .header_phone{
+    display: none;
+  }
+  .my_navbar_phone{
+    display: none;
+  }
+}
+
+@media screen and (max-width : 600px){
+  .cards{
+    display: none;
+  }
+  .header{
+    display: none;
+  }
+  .my_navbar{
+    display: none;
+  }
+  .cards_phone{
+    display: block;
+  }
+  .header_phone{
+    display: block;
+  }
+  .my_navbar_phone{
+    display: block;
+  }
 }
