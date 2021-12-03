@@ -144,7 +144,7 @@ margin-left: 5%;
 padding: 5%;
 position: absolute;
 overflow: hidden;
-border-radius: 5px;
+border-radius: 10px;
 }
 .fall-item-mobile img {
 display: block;
@@ -164,8 +164,8 @@ right: 0%;
 transform: translate(-50%, -50%);
 padding: 0px 30px;
 }
-.fall-effect-mobile .mask {
-border-radius: 5px;
+.fall-effect-mobile .mask-mobile {
+border-radius: 10px;
 background-color: rgba(255, 255, 255, 0.575);
 top: -200px;
 padding: 0px 10px;
@@ -180,6 +180,7 @@ transition: all 0.3s ease-out 0.5s;
 }
 
 .fall-effect-mobile p {
+padding-top: 15%;
 color: rgb(52, 30, 114);
 -webkit-transform: translateY(0px);
 -moz-transform: translateY(0px);
@@ -193,8 +194,8 @@ transform: translateY(0px);
 transition: all 0.02s ease-in-out 0.05s;
 }
 
-.fall-effect-mobile:hover .mask {
-border-radius: 5px;
+.fall-effect-mobile:hover .mask-mobile {
+border-radius: 10px;
 -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
 filter: alpha(opacity=100);
 opacity: 1;
@@ -205,6 +206,28 @@ top: 0px;
 -ms-transition-delay: 0s;
 transition-delay: 0s;
 
+}
+
+.carousel-control-prev-icon {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 80% 80%;
+  background-color: #ffc107;
+  border-radius: 50%;
+}
+
+.carousel-control-next-icon {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 80% 80%;
+  background-color: #ffc107;
+  border-radius: 50%;
 }
 
 .fall-effect-mobile:hover p {
@@ -476,6 +499,16 @@ color: blue;
 
 /* stack mobile  */
 
+/* .carousel-inner .item {
+  opacity: ;
+  transition: none;
+  transform: translate3d(0,0,0) !important;
+}
+
+.carousel-inner .active {
+  transition: opacity 1s ease-in-out;
+  opacity: 1;
+} */
 
 /* Slideshow container */
 * {box-sizing: border-box;}
@@ -756,7 +789,7 @@ transform: rotate(-90deg);
 }
 
 .carousel-inner {
-padding:5%;
+  margin: 10px 0px;
 }
 
 #GalleryInDesktop{
