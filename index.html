@@ -38,6 +38,20 @@
                     Element.className='btn btn-outline-white';
                     var Element = document.getElementById('Logo2');
                     Element.src="blue_logo_200x200.png";
+                    var Element = document.getElementById('body');
+                    Element.style="background-color: black";
+                    var Element = document.getElementById('GalleryInDesktop');
+                    Element.style="background-color: black";
+                    var Element =  document.getElementsByClassName('border-gallery');
+                    for(var i = 0; i < Element.length; i++){
+                        Element[i].style = "border-color: grey; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;";
+                    }
+                    Element =  document.getElementsByClassName('p-stack-color');
+                    for(var i = 0; i < Element.length; i++){
+                        Element[i].style = "color: white";
+                    }
+                    
+
                 } else {
                     stat=0;
                     var Element = document.getElementById('menu_nav');
@@ -54,6 +68,19 @@
                     Element.className='btn btn-outline-dark';
                     var Element = document.getElementById('Logo2');
                     Element.src="black_logo_200x200.png";
+                    var Element = document.getElementById('body');
+                    Element.style="background-color: white";
+                    var Element = document.getElementById('GalleryInDesktop');
+                    Element.style="background-color: white";
+                    var Element =  document.getElementsByClassName('border-gallery');
+                    for(var i = 0; i < Element.length; i++){
+                        Element[i].style.borderColor = "black";
+                    }
+
+                    Element =  document.getElementsByClassName('p-stack-color');
+                    for(var i = 0; i < Element.length; i++){
+                        Element[i].style = "color: black";
+                    }
                 }
             }
             // slide show activity mobile
@@ -77,7 +104,7 @@
             }
         </script>
     </head>
-    <body>
+    <body id="body">
         <div class="my_navbar">
             <nav class="navbar navbar-expand-lg navbar-light bg-light" id="menu_nav">
                 <div class="container-fluid">
@@ -338,7 +365,7 @@
         <div id="GalleryInDesktop" class="d-none d-lg-block d-xl-block">
             <div class="row">
                 <div class="col-sm">
-                    <div class="fall-item fall-effect">
+                    <div class="fall-item fall-effect border-gallery">
                         <img src="pic/pic1.jpg"/>
                         <div class="mask">
                             <p style="margin-top: 25%;"> ! به به دوباره آمد فصل بهاری ! بلبل داره می‌خوانه با بی قراری  </p>
@@ -346,10 +373,9 @@
                     </div>
                 </div>
             </div>    
-            <br>
             <div class="row">
                 <div class="col-sm">
-                    <div class="fall-item fall-effect">
+                    <div class="fall-item fall-effect border-gallery">
                         <img src="pic/pic1.jpg"/>
                         <div class="mask">
                             <p style="margin-top: 25%;"> ! به به دوباره آمد فصل بهاری ! بلبل داره می‌خوانه با بی قراری  </p>
@@ -358,7 +384,7 @@
                 </div>
                 
                 <div class="col-sm">
-                    <div class="fall-item fall-effect">    
+                    <div class="fall-item fall-effect border-gallery">    
                         <img src="pic/pic1.jpg"/>
                         <div class="mask">
                             <p style="margin-top: 25%;"> ! به به دوباره آمد فصل بهاری ! بلبل داره می‌خوانه با بی قراری  </p>
@@ -366,10 +392,10 @@
                     </div>    
                 </div>    
             </div>
-            <br>
+            
             <div class="row">
                 <div class="col-sm">
-                    <div class="fall-item fall-effect">
+                    <div class="fall-item fall-effect border-gallery">
                         <img src="pic/pic1.jpg"/>
                         <div class="mask">
                             <p style="margin-top: 20%;"> ! به به دوباره آمد فصل بهاری ! بلبل داره می‌خوانه با بی قراری  </p>
@@ -378,7 +404,7 @@
                 </div>
                 
                 <div class="col-sm">
-                    <div class="fall-item fall-effect">    
+                    <div class="fall-item fall-effect border-gallery">    
                         <img src="pic/pic1.jpg"/>
                         <div class="mask">
                             <p style="margin-top: 20%;"> ! به به دوباره آمد فصل بهاری ! بلبل داره می‌خوانه با بی قراری  </p>
@@ -387,7 +413,7 @@
                 </div>
                 
                 <div class="col-sm">
-                    <div class="fall-item fall-effect">
+                    <div class="fall-item fall-effect border-gallery">
                         <img src="pic/pic1.jpg"/>
                         <div class="mask">
                             <p style="margin-top: 20%;"> ! به به دوباره آمد فصل بهاری ! بلبل داره می‌خوانه با بی قراری  </p>
@@ -529,7 +555,7 @@
             </span>
             <span class="span-stack">
                 <div class="div-stack">    
-                    <p>اولین عکس مک بوکه دومی پرنده های اسکل و سومی هم پرناولین عکس مک بوکه دومی پرنده های اسکل و سومی هم پرناولین عکس مک بوکه دومی پرنده های اسکل و سومی هم پرنده های اسکل تر
+                    <p class="p-stack-color">اولین عکس مک بوکه دومی پرنده های اسکل و سومی هم پرناولین عکس مک بوکه دومی پرنده های اسکل و سومی هم پرناولین عکس مک بوکه دومی پرنده های اسکل و سومی هم پرنده های اسکل تر
                     </p>
                 </div>
                 <br>
@@ -540,14 +566,14 @@
         </div>
 
         <div id="StackDesktop" class="d-none d-lg-block d-xl-block">
-            <span class="container-stack" style="margin-right: 0%; margin-left: 50%; padding-left: 10%;">
-                <img src="pic/pic2.jpg" class="imagethree" style="margin-top: 40px;">
-                <img src="pic/pic2.jpg" class="imageTwo" style=" margin-top: 100px; margin-right: 60px;">
-                <img src="pic/pic1.jpg" class="imageOne" style="margin-top: 160px;  margin-right: 120px;">
+            <span class="container-stack" style="margin-right: 0%; margin-left: 50%; padding-left: 10%; ">
+                <img src="pic/pic2.jpg" class="imagethree" style="margin-top: 40px; filter: inherit;">
+                <img src="pic/pic2.jpg" class="imageTwo" style=" margin-top: 100px; margin-right: 60px; filter: inherit;">
+                <img src="pic/pic1.jpg" class="imageOne" style="margin-top: 160px;  margin-right: 120px; filter: inherit;">
             </span>
             <span class="span-stack" style="margin-left: 0%; margin-right: 50%; padding-left: 10%;">
                 <div class="div-stack">    
-                    <p>اولین عکس مک بوکه دومی پرنده های اسکل و سومی هم پرناولین عکس مک بوکه دومی پرنده های اسکل و سومی هم پرناولین عکس مک بوکه دومی پرنده های اسکل و سومی هم پرنده های اسکل تر
+                    <p class="p-stack-color">اولین عکس مک بوکه دومی پرنده های اسکل و سومی هم پرناولین عکس مک بوکه دومی پرنده های اسکل و سومی هم پرناولین عکس مک بوکه دومی پرنده های اسکل و سومی هم پرنده های اسکل تر
                     </p>
                 </div>
                 <br>

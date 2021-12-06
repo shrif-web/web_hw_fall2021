@@ -9,6 +9,31 @@
 
 /* galley in desktop */
 
+.carousel-inner {
+  margin: 10px 0px;
+}
+
+.border-gallery {
+  border-style:solid;
+  border-color: black; 
+  border-width: 2px;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.07),
+   0 4px 8px rgba(0,0,0,0.07), 0 8px 16px rgba(0,0,0,0.07)
+   ,0 16px 32px rgba(0,0,0,0.07), 0 32px 64px rgba(0,0,0,0.07);
+}
+
+#GalleryInDesktop{
+  background-color: white;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+.row {
+  background-color: inherit;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
 .fall-item {
 width: 100%;
 height: auto;
@@ -44,7 +69,7 @@ padding: 0px 30px;
 }
 .fall-effect .mask {
 border-radius: 5px;
-background-color: rgba(255, 255, 255, 0.575);
+background-color: rgba(29, 29, 29, 0.575);
 top: -200px;
 padding: 0px 10px;
 vertical-align: middle;
@@ -59,7 +84,7 @@ transition: all 0.3s ease-out 0.5s;
 }
 
 .fall-effect p {
-color: rgb(52, 30, 114);
+color: rgb(246, 246, 246);
 -webkit-transform: translateY(0px);
 -moz-transform: translateY(0px);
 -o-transform: translateY(0px);
@@ -272,60 +297,59 @@ opacity: 1;
 
 /* contact us */
 .p-contact-us{
-display: inline;
-width: 30%;
-background-color: #273036; 
-font-size: 55px;
-font-weight: bold;
-color: cornsilk; 
-margin-left: 0px;
-transition-duration: 0.2s;
--webkit-transition-duration: 0.2s;
+  display: inline;
+  width: 30%;
+  background-color: #273036; 
+  font-size: 55px;
+  font-weight: bold;
+  color: cornsilk; 
+  margin-left: 0px;
+  transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
 }
 .p-contact-us-color{
-display: inline;
-width: 30%;
-background-color: #273036; 
-font-size: 55px;
-font-weight: bold;
-color: rgb(235, 173, 2); 
-margin-left: 0px;
-transition-duration: 0.2s;
--webkit-transition-duration: 0.2s;
+  display: inline;
+  width: 30%;
+  background-color: #273036; 
+  font-size: 55px;
+  font-weight: bold;
+  color: rgb(235, 173, 2); 
+  margin-left: 0px;
+  transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
 }
 
 .p-contact-us-color:hover{
-background-color: #273036; 
-font-size: 80px;
-font-weight: bold;
-color: rgb(235, 173, 2); 
-margin-left: 0px;
-transition-duration: 0.2s;
--webkit-transition-duration: 0.2s;
+  background-color: #273036; 
+  font-size: 80px;
+  font-weight: bold;
+  color: rgb(235, 173, 2); 
+  margin-left: 0px;
+  transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
 }
 
 .ContactUsContainer{
-display: flex;
-align-self: center;
-align-items: center;
-justify-content: center;
-width: auto;
-height: auto;
-top: 0 ;
-padding:  0px 0px ;
-background-color: #273036;
-z-index: -1;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  padding:  0px 0px ;
+  background-color: #273036;
+  z-index: -1;
 }
 
 .socialmedia{
-position: relative;
-background-color: #273036;
-color: #fff;
-display: inline;
-float:right;
-width: 75px;
-height: 75px;
-margin-right: 25px;
+  position: relative;
+  background-color: #273036;
+  color: #fff;
+  display: inline;
+  float:right;
+  width: 75px;
+  height: 75px;
+  margin-right: 25px;
 }
 
 .socialmedia:hover{
@@ -413,16 +437,18 @@ margin-left: 10%;
 }
 
 .imageOne {
+  border-radius: 10px;
   position: absolute;
   margin-top: 40px;
   z-index: 0;
   width: 250px;
   height: 250px;
   transition: all 0.5s;
-  box-shadow: 10px 10px 10px 0px #ccc;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
 .imageTwo {
+  border-radius: 10px;
   position: absolute;
   margin-top: 100px;
   margin-left: 60px;
@@ -430,10 +456,11 @@ margin-left: 10%;
   width: 250px;
   height: 250px;
   transition: all 0.5s;
-  box-shadow: 10px 10px 10px 0px #ccc;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
 .imagethree {
+  border-radius: 10px;
   position: absolute;
   margin-top: 160px;
   margin-left: 120px;
@@ -441,25 +468,31 @@ margin-left: 10%;
   width: 250px;
   height: 250px;
   transition: all 0.5s;
-  box-shadow: 10px 10px 10px 0px #ccc;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
 .imageOne:hover {
+  border-radius: 10px;
   z-index: 4;
   transform: scale(1.4) rotate(-5deg);
-  box-shadow: 0px 0px 0px 0px #ccc;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  filter: grayscale(0);
 }
 
 .imageTwo:hover {
+  border-radius: 10px;
   z-index: 4;
   transform: scale(1.4) rotate(5deg);
-  box-shadow: 0px 0px 0px 0px #ccc;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  filter: grayscale(0);
 }
 
 .imagethree:hover {
+  border-radius: 10px;
   z-index: 4;
   transform: scale(1.4) rotate(-5deg);
-  box-shadow: 0px 0px 0px 0px #ccc;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  filter: grayscale(0);
 }
 
 .span-stack{
@@ -788,22 +821,7 @@ border-radius: 5px;
 transform: rotate(-90deg);
 }
 
-.carousel-inner {
-  margin: 10px 0px;
-}
 
-#GalleryInDesktop{
-margin-left: 20%;
-margin-right: 20%;
-background-color: white;
-padding: 5px;
-}
-.row {
-/* border-width: 1px; */
-border: solid;
-border-radius: 5px;
-box-shadow: 3px 3px;
-}
 
 #cnt svg:hover{
 padding: 1px;
