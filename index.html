@@ -50,8 +50,18 @@
                     for(var i = 0; i < Element.length; i++){
                         Element[i].style = "color: white";
                     }
-                    
-
+                    Element =  document.getElementsByClassName('stack-mobile-h2');
+                    for(var i = 0; i < Element.length; i++){
+                        Element[i].style = "color: white";
+                    }
+                    Element =  document.getElementsByClassName('stack-mobile-p');
+                    for(var i = 0; i < Element.length; i++){
+                        Element[i].style = "color: white";
+                    }                  
+                    Element =  document.getElementsByClassName('fall-effect-mobile');
+                    for(var i = 0; i < Element.length; i++){
+                        Element[i].style = "background-color: rgba(41, 39, 39, 0.575)";
+                    }                  
                 } else {
                     stat=0;
                     var Element = document.getElementById('menu_nav');
@@ -76,11 +86,22 @@
                     for(var i = 0; i < Element.length; i++){
                         Element[i].style.borderColor = "black";
                     }
-
                     Element =  document.getElementsByClassName('p-stack-color');
                     for(var i = 0; i < Element.length; i++){
                         Element[i].style = "color: black";
                     }
+                    Element =  document.getElementsByClassName('stack-mobile-h2');
+                    for(var i = 0; i < Element.length; i++){
+                        Element[i].style = "color: black";
+                    }
+                    Element =  document.getElementsByClassName('stack-mobile-p');
+                    for(var i = 0; i < Element.length; i++){
+                        Element[i].style = "color: black";
+                    }
+                    Element =  document.getElementsByClassName('fall-effect-mobile');
+                    for(var i = 0; i < Element.length; i++){
+                        Element[i].style = "background-color: rgba(255, 255, 255, 0.575)";
+                    }    
                 }
             }
             // slide show activity mobile
@@ -586,66 +607,66 @@
         <div id="StackMobile" class="d-lg-none d-xl-none" style="margin-top: 50px;">
             <div id="StackMobilegallery" class="carousel slide" data-ride="carousel">
                 
-                <h2 style="direction: rtl; font-weight: bold; padding-right: 10%;">فعالیت ها</h2>
-                <p style="direction: rtl; padding: 0% 10%;">اولین عکس مک بوکه دومی پرنده های اسکل و سومی هم پرنده های اسکل تر
+                <h2 class="stack-mobile-h2">فعالیت ها</h2>
+                <p class="stack-mobile-p">اولین عکس مک بوکه دومی پرنده های اسکل و سومی هم پرنده های اسکل تر
                 </p>
                 
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div id="Mobilecarouselcontrol" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators" style="margin-top: 0%;">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        <li data-target="#MobileIndicator" data-slide-to="0" class="active"></li>
+                        <li data-target="#MobileIndicator" data-slide-to="1"></li>
+                        <li data-target="#MobileIndicator" data-slide-to="2"></li>
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item mobile active">
-                            <div style="width: 90%; height: 90%;">
-                                <img src="pic/pic1.jpg" style="margin: 10%; display: block; width: 90%; height: 100%; border-radius: 10px;"/>
+                            <div style="width: 90%; height: 90%;" data-mdb-interval="2000">
+                                <img src="pic/pic1.jpg" class="stack-mobile-img"/>
                             </div>
                         </div>        
     
                         <div class="carousel-item mobile ">
-                            <div style="width: 90%; height: 90%;">
-                                <img src="pic/pic1.jpg" style="margin: 10%; display: block; width: 90%; height: 100%; border-radius: 10px;"/>
+                            <div style="width: 90%; height: 90%;" data-mdb-interval="2000">
+                                <img src="pic/pic1.jpg" class="stack-mobile-img"/>
                             </div>
                         </div>   
 
                         <div class="carousel-item mobile ">
-                            <div style="width: 90%; height: 90%;">
-                                <img src="pic/pic1.jpg" style="margin: 10%; display: block; width: 90%; height: 100%; border-radius: 10px;"/>
+                            <div style="width: 90%; height: 90%;" data-mdb-interval="2000">
+                                <img src="pic/pic1.jpg" class="stack-mobile-img"/>
                             </div>
                         </div>   
                     </div>
                 </div> 
             </div>   
             
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div id="Mobilecarouselcontrol" class="carousel slide" data-ride="carousel">
                 
-                <h2 style="direction: rtl; font-weight: bold; padding-right: 10%;">فعالیت ها</h2>
-                <p style="direction: rtl; padding: 0% 10%;">اولین عکس مک بوکه دومی پرنده های اسکل و سومی هم پرنده های اسکل تر
+                <h2 class="stack-mobile-h2">فعالیت ها</h2>
+                <p class="stack-mobile-p">اولین عکس مک بوکه دومی پرنده های اسکل و سومی هم پرنده های اسکل تر
                 </p>
                 
                 <div id="MobileGallery" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators" style="margin-top: 0%;">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        <li data-target="#MobileIndicator" data-slide-to="0" class="active"></li>
+                        <li data-target="#MobileIndicator" data-slide-to="1"></li>
+                        <li data-target="#MobileIndicator" data-slide-to="2"></li>
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item mobile active">
                             <div style="width: 90%; height: 90%;">
-                                <img src="pic/pic1.jpg" style="margin: 10%; display: block; width: 90%; height: 100%; border-radius: 10px;"/>
+                                <img src="pic/pic1.jpg" class="stack-mobile-img"/>
                             </div>
                         </div>        
     
                         <div class="carousel-item mobile ">
                             <div style="width: 90%; height: 90%;">
-                                <img src="pic/pic1.jpg" style="margin: 10%; display: block; width: 90%; height: 100%; border-radius: 10px;"/>
+                                <img src="pic/pic1.jpg" class="stack-mobile-img"/>
                             </div>
                         </div>   
 
                         <div class="carousel-item mobile ">
                             <div style="width: 90%; height: 90%;">
-                                <img src="pic/pic1.jpg" style="margin: 10%; display: block; width: 90%; height: 100%; border-radius: 10px;"/>
+                                <img src="pic/pic1.jpg" class="stack-mobile-img"/>
                             </div>
                         </div>   
                     </div>

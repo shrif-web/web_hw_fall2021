@@ -182,7 +182,7 @@ border-radius: 10px;
 .fall-item-mobile p {
 font-style: normal;
 position: relative;
-color: #fff;
+color: rgb(149, 39, 39);
 top: 20%;
 left: 0%;
 right: 0%;
@@ -543,6 +543,24 @@ color: blue;
   opacity: 1;
 } */
 
+.stack-mobile-h2 {
+  direction: rtl; 
+  font-weight: bold;
+  padding-right: 10%;
+  color: #000;
+}
+.stack-mobile-p {
+  direction: rtl;
+  padding: 0% 10%;
+  color: #000;
+}
+.stack-mobile-img {
+  margin: 10%;
+  display: block;
+  width: 90%; 
+  height: 100%; 
+  border-radius: 10px;
+}
 /* Slideshow container */
 * {box-sizing: border-box;}
 .mySlides {display: none;}
