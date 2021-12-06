@@ -365,60 +365,60 @@ margin-right: 25px;
 
 /* mobile contact us */
 .p-contact-us-mobile{
-background-color: #273036; 
-font-size: 40px;
-font-weight: bold;
-color: cornsilk; 
-margin: 0 auto;   
-padding: 0px 0px 0px 200px;
+  background-color: #273036; 
+  font-size: 40px;
+  font-weight: bold;
+  color: cornsilk; 
+  margin: 0 auto;   
+  padding: 0px 0px 0px 200px;
 }
 .p-contact-us-color-mobile{
-background-color: #273036; 
-font-size: 40px;
-font-weight: bold;
-color: rgb(235, 173, 2); 
-margin: 0 auto;
-padding: 0px 0px 0px 170px;
+  background-color: #273036; 
+  font-size: 40px;
+  font-weight: bold;
+  color: rgb(235, 173, 2); 
+  margin: 0 auto;
+  padding: 0px 0px 0px 170px;
 }
 
 .p-contact-us-color-mobile:hover{
-background-color: #273036; 
-font-size: 60px;
-font-weight: bold;
-color: rgb(235, 173, 2); 
-margin: 0 auto;
-padding: 0px 0px 0px 170px;
+  background-color: #273036; 
+  font-size: 60px;
+  font-weight: bold;
+  color: rgb(235, 173, 2); 
+  margin: 0 auto;
+  padding: 0px 0px 0px 170px;
 }
 
 .socialmedia-mobile{
-position: relative;
-background-color: #273036;
-color: #fff;
-display: inline;
-width: 75px;
-height: 75px;
-margin-right: 25px;
+  position: relative;
+  background-color: #273036;
+  color: #fff;
+  display: inline;
+  width: 75px;
+  height: 75px;
+  margin-right: 25px;
 }
 
 .socialmedia-mobile:hover{
-position: relative;
-background-color: gold;
-color: #fff;
-display: inline;
-width: 75px;
-height: 75px;
-margin-right: 25px;
+  position: relative;
+  background-color: gold;
+  color: #fff;
+  display: inline;
+  width: 75px;
+  height: 75px;
+  margin-right: 25px;
 }
 
 .img-mobile-contact{
-margin: auto;
-padding-top: 15px;
-padding-left: 35%;
+  margin: auto;
+  padding-top: 15px;
+  padding-left: 35%;
 }
 
 .p-mobile-contact{
-padding-top: 10%;
-padding-left: 25%;
+  padding-top: 10%;
+  padding-left: 25%;
 }
 
 /*  stack desktop    */
@@ -431,7 +431,6 @@ max-height: fit-content;
 
 .container-stack {
 position: relative;
-justify-content: left;
 height: auto;
 margin-left: 10%;
 }
@@ -935,59 +934,61 @@ margin-left: auto;
 }
 
 .NewsText {
-    background-color: #E0E6EE;   
-    width: 18%;
-    text-align: right;
-    border-radius: 5px;
-    margin: 1%;
+  background-color: #E0E6EE;   
+  width: 18%;
+  text-align: right;
+  border-radius: 5px;
+  margin: 1%;
 }
 .Newsbutton{
-    background-color: #E5C026; 
-    width: 18%;
-    border-radius: 5px;
-    margin: 1%;
+  background-color: #E5C026; 
+  width: 18%;
+  border-radius: 5px;
+  margin: 1%;
 }
 .NewsHeader{
-    color: #E0E6EE;
-    border-radius: 5px;
-    position:relative;
-    left:35%;
+  color: #E0E6EE;
+  border-radius: 5px;
+  position:relative;
+  left:35%;
 }
 .footer {
-      position: relative;
-      width: 100%;
-      background-color: #313131;
-      color: #c7c7c7;
-      text-align: center;
-      height: 300px;
-    }
+  position: relative;
+  width: 100%;
+  background-color: #313131;
+  color: #c7c7c7;
+  text-align: center;
+  height: 300px;
+}
 .footerText {
-    position: relative;
+  position: relative;
 }
 .commentText{
-    float:right;
-    width: 50%;
-    text-align:center;
-    margin: 2%;
+  float:right;
+  width: 50%;
+  text-align:center;
+  margin: 2%;
 }
 .commentImage{
-    float:left;
-    width: 50%;
-    margin: 2%;
+  float:left;
+  width: 50%;
+  margin: 2%;
 }
 .comment{
-    width:50% ;
-    margin-left:auto; 
-    margin-right: auto; 
-    margin-top: 1%;
-    margin-bottom: 1%;
-    display: flex; 
-    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
+  width:50% ;
+  margin-left:auto; 
+  margin-right: auto; 
+  margin-top: 1%;
+  margin-bottom: 1%;
+  display: flex; 
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
 }
 .BigDiv {
+  margin-bottom: -200px;
+  z-index: 4;
   margin-left: auto;
   margin-right: auto;
-  background-color: #667eef;    
+  background-color: #667eef;
   text-align: center;
   border-radius: 5px;
   padding: 2%;
@@ -995,32 +996,34 @@ margin-left: auto;
 }
 
 .NewsText {
-    background-color: #E0E6EE;   
-    width: 18%;
-    text-align: right;
-    border-radius: 5px;
-    margin: 1%;
+  background-color: #E0E6EE;   
+  width: 18%;
+  text-align: right;
+  border-radius: 5px;
+  margin: 1%;
 }
 .Newsbutton{
-    background-color: #E5C026; 
-    width: 18%;
-    border-radius: 5px;
-    margin: 1%;
+  background-color: #E5C026; 
+  width: 18%;
+  border-radius: 5px;
+  margin: 1%;
 }
 .NewsHeader{
-    color: #E0E6EE;
-    border-radius: 5px;
-    position:relative;
-    left:35%;
+  color: #E0E6EE;
+  border-radius: 5px;
+  position:relative;
+  left:35%;
 }
 .footer {
-      position: relative;
-      width: 100%;
-      background-color: #313131;
-      color: #c7c7c7;
-      text-align: center;
-      height: 300px;
-    }
+  position: relative;
+  width: 100%;
+  z-index: -1;
+  background-color: #313131;
+  color: #c7c7c7;
+  text-align: center;
+  height: 300px;
+}
 .footerText {
     position: relative;
+    top: 40%;
 }
