@@ -2,10 +2,11 @@
   font-family: Bnazanin;
   src: url(BNazanin.TTF);
 }
-* {
+*{
   font-family: Bnazanin !important;
   font-size: 1.1rem;
 }
+
 
 /* galley in desktop */
 
@@ -330,11 +331,59 @@ opacity: 1;
   -webkit-transition-duration: 0.2s;
 }
 
+.p-contact-us-mobile{
+  display: inline;
+  width: 30%;
+  background-color: #273036; 
+  font-size: 45px;
+  font-weight: bold;
+  color: cornsilk; 
+  margin-left: 0px;
+  transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+}
+
+.p-contact-us-color-mobile {
+  display: inline;
+  width: 30%;
+  background-color: #273036; 
+  font-size: 45px;
+  font-weight: bold;
+  color: rgb(235, 173, 2); 
+  margin-left: 0px;
+  transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+}
+
+.p-contact-us-color-mobile:hover {
+  background-color: #273036; 
+  font-size: 55px;
+  font-weight: bold;
+  color: rgb(235, 173, 2); 
+  margin-left: 0px;
+  transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+}
+
 .ContactUsContainer{
   display: flex;
   align-self: center;
   align-items: center;
   justify-content: center;
+  width: auto;
+  height: auto;
+  margin: auto;
+  padding:  0px 0px ;
+  background-color: #273036;
+  z-index: -1;
+}
+
+.ContactUsContainer-mobile {
+  display: block;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
   width: auto;
   height: auto;
   padding:  0px 0px ;
@@ -365,31 +414,8 @@ margin-right: 25px;
 }
 
 /* mobile contact us */
-.p-contact-us-mobile{
-  background-color: #273036; 
-  font-size: 40px;
-  font-weight: bold;
-  color: cornsilk; 
-  margin: 0 auto;   
-  padding: 0px 0px 0px 200px;
-}
-.p-contact-us-color-mobile{
-  background-color: #273036; 
-  font-size: 40px;
-  font-weight: bold;
-  color: rgb(235, 173, 2); 
-  margin: 0 auto;
-  padding: 0px 0px 0px 170px;
-}
 
-.p-contact-us-color-mobile:hover{
-  background-color: #273036; 
-  font-size: 60px;
-  font-weight: bold;
-  color: rgb(235, 173, 2); 
-  margin: 0 auto;
-  padding: 0px 0px 0px 170px;
-}
+
 
 .socialmedia-mobile{
   position: relative;
@@ -629,7 +655,18 @@ to {opacity: 1}
 z-index: 10;
 width: 100%;
 position: fixed;
+backface-visibility:hidden;
+-webkit-backface-visibility: hidden;
 }
+
+.my_navbar_phone{
+  z-index: 10;
+  width: 100%;
+  position: fixed;
+  backface-visibility:hidden;
+  -webkit-backface-visibility: hidden;
+}
+
 #changer{
 margin-left: 5%;
 }
@@ -873,6 +910,11 @@ margin-right: 0;
 margin-left: auto;
 }
 
+#div-header {
+  margin-top: -1px;
+  background-color: white;
+}
+
 #persons {
   text-align: center;
 }
@@ -1054,13 +1096,12 @@ div.scrollmenu {
 
 .wrapper { 
   margin: auto; 
-  text-align: center; 
   position: relative;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
   margin-bottom: 20px !important;
-  width: 500px;
+  width: 100%;
   padding-top: 5px;
 }
 .scrolls { 
