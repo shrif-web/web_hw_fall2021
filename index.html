@@ -65,6 +65,8 @@
                     for(var i = 0; i < Element.length; i++){
                         Element[i].style = "color: white";
                     }                  
+                    Element =  document.getElementById('persons');
+                    Element.style = "color: white";
       
                 } else {
                     stat=0;
@@ -104,6 +106,8 @@
                     for(var i = 0; i < Element.length; i++){
                         Element[i].style = "color: black";
                     }
+                    Element =  document.getElementById('persons');
+                    Element.style = "color: black";
                       
                 }
             }
@@ -111,7 +115,7 @@
     </head>
     <body id="body">
 
-        <div class="my_navbar">
+        <div class="my_navbar d-none d-lg-block d-xl-block">
             <nav class="navbar navbar-expand-lg navbar-light bg-light" id="menu_nav">
                 <div class="container-fluid">
                     <a class="navbar-brand">
@@ -148,7 +152,7 @@
             </nav>
         </div>
 
-        <div class="my_navbar_phone">
+        <div class="my_navbar_phone d-lg-none d-xl-none">
             <nav class="navbar navbar-light bg-light fixed-top" id="menu_nav2">
                 <div class="container-fluid">
                     <a class="navbar-brand">
@@ -190,7 +194,7 @@
               </nav>
         </div>
         
-        <div class="header">
+        <div class="header d-none d-lg-block d-xl-block">
             <div class="headerinner">
                 <div class="textt">
                     <h1>تیم VAF</h1>
@@ -203,7 +207,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path id="hxvg" fill="#ffffff" fill-opacity="1" d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,250.7C1248,256,1344,288,1392,304L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
         </div>
 
-        <div class="header_phone">
+        <div class="header_phone d-lg-none d-xl-none">
             <div class="headerinner">
                 <div class="textt">
                     <h1>تیم VAF</h1>
@@ -216,8 +220,8 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="1" d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,250.7C1248,256,1344,288,1392,304L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
         </div>
 
-        <h1 style="text-align: center;">افراد</h1>
-        <div class="cards">
+        <h1 id="persons">افراد</h1>
+        <div class="cards d-none d-lg-flex d-xl-flex">
             <div class="card-childs">
                 <div class="content"> 
                     <h8>97102225</h8>
@@ -293,7 +297,7 @@
             </div>
         </div>
 
-        <div class="cards_phone">
+        <div class="cards_phone d-lg-none d-xl-none">
             <div class="card-childs">
                 <div class="content"> 
                     <h8>97102225</h8>
@@ -667,9 +671,48 @@
             </div>
         </div>
 
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-			<div class="carousel-inner">
-				<div class="carousel-item active">
+        <div id="CommentsMobile" class=" d-lg-none d-xl-none">
+            <div class="card-deck">
+                <div class="wrapper">
+                    <div class="scrolls">
+                        <div class="card" style="display: inline-block; width: 80%;  height: auto;">
+                            <img src="pic/comment1.jpg" class="card-img-top" alt="...">
+                            <div class="card-body" >
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text" style="word-wrap: break-word; height: 200px;">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Last updated 3 mins ago</small>
+                            </div>
+                        </div>
+                        <div class="card" style="display: inline-block; width: 80%;  height: auto;">
+                            <img src="pic/comment1.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Last updated 3 mins ago</small>
+                            </div>
+                        </div>
+                        <div class="card" style="display: inline-block; width: 80%; height: auto;">
+                            <img src="pic/comment1.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Last updated 3 mins ago</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </div>
+            
+        <div id="CommentsDesktop" class="carousel slide d-none d-lg-block d-xl-block" data-ride="carousel" >
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
 					<div class="comment" >
 					    <div class="commentText" >
 							A happy customer tells a friend; an unhappy customer tells the world.
@@ -678,7 +721,7 @@
 							</svg>
 						</div>
 						<div class="commentImage">
-							<img src='pic/pic1.jpg' width="100%" >
+							<img src='pic/comment1.jpgc/pic1.jpg' width="100%" >
 						</div>  
 					</div>
 				</div>
@@ -696,13 +739,13 @@
 					</div>
 				</div>
 			</div>
-			<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+			<a class="carousel-control-prev" href="#CommentsDesktop" role="button" data-slide="prev">
 				<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#e2be26" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
 					<path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
 				</svg>
 				<span class="sr-only">Previous</span>
 			</a>
-			<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+			<a class="carousel-control-next" href="#CommentsDesktop" role="button" data-slide="next">
 				<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#e2be26" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
 					<path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
 				</svg>
@@ -710,39 +753,70 @@
 				</a>
 		</div> 
 
-        <div style="text-align: center; margin-top:50px; z-index: 1;">
+        <div class="d-none d-lg-block d-xl-block news-div">
             <div class="BigDiv">
-                <div  class="NewsHeader" style="color: white;">  خبرنامه </div>
-				<span class="popup" onclick="Submit_Popup()">
-					<div class="Div" id="mydiv"> 
-						<p style="direction:rtl;">مطمئنید؟</p>
-						<div class="popup" style="" onclick="Final_Popup()">
-							<button class="button" type="button" width="100"> Yes </button>
-							<span class="popuptext" id="myPopup" width="50px">OK</span>
-						</div>
-						<button class="button" type="button"> No </button>
-					</div>
-				</span>
-				<div style="display: flex;">
-					<input class="NewsText" type="text" placeholder="نام">
-					<input class="NewsText" type="text" placeholder="نام خانوادگی">
-					<input class="NewsText" type="email" placeholder="ایمیل">
-					<span class="popup" onclick="Submit_Popup()">
-						<button class="Newsbutton" type="button"> ثبت‌نام </button>
-					</span>
-				</div>
+                <div  class="NewsHeader">  
+                    خبرنامه 
+                </div>
+                <div>
+                    <input  id="Email" type="email" placeholder="ایمیل" value="">
+                    <input  id="Lastname" type="text" placeholder="نام خانوادگی">
+                    <input  id="Firstname" type="text" placeholder="نام">
+                    <button id="myBtn">ثبت‌نام </button>
+                </div>
             </div>
         </div>
-        
+    
+        <div class="news-mobile d-lg-none d-xl-none">
+            <div class="BigDiv">
+                <div  class="NewsHeader", style="position:relative; left:0%;">  
+                    خبرنامه 
+                </div>
+                <div>
+                    <div style="text-align: right;">
+                        <p style="height: 3%; margin-top: 1%; color: gray;"> ایمیل </p>
+                        <input  id="Email" type="email" value="" style="width: 100%; margin: 0%;">
+                    </div>
+                    <div style="text-align: right;">
+                        <p style="height: 3%; margin-top: 1%; color: gray;"> نام خانوادگی </p>
+                        <input  id="Lastname" type="text"  style="width: 100%; margin: 0%;">
+                    </div>
+                    <div style="text-align: right;">
+                        <p style="height: 3%; margin-top: 1%; color: gray;"> نام </p>
+                        <input  id="Firstname" type="text"  style="width: 100%; margin: 0%;">
+                    </div>
+                    <div>
+                        <button id="myBtn" style="width: 50%; margin-top: 10%;"> ثبت‌نام </button> 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="myModal" class="modal">
+            <div class="modal-content", style="width: 50%; align-items: center; border-radius: 10px">
+                <span class="close" style="margin-left: 80%;">&times;</span>
+                <p>
+                    Are you sure you want to do this?
+                </p>
+                <div style="display: inline;">
+                    <button id="Yes_button" style="width: 50%; border-radius: 5px;"> Yes </button>
+                    <button id="No_button"  style="width: 50%; border-radius: 5px;"> No </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="snackbar">
+            عملیات موفقیت آمیز بود
+        </div>
+
         <div class="footer">
-			<br /><br /><br />
             <div class="footerText">
                 <h2> VAF تیم </h2>
                 <h2> VAF@gmail.com </h2>
             </div>
         </div>
 
-		<script>
+        <script>
             function Submit_Popup() {
                 var popup = document.getElementById("mydiv");
                 popup.classList.toggle("show");
@@ -751,7 +825,38 @@
                 var popup = document.getElementById("myPopup");
                 popup.classList.toggle("show");
             }
-        </script>
+            var modal = document.getElementById("myModal");
+            var btn = document.getElementById("myBtn");
+            var span = document.getElementsByClassName("close")[0];
+            var Yes = document.getElementById("Yes_button");
+            var No = document.getElementById("No_button");
+            btn.onclick = function() {
+              modal.style.display = "block";
+            }
+            span.onclick = function() {
+              modal.style.display = "none";
+            }
+            window.onclick = function(event) {
+              if (event.target == modal) {
+                modal.style.display = "none";
+              }
+            }
+            Yes.onclick = function() {
+                modal.style.display = "none";
+                var x = document.getElementById("snackbar");
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            }
+            No.onclick = function() {
+                modal.style.display = "none";
+            }
+            var Email = document.getElementById("Email");
+            Email.value = ""
+            var Lastname = document.getElementById("Lastname");
+            Lastname.value = ""
+            var Firstname = document.getElementById("Firstname");
+            Firstname.value = ""
+            </script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </body>
