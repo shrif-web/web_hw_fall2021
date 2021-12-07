@@ -71,8 +71,15 @@
                     }         
                     Element =  document.getElementById('persons');
                     Element.style = "color: white";         
+
                     Element =  document.getElementById('div-header');
                     Element.style = "background-color: black";
+
+                    Element =  document.getElementById('div-nazarat');
+                    Element.style = "background-color: black";
+
+                    Element =  document.getElementById('nazarat');
+                    Element.style = "color: white"; 
                     
                 } else {
                     stat=0;
@@ -119,6 +126,12 @@
 
                     Element =  document.getElementById('div-header');
                     Element.style = "background-color: white";
+                    
+                    Element =  document.getElementById('div-nazarat');
+                    Element.style = "background-color: white";
+
+                    Element =  document.getElementById('nazarat');
+                    Element.style = "color: black"; 
                 }
             }
         </script>
@@ -687,7 +700,7 @@
             </div>
         </div>
 
-        <div id="CommentsMobile" class="d-lg-none d-xl-none">
+        <!-- <div id="CommentsMobile" class="d-lg-none d-xl-none">
             <div class="card-deck" style="display: flex;">
                 <div class="card" style="display: inline-block; width: 80%;  height: auto; justify-content: center;  overflow-x: auto;">
                     <img src="pic/comment1.jpg" class="card-img-top" alt="...">
@@ -730,8 +743,12 @@
                     </div>
                 </div>
             </div>    
-        </div>
+        </div> -->
             
+        <div id="div-nazarat">
+            <h1 id="nazarat" >نظرات مشتریان</h1>
+        </div>
+
         <div id="CommentsDesktop" class="carousel slide d-none d-lg-block d-xl-block" data-ride="carousel" >
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">        
                 <div class="carousel-inner">

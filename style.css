@@ -916,8 +916,20 @@ margin-left: auto;
   background-color: white;
 }
 
+#div-nazarat {
+  margin-top: -10px;
+  margin-bottom: 20px;
+  background-color: white;
+}
+
 #persons {
   text-align: center;
+  font-weight: bold;
+}
+
+#nazarat {
+  text-align: center;
+  font-weight: bold;
 }
 
 /* amirhossein */
