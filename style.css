@@ -7,6 +7,12 @@
   font-size: 1.1rem;
 }
 
+a{
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: none;
+}
 
 /* galley in desktop */
 
@@ -389,6 +395,9 @@ opacity: 1;
   padding:  0px 0px ;
   background-color: #273036;
   z-index: -1;
+  margin-bottom: 5%;
+  padding-bottom: 5%;
+  padding-top: 5%;
 }
 
 .socialmedia{
@@ -1150,4 +1159,29 @@ div.scrollmenu {
   border-width: 0px; 
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+#CommentsMobile .col-3 {
+	flex: 0 0 auto;
+    width: 25%;
+    width: unset;
+    display: inline-block;
+    margin: 5%;
+    margin-right: 10%;
+    margin-left: 10%;
+    padding: 3%;
+    min-height: 100%;
+}
+#CommentsMobile .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    padding: 5%;
+    text-align: justify;
 }
