@@ -603,10 +603,6 @@ display: inline-block;
 transition: background-color 0.6s ease;
 }
 
-.active {
-background-color: #717171;
-}
-
 /* Fading animation */
 .fade {
 -webkit-animation-name: fade;
@@ -1084,4 +1080,21 @@ margin-left: auto;
 @keyframes fadeIn {
     from {opacity: 0;}
     to {opacity:1 ;}
+}
+
+.carousel-indicators li {
+  position: relative;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  width: 5px;
+  height: 5px;
+  margin-right: 3px;
+  margin-left: 3px;
+  text-indent: -999px;
+  background-color:  #8a8787;
+}
+
+.carousel-indicators .active {
+  background-color: #555454;
 }
