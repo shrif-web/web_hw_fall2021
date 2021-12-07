@@ -5,6 +5,7 @@
         <title>VAF Website</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         <script src="bootstrap.min.js"></script>
         <script src="carousel.js"></script>
@@ -113,37 +114,38 @@
         <div class="my_navbar">
             <nav class="navbar navbar-expand-lg navbar-light bg-light" id="menu_nav">
                 <div class="container-fluid">
-                <a class="navbar-brand">
-                    <img id="Logo" src="black_logo_200x200.png" width="100">
-                    <button type="button" id="changer" onclick="changetheme()" style="padding: 3px 20px 3px 20px;" class="btn btn-outline-dark">تاریک</button>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" style="direction: rtl;" id="navbarNav">
-                    <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">خانه</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">کارت ها</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">گالری</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link">ارتباط با ما</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link">نظرات</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link">خبرنامه</a>
-                    </li>
-                    </ul>
+                    <a class="navbar-brand">
+                        <img id="Logo" src="black_logo_200x200.png" width="100">
+                        <button type="button" id="changer" onclick="changetheme()" style="padding: 3px 20px 3px 20px;" class="btn btn-outline-dark">تاریک</button>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" style="direction: rtl;" id="navbarNav">
+                        <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">خانه</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">کارت ها</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">گالری</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">ارتباط با ما</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">نظرات</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">خبرنامه</a>
+                        </li>
+                        </ul>
+                    </div>
+                    <br>
                 </div>
-                <br>
-            </div>
+            </nav>
         </div>
 
         <div class="my_navbar_phone">
@@ -490,7 +492,7 @@
         </div> 
 
         <div id="StackDesktop" class="d-none d-lg-block d-xl-block">
-            <span class="container-stack">
+            <span class="container-stack" style="margin-top: 0%;">
                     <img src="pic/pic1.jpg" class="imageOne">
                     <img src="pic/pic2.jpg" class="imageTwo">
                     <img src="pic/pic2.jpg" class="imagethree">
@@ -602,7 +604,6 @@
             </div> 
         </div>
 
-
         <div id="ContactUsDesktop" class="d-none d-lg-block d-xl-block">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                 <path fill="#273036" fill-opacity="1" d="M0,0L720,144L1440,0L1440,320L720,320L0,320Z"></path>
@@ -666,7 +667,50 @@
             </div>
         </div>
 
-        <div id="news-div" class="d-none d-lg-block d-xl-block">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<div class="comment" >
+					    <div class="commentText" >
+							A happy customer tells a friend; an unhappy customer tells the world.
+							<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40px" fill="currentColor" class="bi bi-quote" viewBox="0 0 16 16">
+								<path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z"/>
+							</svg>
+						</div>
+						<div class="commentImage">
+							<img src='pic/pic1.jpg' width="100%" >
+						</div>  
+					</div>
+				</div>
+				<div class="carousel-item">
+					<div class="comment" >
+						<div class="commentText" >
+							A happy customer tells a friend; an unhappy customer tells the world.
+							<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40px" fill="currentColor" class="bi bi-quote" viewBox="0 0 16 16">
+								<path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z"/>
+							</svg>
+						</div>
+						<div class="commentImage">
+							<img src='pic/pic1.jpg' width="100%" >
+						</div>  
+					</div>
+				</div>
+			</div>
+			<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+				<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#e2be26" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+					<path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+				</svg>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+				<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#e2be26" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+					<path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+				</svg>
+				<span class="sr-only">Next</span>
+				</a>
+		</div> 
+
+        <div style="text-align: center; margin-top:50px; z-index: 1;">
             <div class="BigDiv">
                 <div  class="NewsHeader" style="color: white;">  خبرنامه </div>
 				<span class="popup" onclick="Submit_Popup()">
@@ -697,6 +741,7 @@
                 <h2> VAF@gmail.com </h2>
             </div>
         </div>
+
 		<script>
             function Submit_Popup() {
                 var popup = document.getElementById("mydiv");
@@ -707,6 +752,7 @@
                 popup.classList.toggle("show");
             }
         </script>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </body>
 </html>

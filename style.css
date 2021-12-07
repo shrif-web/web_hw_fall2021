@@ -425,9 +425,8 @@ margin-right: 25px;
 /*  stack desktop    */
 
 #StackDesktop{
-margin-top: 0px;
-min-height: fit-content;
-max-height: fit-content;
+  margin-top: 0px;
+  height: 467px;
 }
 
 .container-stack {
@@ -625,8 +624,6 @@ to {opacity: 1}
 @media only screen and (max-width: 300px) {
 .text {font-size: 11px}
 }
-
-
 
 .my_navbar{
 z-index: 10;
