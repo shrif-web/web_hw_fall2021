@@ -123,7 +123,8 @@ transform: translateY(0px);
 -ms-transition-delay: 0.1s;
 transition-delay: 0.1s;
 }
-.carousel-item{
+
+.carousel-item-gallery{
 position: relative;
 width: 100%;
 margin-left: 0%;
@@ -1067,6 +1068,12 @@ margin-left: auto;
     display: block !important;
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s;
+}
+
+#news-div {
+  text-align: center;
+  margin-top:50px;
+  z-index: 1;
 }
 
 @-webkit-keyframes fadeIn {
