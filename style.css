@@ -1119,3 +1119,22 @@ div.scrollmenu {
   top:60px; 
   z-index: 1;
 }
+
+
+.commentsdesktop {
+    width: 60%;
+    height: 600px;
+    margin-right: 10px;
+    margin-left: 30%;
+    /* margin-top: 50px; */
+    /* margin-bottom: 50px; */
+}
+
+
+.cards-comments {
+  width:60%; 
+  margin-left: 20%; 
+  border-width: 0px; 
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
