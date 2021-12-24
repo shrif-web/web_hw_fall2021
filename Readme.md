@@ -1,7 +1,7 @@
 Kubernetes
 ==========
 
-<div style="direction:rtl;text-align:justify;">
+<div style="direction:rtl;">
 تحقیق میانترم سال ۱۴۰۰
 
 اعضای گروه:
@@ -13,7 +13,7 @@ Kubernetes
 
 <hr>
 
-<div style="direction:rtl;text-align:justify;">
+<div style="direction:rtl;">
 <h2>قسمت اول: آشنایی با <b>Kubernetes</b></h2>
 
 <div style="text-align:center">
@@ -136,7 +136,7 @@ Kubernetes
 curl -sfL https://get.k3s.io | sh -s - --no-deploy traefik --write-kubeconfig-mode 644 --node-name master
 ```
 
-<div style="direction:rtl;text-align:justify;">
+<div style="direction:rtl;">
 متغییر اول این باعث می‌شود load balancer غیر فعال شود و متغیر دوم تغییرات متغیرها را انجام می‌دهد و متغیر سوم نام نود است. پس از زدن دستور بالا این دستور می‌تواند چندین دقیقه طول بکشد و زمانی که تمام شد برای اطمینان از درستی آن دستور زیر را بزنید:
 </div>
 
@@ -144,7 +144,7 @@ curl -sfL https://get.k3s.io | sh -s - --no-deploy traefik --write-kubeconfig-mo
 kubectl get nodes
 ```
 
-<div style="direction:rtl;text-align:justify;">
+<div style="direction:rtl;">
 باید نتیجه‌ای مانند زیر را دریافت کنید:
 </div>
 
@@ -153,7 +153,7 @@ NAME         STATUS      ROLES                            AGE       VERSION
 master        Ready         control-plane,master   10m       v1.22.5+k3s1
 ```
 
-<div style="direction:rtl;text-align:justify;">
+<div style="direction:rtl;">
 این موضوع نشان دهنده آن است که نود مستر به درستی در حال اجرا شدن است و کار ما در این قسمت تمام است.
 
 <h3>راه‌اندازی Worker</h3>
@@ -165,7 +165,7 @@ sudo cat /var/lib/rancher/k3s/server/node-token
 K10c0170e30504120ffe8cb696d6391c6623b6667954e3ad51be09f540e1bfadf9d::server:aa33e4e0133f721bd1f812528dd4af5b
 ```
 
-<div style="direction:rtl;text-align:justify;">
+<div style="direction:rtl;">
 حال به ماشین Worker بروید و دستور زیر را اجرا کنید. و به جای IP باید IP نود مستر را قرار دهید و به جای TOKEN نیز توکن قسمت قبل را کپی کنید.
 </div>
 
@@ -173,7 +173,7 @@ K10c0170e30504120ffe8cb696d6391c6623b6667954e3ad51be09f540e1bfadf9d::server:aa33
 curl -sfL https://get.k3s.io | K3S_NODE_NAME=k3s-worker-01 K3S_URL=https://<IP>:6443 K3S_TOKEN=<TOKEN> sh -
 ```
 
-<div style="direction:rtl;text-align:justify;">
+<div style="direction:rtl;">
 برای مثال آدرس ‌IP ماشین مستر من 192.168.4.7 بود و دستور برای من به شکل زیر شد:
 </div>
 
@@ -181,7 +181,7 @@ curl -sfL https://get.k3s.io | K3S_NODE_NAME=k3s-worker-01 K3S_URL=https://<IP>:
 url -sfL https://get.k3s.io | K3S_NODE_NAME=worker K3S_URL=https://192.168.4.7:6443 K3S_TOKEN=K10c0170e30504120ffe8cb696d6391c6623b6667954e3ad51be09f540e1bfadf9d::server:aa33e4e0133f721bd1f812528dd4af5b sh -
 ```
 
-<div style="direction:rtl;text-align:justify;">
+<div style="direction:rtl;">
 پس از راه اندازی این قسمت که باز ممکن است چندین دقیقه به طول بی‌انجامد درستی آن را چک می‌کنیم برای این کار باید به ماشین Master برویم و دستور زیر را که در قسمت قبل زده بودیم دوباره تکرار کنیم:
 </div>
 
@@ -192,7 +192,7 @@ master Ready control-plane,master 31m v1.22.5+k3s1
 worker Ready <none> 78s v1.22.5+k3s1
 ```
 
-<div style="direction:rtl;text-align:justify;">
+<div style="direction:rtl;">
 همانطور که مشاهده می‌شود به لیست ما در ماشین Master نود Worker اضافه شده است. حال ما یک k3s با یک نود Master و یک نود Worker پیاده سازی کرده ایم و تنها یک Ingress برای دیدن برنامه از بیرون و یک image برای اجرا شدن روی این نود ها نیاز داریم.
 
 <h3> پیاده‌سازی یک کانتینز ساده بر روی k3s </h3>
@@ -257,7 +257,7 @@ port:
 number: 80
 ```
 
-<div style="direction:rtl;text-align:justify;">
+<div style="direction:rtl;">
 که دو قسمتی که با خط تیره جدا شده اند نقش Ingress را بازی می‌کنند و در اینجاا از<a href="https://kubernetes.github.io/ingress-nginx/"> ingress-nginx</a> استفاده شده است. این دیپلوی منت از <a href="https://gitlab.com/cloud-versity/rancher-k3s-first-steps/-/blob/main/manifest.yaml"> این جا </a> برداشته شده است و متانسب با image ما تغییر یافته است ضمنا قسمت آخر این مانیفست حذف شده است زیرا کاربرد DNS را دارد که برای ما مورد نیاز نیست.
 
 در جلوی تگ image به جای front باید آدرس ایمیج از یک رجیستری داده شود. اما این قسمت را به دلیل فیلتر بودن از سمت داکر رجیستری نتوانستیم راه حلی برای آن پیاده سازی کنیم.
