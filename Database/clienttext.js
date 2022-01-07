@@ -38,7 +38,7 @@ function main() {
   var client = new db.database(target,
                                        grpc.credentials.createInsecure());
 
-  client.createUser({username:'adfa', password:'anghezi'}, function(err, response) {
+  client.loginUser({username:'arsalan', password:'anghezis'}, function(err, response) {
     console.log('Greeting:', response.message);
   });
 }

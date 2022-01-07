@@ -25,6 +25,7 @@ package cache;
 service database {
   // Sends a greeting
   rpc createUser (ReqParamsCreateUser) returns (Reply) {}
+  rpc loginUser  (ReqParamsLoginUser) returns (Reply) {}
   rpc createNote (ReqParamsCreateNote) returns (Reply) {}
   rpc deleteNote (ReqParamsDeleteNote) returns (Reply) {}
   rpc updateNote (ReqParamsUpdateNote) returns (Reply) {}
@@ -33,6 +34,11 @@ service database {
 
 // The request message containing the user's name.
 message ReqParamsCreateUser {
+  string username = 1;
+  string password = 2;
+}
+
+message ReqParamsLoginUser {
   string username = 1;
   string password = 2;
 }
