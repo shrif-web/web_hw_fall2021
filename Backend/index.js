@@ -1,11 +1,28 @@
-const express = require('express')
+import express from 'express'
+import cors from 'cors'
+import grpc from '@grpc/grpc-js';
+import protoLoader from '@grpc/proto-loader';
+import jwt from 'jsonwebtoken';
+
+var PROTO_PATH = './protos/db.proto';
+var packageDefinition = protoLoader.loadSync(
+    PROTO_PATH,
+    {
+        keepCase: true,
+        longs: String,
+        enums: String,
+        defaults: true,
+        oneofs: true
+    });
+var db = grpc.loadPackageDefinition(packageDefinition).cache;
+
 const app = express()
+app.use(cors())
 const port = 3030
-var jwt = require('jsonwebtoken');
 const pKey = 'ArslanaErfanAmirhossein'
 
-var cors = require('cors')
-app.use(cors())
+var target = 'localhost:50051';
+var client = new db.database(target, grpc.credentials.createInsecure());
 
 function checkvalid() {
     try {
@@ -19,7 +36,7 @@ function checkvalid() {
 }
 
 // app.post('/Login', (req, res) => {
-app.get('/Login', (req, res) => {
+app.get('/Login', async (req, res) => {
     let user;
     let pass;
     try {
@@ -38,25 +55,30 @@ app.get('/Login', (req, res) => {
         });
     }
     if (user != undefined && pass != undefined) {
-        /* 
-            Check with db
-        */
-        /* if valid */
-        var token = jwt.sign({
-            user: user,
-            pass: pass,
-            exp: Math.floor(Date.now() / 1000) + (5 * 60),
-        }, pKey);
+        let valid;
+        client.loginUser({ username: user, password: pass }, (err, response) => {
+            console.log(user)
+            console.log(pass)
+            valid = response.message;
+            console.log(valid)
+            if (valid == 'true') {
+                var token = jwt.sign({
+                    user: user,
+                    pass: pass,
+                    exp: Math.floor(Date.now() / 1000) + (5 * 60),
+                }, pKey);
 
-        res.json({
-            token: token,
-            message: 'Valid'
+                res.json({
+                    token: token,
+                    message: 'Valid'
+                });
+            } else {
+                res.json({
+                    token: '',
+                    message: 'Username or Password is WRONG!'
+                });
+            }
         });
-        /* Else */
-        // res.json({
-        //     token: '',
-        //     message: 'Username or Password is WRONG!'
-        // });
     }
 })
 
