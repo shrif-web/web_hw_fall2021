@@ -1,0 +1,34 @@
+import { Form, Input, Button, Checkbox, Card, Spin, message } from 'antd';
+import React, { memo, useState, useCallback, } from 'react';
+import Login from './Login.js'
+import Parse from 'parse'
+import {
+    RecoilRoot,
+    atom,
+    selector,
+    useRecoilState,
+    useRecoilValue,
+    useSetRecoilState,
+} from 'recoil';
+
+const state = atom({
+    key: 'state', // unique ID (with respect to other atoms/selectors)
+    default: 'Login'
+});
+const token = atom({
+    key: 'token', // unique ID (with respect to other atoms/selectors)
+    default: ''
+});
+
+const Front = () => {
+    let stateval = useRecoilValue(state);
+    console.log(stateval)
+    return (
+        <>
+            {stateval == 'Login' && <Login />}
+            {/* {stateval == 'Signup' && <Signup />} */}
+        </>
+    );
+};
+
+export default React.memo(Front)
