@@ -181,27 +181,27 @@ const SeeTexts = () => {
 };
 
 const UpdateTexts = () => {
-    const onClick = useSetRecoilState(state);
     const [tokenval, tokenupdater] = useRecoilState(token);
     const [prog, updateprog] = useState(false);
     const [a, aUpd] = useRecoilState(textState);
-    const onFinish = useCallback(async (values) => {
+    let t = a;
+    const onFinish = async (values) => {
         console.log('Success:', values);
         updateprog(true);
         const { text } = values;
-        let ans = await fetch('http://localhost:3030/Update?oldtext=' + a + '&newtext=' + text + '&token=' + tokenval);
+        console.log(t)
+        let ans = await fetch('http://localhost:3030/Update?oldtext=' + t + '&newtext=' + text + '&token=' + tokenval);
         ans = await ans.json();
         console.log(ans);
         // if (ans.message != 'Done!')
         //     message.error(ans.message);
         // else {
         message.warning('Printed')
-        aUpd(text)
+        //aUpd(text)
         // }
-        aUpd(ans.message);
-        console.log(a);
+        console.log(t);
         updateprog(false)
-    }, []);
+    };
 
     const onFinishFailed = useCallback((errorInfo) => {
         console.log('Failed:', errorInfo);
@@ -240,6 +240,7 @@ const UpdateTexts = () => {
                     </Button>
                 </Form.Item>
             </Form>
+            <div>{a}</div>
         </Card>
     );
 };
