@@ -20,6 +20,11 @@ const token = atom({
     default: ''
 });
 
+const textState = atom({
+    key: 'textState', // unique ID (with respect to other atoms/selectors)
+    default: 'Fill the form please'
+});
+
 const Front = () => {
     const [stateval, setState] = useRecoilState(state);
     console.log(stateval)
@@ -34,7 +39,7 @@ const Front = () => {
 
 const Text = () => {
     return (
-        <div style={{display: 'flex'}}>
+        <div style={{ display: 'flex' }}>
             <CreateText />
             <SeeTexts />
             <UpdateTexts />
@@ -50,16 +55,14 @@ const CreateText = () => {
     const onFinish = useCallback(async (values) => {
         console.log('Success:', values);
         updateprog(true);
-        const { username, password } = values;
-        let ans = await fetch('http://localhost:3030/Login?user=' + username + '&pass=' + password);
+        const { text } = values;
+        let ans = await fetch('http://localhost:3030/Create?text=' + text + '&token=' + tokenval);
         ans = await ans.json();
         console.log(ans);
-        if (ans.message != 'Valid')
+        if (ans.message != 'Done!')
             message.error(ans.message);
         else {
-            tokenupdater(ans.token)
-            onClick('Text')
-            message.warning('Token is received')
+            message.warning('Text is submitted.')
         }
         console.log(token)
         updateprog(false)
@@ -110,21 +113,21 @@ const SeeTexts = () => {
     const onClick = useSetRecoilState(state);
     const [tokenval, tokenupdater] = useRecoilState(token);
     const [prog, updateprog] = useState(false);
+    const [a, aUpd] = useRecoilState(textState);
     const onFinish = useCallback(async (values) => {
         console.log('Success:', values);
         updateprog(true);
-        const { username, password } = values;
-        let ans = await fetch('http://localhost:3030/Login?user=' + username + '&pass=' + password);
+        const { num } = values;
+        let ans = await fetch('http://localhost:3030/See?num=' + num + '&token=' + tokenval);
         ans = await ans.json();
         console.log(ans);
-        if (ans.message != 'Valid')
-            message.error(ans.message);
-        else {
-            tokenupdater(ans.token)
-            onClick('Text')
-            message.warning('Token is received')
-        }
-        console.log(token)
+        // if (ans.message != 'Done!')
+        //     message.error(ans.message);
+        // else {
+        message.warning('Printed')
+        // }
+        aUpd(ans.message);
+        console.log(a);
         updateprog(false)
     }, []);
 
@@ -149,10 +152,18 @@ const SeeTexts = () => {
                 autoComplete="off"
             >
                 <Form.Item
+                    label="Which Note!?"
+                    name="num"
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
                     label="Text"
                     name="text"
                 >
-                    <TextArea rows={4} />
+                    <div>
+                        {a}
+                    </div>
                 </Form.Item>
                 <Form.Item
                     wrapperCol={{
@@ -173,21 +184,22 @@ const UpdateTexts = () => {
     const onClick = useSetRecoilState(state);
     const [tokenval, tokenupdater] = useRecoilState(token);
     const [prog, updateprog] = useState(false);
+    const [a, aUpd] = useRecoilState(textState);
     const onFinish = useCallback(async (values) => {
         console.log('Success:', values);
         updateprog(true);
-        const { username, password } = values;
-        let ans = await fetch('http://localhost:3030/Login?user=' + username + '&pass=' + password);
+        const { text } = values;
+        let ans = await fetch('http://localhost:3030/Update?oldtext=' + a + '&newtext=' + text + '&token=' + tokenval);
         ans = await ans.json();
         console.log(ans);
-        if (ans.message != 'Valid')
-            message.error(ans.message);
-        else {
-            tokenupdater(ans.token)
-            onClick('Text')
-            message.warning('Token is received')
-        }
-        console.log(token)
+        // if (ans.message != 'Done!')
+        //     message.error(ans.message);
+        // else {
+        message.warning('Printed')
+        aUpd(text)
+        // }
+        aUpd(ans.message);
+        console.log(a);
         updateprog(false)
     }, []);
 
@@ -195,7 +207,7 @@ const UpdateTexts = () => {
         console.log('Failed:', errorInfo);
     }, []);
     return (
-        <Card title="Update Text" style={{ width: "30%", margin: "auto", marginTop: 30 }}>
+        <Card title="See Notes" style={{ width: "30%", margin: "auto", marginTop: 30 }}>
             <Form
                 name="basic"
                 labelCol={{
@@ -212,7 +224,7 @@ const UpdateTexts = () => {
                 autoComplete="off"
             >
                 <Form.Item
-                    label="Text"
+                    label="New Text"
                     name="text"
                 >
                     <TextArea rows={4} />
@@ -231,7 +243,6 @@ const UpdateTexts = () => {
         </Card>
     );
 };
-
 const Login = () => {
     const onClick = useSetRecoilState(state);
     const [tokenval, tokenupdater] = useRecoilState(token);
