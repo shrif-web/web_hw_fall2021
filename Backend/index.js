@@ -59,9 +59,10 @@ app.get('/Login', async (req, res) => {
         client.loginUser({ username: user, password: pass }, (err, response) => {
             console.log(user)
             console.log(pass)
-            valid = response.message;
+            console.log(response)
+            valid = response.successful;
             console.log(valid)
-            if (valid == 'true') {
+            if (valid) {
                 var token = jwt.sign({
                     user: user,
                     pass: pass,
@@ -76,6 +77,45 @@ app.get('/Login', async (req, res) => {
                 res.json({
                     token: '',
                     message: 'Username or Password is WRONG!'
+                });
+            }
+        });
+    }
+})
+
+app.get('/Signup', async (req, res) => {
+    console.log(req);
+    let user;
+    let pass;
+    try {
+        // user = req.body.user;
+        user = req.query.user;
+        if (user == undefined)
+            throw 'Err';
+        pass = req.query.pass;
+        if (pass == undefined)
+            throw 'Err';
+    } catch {
+        user = undefined;
+        pass = undefined;
+        res.json({
+            message: 'No Input!'
+        });
+    }
+    if (user != undefined && pass != undefined) {
+        let valid;
+        client.createUser({ username: user, password: pass }, (err, response) => {
+            console.log('Login: ' + user)
+            valid = response.successful;
+            console.log(valid)
+            if (valid == true) {
+                res.json({
+                    message: 'Done!'
+                });
+            } else {
+                res.json({
+                    token: '',
+                    message: response.message
                 });
             }
         });

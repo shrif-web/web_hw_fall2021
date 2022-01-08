@@ -1,116 +1,106 @@
-import { Form, Input, Button, Row, Col, Checkbox, Card, Spin, message } from 'antd';
-import React, { useRef, memo, useState, useCallback, } from 'react';
+import { Form, Input, Button, Checkbox, Card, Spin, message } from 'antd';
+import React, { memo, useState, useCallback, } from 'react';
 import Parse from 'parse'
 import {
-    RecoilRoot,
-    atom,
-    selector,
-    useRecoilState,
-    useRecoilValue,
-    useSetRecoilState,
-  } from 'recoil';
-
-const stateVar = atom({
-  key: 'stateVar', // unique ID (with respect to other atoms/selectors)
-  default: { phase:'Phone', phone: '', OTP: '', user: '' }, // default value (aka initial value)
-});
-
-const dbsignup = selector({
-    key: 'dbsignup', // unique ID (with respect to other atoms/selectors)
-    get: async ({get}) => {
-        const state = get(stateVar);
-        const user = new Parse.User();
-        user.set("username", state.user);
-        user.set("password", state.OTP);
-        try {
-            await user.signUp();
-            console.log('Success');
-        } catch (error) {
-            console.log("Error: " + error.code + " " + error.message);
-        }
-        return user.getUsername();
-    },
-});
-
-/*const useLogin = async function() {
-    //const [state, updateState] = useState({ phase:'Phone', phone: '', OTP: '', user: '' });
-    const state = useRecoilValue(stateVar);
-    console.log(state);
-    if(state.phase === 'Submit'){
-        const user = new Parse.User();
-        user.set("username", state.user);
-        user.set("password", state.OTP);
-        try {
-            await user.signUp();
-            console.log('Success');
-        } catch (error) {
-            console.log("Error: " + error.code + " " + error.message);
-        }
-    }
-};*/
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+  useSetRecoilState,
+} from 'recoil';
 
 const Signup = () => {
-    const { phase } = useRecoilValue(stateVar);
-    console.log(phase);
+  const [prog, updateprog] = useState(false);
+  const onFinish = useCallback(async (values) => {
+    console.log('Success:', values);
+    updateprog(true);
+    const { username, password } = values;
+    // setTimeout(() => updateprog(false), 1000)
 
-    return (
-        <React.Suspense fallback={<div>Loading...</div>}>
-            <Row>
-                <Col span="12" offset="6">
-                { phase==='Phone' && (<Phone/>) }
-                { phase==='OTP' && (<OTP />) }
-                { phase==='USER' && (<USER />) }
-                { phase==='Submit' && (<ShowRes />) }
-                </Col>
-            </Row>
-        </React.Suspense>
-    );
-}
-const Phone = () => {
-    const onClick = useSetRecoilState(stateVar);
-    const inputEl = useRef(null);
+    /* Send Get Req */
+    let ans = await fetch('http://localhost:3030/Signup?user=' + username + '&pass=' + password);
+    ans = await ans.json();
+    console.log(ans);
+    if (ans.message != 'Done!')
+      message.error(ans.message);
+    else {
+      message.warning('Created')
+    }
+    updateprog(false)
+  }, []);
 
-    return (
-        <Card size="small" title="phone" style={{marginTop: 10}} >
-            <Input ref={inputEl} type="text" />
-            <Button type="primary" onClick={
-                () => onClick((s)=> ({...s, phone: inputEl.current.state.value, phase: 'OTP'})) 
-            }>OTP</Button>
-        </Card>
-    );
-}
-const OTP = () => {
-    const onClick = useSetRecoilState(stateVar);
-    const inputEl = useRef(null);
+  const onFinishFailed = useCallback((errorInfo) => {
+    console.log('Failed:', errorInfo);
+  }, []);
 
-    return (
-        <Card size="small" title="OTP" style={{marginTop: 10}} >
-            <Input ref={inputEl} type="text" />
-            <Button type="primary" onClick={
-                () => onClick((s)=> ({...s, OTP: inputEl.current.state.value, phase: 'USER'})) 
-            }>User</Button>
-        </Card>
-    );
-}
-const USER = () => {
-    const onClick = useSetRecoilState(stateVar);
-    const inputEl = useRef(null);
+  return (
+    <Card title="Signup" style={{ width: "30%", margin: "auto", marginTop: 30 }}>
+      <Form
+        name="basic"
+        labelCol={{
+          span: 8,
+        }}
+        wrapperCol={{
+          span: 16,
+        }}
+        initialValues={{
+          remember: true,
+        }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+      >
+        <Form.Item
+          label="Username"
+          name="username"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your username!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
 
-    return (
-        <Card size="small" title="User" style={{marginTop: 10}} >
-            <Input ref={inputEl} type="text" />
-            <Button type="primary" onClick={
-                () => onClick((s)=> ({...s, user: inputEl.current.state.value, phase: 'Submit'})) 
-            }>Submit</Button>
-        </Card>
-    );
-}
+        <Form.Item
+          label="Password"
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+          <Input.Password />
+        </Form.Item>
 
-const ShowRes = () => {
-    const res = useRecoilValue(dbsignup);
-    return (
-        <div>{res}</div>
-    );
-}
+        <Form.Item
+          name="remember"
+          valuePropName="checked"
+          wrapperCol={{
+            offset: 8,
+            span: 16,
+          }}
+        >
+          <Checkbox>Remember me</Checkbox>
+        </Form.Item>
+
+        <Form.Item
+          wrapperCol={{
+            offset: 8,
+            span: 16,
+          }}
+        >
+          <Button htmlType="submit">
+            <Spin style={{ marginRight: 8 }} spinning={prog} /> Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </Card>
+  );
+};
 
 export default React.memo(Signup)

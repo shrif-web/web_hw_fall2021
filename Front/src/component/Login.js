@@ -10,7 +10,13 @@ import {
   useSetRecoilState,
 } from 'recoil';
 
+const token = atom({
+  key: 'token', // unique ID (with respect to other atoms/selectors)
+  default: ''
+});
+
 const Login = () => {
+  const [tokenval, tokenupdater] = useRecoilState(token);
   const [prog, updateprog] = useState(false);
   const onFinish = useCallback(async (values) => {
     console.log('Success:', values);
@@ -24,21 +30,12 @@ const Login = () => {
     console.log(ans);
     if (ans.message != 'Valid')
       message.error(ans.message);
-
-
+    else {
+      tokenupdater(ans.token)
+      message.warning('Token is received')
+    }
+    console.log(token)
     updateprog(false)
-
-    // // Connect to DB
-    // try{
-    //     const res = await Parse.User.logIn(username, password);
-    //     console.log('res:', res);
-    //     message.info('Logined!');
-    // } catch(err) {
-    //     console.log('Err: ',err);
-    //     message.error(err.message);
-    // } finally {
-    //     updateprog(false);
-    // }
   }, []);
 
   const onFinishFailed = useCallback((errorInfo) => {
