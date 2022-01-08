@@ -52,7 +52,7 @@ const CreateText = () => {
     const onClick = useSetRecoilState(state);
     const [tokenval, tokenupdater] = useRecoilState(token);
     const [prog, updateprog] = useState(false);
-    const onFinish = useCallback(async (values) => {
+    const onFinish = async (values) => {
         console.log('Success:', values);
         updateprog(true);
         const { text } = values;
@@ -66,7 +66,7 @@ const CreateText = () => {
         }
         console.log(token)
         updateprog(false)
-    }, []);
+    };
 
     const onFinishFailed = useCallback((errorInfo) => {
         console.log('Failed:', errorInfo);
@@ -114,7 +114,7 @@ const SeeTexts = () => {
     const [tokenval, tokenupdater] = useRecoilState(token);
     const [prog, updateprog] = useState(false);
     const [a, aUpd] = useRecoilState(textState);
-    const onFinish = useCallback(async (values) => {
+    const onFinish = async (values) => {
         console.log('Success:', values);
         updateprog(true);
         const { num } = values;
@@ -129,7 +129,7 @@ const SeeTexts = () => {
         aUpd(ans.message);
         console.log(a);
         updateprog(false)
-    }, []);
+    };
 
     const onFinishFailed = useCallback((errorInfo) => {
         console.log('Failed:', errorInfo);
@@ -197,7 +197,7 @@ const UpdateTexts = () => {
         //     message.error(ans.message);
         // else {
         message.warning('Printed')
-        //aUpd(text)
+        aUpd(text)
         // }
         console.log(t);
         updateprog(false)
@@ -240,7 +240,6 @@ const UpdateTexts = () => {
                     </Button>
                 </Form.Item>
             </Form>
-            <div>{a}</div>
         </Card>
     );
 };

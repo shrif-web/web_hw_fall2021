@@ -42,6 +42,7 @@ var client_cache = new cache.Greeter(target2, grpc.credentials.createInsecure())
 function checkvalid(token) {
     try {
         let t = jwt.verify(token, pKey);
+        console.log(t);
         return t.user;
         console.log(t.user + 'has just logged in');
     } catch (err) {
@@ -274,6 +275,10 @@ app.get('/See', async (req, res) => {
                             message: message
                         });
                     })
+                } else {
+                    res.json({
+                        message: response.message
+                    });
                 }
             });
         } else {
