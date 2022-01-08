@@ -53,8 +53,10 @@ function GetKey(call, callback, op = 0) {
   mutex.runExclusive(async () => {
     let { key, value } = call.request;
     let message = 'Not found!';
+    let successful = false;
 
     if (map[key] != undefined) {
+      successful = true;
       message = map[key].data;
       if (map[key].next != -1 && map[key].parent != -1) {
         console.log('qq2');
@@ -84,12 +86,16 @@ function GetKey(call, callback, op = 0) {
     console.log('Last:')
     console.log(last)
     console.log('----------------------------' + id)
-    callback(null, { message: message });
+    callback(null, {
+      message: message,
+      successful: successful
+    });
   });
 }
 
 function SetKey(call, callback) {
   mutex.runExclusive(async () => {
+    let successful = true;
     // console.log('Linked List:')
     // console.log(showLinkList())
     let { key, value } = call.request;
@@ -138,7 +144,10 @@ function SetKey(call, callback) {
         list.parent = t;
       list = t;
     }
-    callback(null, { message: message });
+    callback(null, {
+      successful: successful,
+      message: message
+    });
     console.log('Linked List:')
     console.log(showLinkList())
     console.log('Last:')
@@ -150,20 +159,20 @@ function SetKey(call, callback) {
 
 function Clear(call, callback) {
   mutex.runExclusive(async () => {
+    let successful = true;
     list = -1;
     // Map 
-    callback(null, { message: 'Ok' });
+    callback(null, {
+      message: 'Ok',
+      successful: successful
+    });
   });
 }
 
-/**
- * Starts an RPC server that receives requests for the Greeter service at the
- * sample server port
- */
 function main() {
   var server = new grpc.Server();
   server.addService(cache.Greeter.service, { Clear: Clear, SetKey: SetKey, GetKey: GetKey });
-  server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), () => {
+  server.bindAsync('0.0.0.0:50052', grpc.ServerCredentials.createInsecure(), () => {
     server.start();
   });
 }
