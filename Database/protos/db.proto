@@ -29,7 +29,7 @@ service database {
   rpc createNote (ReqParamsCreateNote) returns (Reply) {}
   rpc deleteNote (ReqParamsDeleteNote) returns (Reply) {}
   rpc updateNote (ReqParamsUpdateNote) returns (Reply) {}
-  rpc GetNote    (ReqParamsGetNote)    returns (GetNotesReply) {}
+  rpc getNote    (ReqParamsGetNote)    returns (GetNotesReply) {}
   
 }
 

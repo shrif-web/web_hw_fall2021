@@ -17,9 +17,10 @@ async function updateNote(Text, Username, NewText){
         const user = await User.findOne({ where: {username:Username} },
             {transaction: t});
 
-        const note = await User.findOne({ where: {hash:text_hash , userId:user.id}} 
+        const note = await Note.findOne({ where: {hash:text_hash , userId:user.id}} 
             , {transaction:t});
-        if (user === null){
+
+        if (user === null || note === null){
             await t.commit();
             return false;
         }
@@ -31,7 +32,7 @@ async function updateNote(Text, Username, NewText){
                 },
                 {where:{
                     hash:text_hash,
-                    userId:Userid
+                    userId:user.id
                 }
             } , {transaction:t} );
             await t.commit()
