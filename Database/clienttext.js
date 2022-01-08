@@ -31,15 +31,23 @@ var packageDefinition = protoLoader.loadSync(
     });
 var db = grpc.loadPackageDefinition(packageDefinition).cache;
 
-function main() {
+async function main() {
 
   var target = 'localhost:50051';
   
   var client = new db.database(target,
                                        grpc.credentials.createInsecure());
 
-  client.loginUser({username:'arsalan', password:'anghezis'}, function(err, response) {
-    console.log('Greeting:', response.message);
+  client.createUser({username:'ali', password:'adfasfasdf'}, function(err, response) {
+    console.log( response.successful, response.message);
+    
+      client.loginUser({username:'erfan', password:'adfasfasdf'}, function(err, response) {
+        console.log( response.successful, response.message);
+      });
+
+      client.createNote({text:'salam arsalans', username:'ali'}, function(err, response) { 
+        console.log( response.successful, response.message);
+      });
   });
 }
 
