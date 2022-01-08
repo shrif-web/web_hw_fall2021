@@ -79,7 +79,7 @@ async function CreateNote(call, callback) {
 
 async function DeleteNote(call, callback) {
     try{
-        const note_deleted = await deleteNote( call.request.text, call.request.UserId);
+        const note_deleted = await deleteNote( call.request.text, call.request.username);
         if (note_deleted == true){
             callback(null, {successful: true, message: 'note deletetd!' });
         }
@@ -96,7 +96,7 @@ async function DeleteNote(call, callback) {
 
 async function UpdateNote(call, callback) {
     try{
-        const note_updated = await updateNote(call.request.text, call.request.UserId, call.request.NewText);
+        const note_updated = await updateNote(call.request.text, call.request.username, call.request.NewText);
         if (note_deleted == true){
             callback(null, {successful: true, message: 'note updtated!' });
         }
@@ -110,8 +110,6 @@ async function UpdateNote(call, callback) {
             + call.request.username + " \n " + err});
     }
 }
-
-
 
 function main() {
     var server = new grpc.Server();
