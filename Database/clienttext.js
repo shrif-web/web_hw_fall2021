@@ -41,7 +41,7 @@ async function main() {
   client.createUser({username:'ali', password:'adfasfasdf'}, function(err, response) {
     console.log( response.successful, response.message);;
 
-      client.getNote({username:'ali'}, function(err, response) { 
+      client.getNote({username:'ali' , start: 0 , end: 1}, function(err, response) { 
         
         console.log( response.successful, response.texts);
       });

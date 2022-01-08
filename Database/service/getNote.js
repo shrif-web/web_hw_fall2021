@@ -2,8 +2,9 @@ import User from "../models/User.js"
 import Note from "../models/Note.js"
 import crypto from 'crypto'
 import sequelize from "../utils/database.js"    
+import e from "express";
 
-async function getNote(Username){
+async function getNote(Username, Start, End){
     
     const t = await sequelize.transaction();
 
@@ -22,7 +23,9 @@ async function getNote(Username){
             let text = []
             for (const element in notes)
             {
-                text.push(notes[element].text)
+                if (element >= Start && element <= End ){
+                    text.push(notes[element].text)
+                }
             }
        
             return text;
