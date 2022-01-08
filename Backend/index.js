@@ -36,51 +36,100 @@ function checkvalid() {
 }
 
 // app.post('/Login', (req, res) => {
-app.get('/Login', async (req, res) => {
-    let user;
-    let pass;
-    try {
-        // user = req.body.user;
-        user = req.query.user;
-        if (user == undefined)
-            throw 'Err';
-        pass = req.query.pass;
-        if (pass == undefined)
-            throw 'Err';
-    } catch {
-        user = undefined;
-        pass = undefined;
-        res.json({
-            message: 'No Input!'
-        });
-    }
-    if (user != undefined && pass != undefined) {
-        let valid;
-        client.loginUser({ username: user, password: pass }, (err, response) => {
-            console.log(user)
-            console.log(pass)
-            valid = response.message;
-            console.log(valid)
-            if (valid == 'true') {
-                var token = jwt.sign({
-                    user: user,
-                    pass: pass,
-                    exp: Math.floor(Date.now() / 1000) + (5 * 60),
-                }, pKey);
+    app.get('/Login', async (req, res) => {
+        let user;
+        let pass;
+        try {
+            // user = req.body.user;
+            user = req.query.user;
+            if (user == undefined)
+                throw 'Err';
+            pass = req.query.pass;
+            if (pass == undefined)
+                throw 'Err';
+        } catch {
+            user = undefined;
+            pass = undefined;
+            res.json({
+                message: 'No Input!'
+            });
+        }
+        if (user != undefined && pass != undefined) {
+            let valid;
+            client.loginUser({ username: user, password: pass }, (err, response) => {
+                console.log(user)
+                console.log(pass)
+                console.log(response)
+                valid = response.message;
+                console.log(valid)
+                if (valid == 'true') {
+                    var token = jwt.sign({
+                        user: user,
+                        pass: pass,
+                        exp: Math.floor(Date.now() / 1000) + (5 * 60),
+                    }, pKey);
+    
+                    res.json({
+                        token: token,
+                        message: 'Valid'
+                    });
+                } else {
+                    res.json({
+                        token: '',
+                        message: 'Username or Password is WRONG!'
+                    });
+                }
+            });
+        }
+    })
 
-                res.json({
-                    token: token,
-                    message: 'Valid'
-                });
-            } else {
-                res.json({
-                    token: '',
-                    message: 'Username or Password is WRONG!'
-                });
-            }
-        });
-    }
-})
+    app.get('/Signup', async (req, res) => {
+        console.log(req);
+        let user;
+        let pass;
+        try {
+            // user = req.body.user;
+            user = req.query.user;
+            if (user == undefined)
+                throw 'Err';
+            pass = req.query.pass;
+            if (pass == undefined)
+                throw 'Err';
+        } catch {
+            user = undefined;
+            pass = undefined;
+            res.json({
+                message: 'No Input!'
+            });
+        }
+        if (user != undefined && pass != undefined) {
+            let valid;
+            client.createUser({ username: user, password: pass }, (err, response) => {
+                console.log(user)
+                console.log(pass)
+                console.log(response)
+                valid = response.message;
+                console.log(valid)
+                if (valid == 'true') {
+                    var token = jwt.sign({
+                        user: user,
+                        pass: pass,
+                        exp: Math.floor(Date.now() / 1000) + (5 * 60),
+                    }, pKey);
+    
+                    res.json({
+                        token: token,
+                        message: 'Valid'
+                    });
+                } else {
+                    res.json({
+                        token: '',
+                        message: 'Username or Password is WRONG!'
+                    });
+                }
+            });
+        }
+    })
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
