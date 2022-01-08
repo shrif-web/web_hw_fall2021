@@ -62,10 +62,10 @@ message ReqParamsUpdateNote {
 
 message ReqParamsGetNote {
   string username = 1;
+  int64 start = 2;
+  int64 end = 3;
 }
 
-
-// The response message containing the greetings
 message Reply {
   bool successful = 1;
   string message = 2;

@@ -78,7 +78,7 @@ async function UpdateNote(call, callback) {
 }
 
 async function GetNote(call, callback) {
-    const note = await getNote(call.request.username);
+    const note = await getNote(call.request.username, call.request.start, call.request.end);
     if (note != null){
         callback(null, {successful: true, texts: note });
     }
