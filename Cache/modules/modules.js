@@ -2,7 +2,7 @@ import { Mutex, Semaphore, withTimeout } from 'async-mutex';
 
 const mutex = new Mutex();
 
-const N_Max = 3; // Cache Storage
+const N_Max = 30; // Cache Storage
 let N = 0;
 
 class ListNode {
@@ -87,7 +87,7 @@ export function SetKey(call, callback) {
     let flag = 0;
     if (map[key] != undefined) {
       console.log('Exist')
-      map[key].value = value;
+      map[key].data = value;
       if (map[key].next != -1 && map[key].parent != -1) {
         console.log('qq2');
         map[key].next.parent = map[key].parent;

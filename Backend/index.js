@@ -39,6 +39,8 @@ var client_db = new db.database(target, grpc.credentials.createInsecure());
 var target2 = 'localhost:50052';
 var client_cache = new cache.Greeter(target2, grpc.credentials.createInsecure());
 
+let num;
+
 function checkvalid(token) {
     try {
         let t = jwt.verify(token, pKey);
@@ -237,9 +239,7 @@ app.get('/Create', async (req, res) => {
 
 app.get('/See', async (req, res) => {
     let token;
-    let num;
     try {
-        // user = req.body.user;
         token = req.query.token;
         if (token == undefined)
             throw 'Err';
@@ -254,33 +254,43 @@ app.get('/See', async (req, res) => {
         });
     }
     if (num != undefined && token != undefined) {
-        let res_cache;
         let user = checkvalid(token);
         if (user != undefined) {
-            // TODO cahce checking
-            client_db.getNote({
-                start: num,
-                end: num + 2,
-                username: user
+            client_cache.GetKey({
+                key: 'TEXTTABLE' + user + num,
+                value: ''
             }, (err, response) => {
-                console.log(response)
-                let res_db = response.successful;
-                if (res_db) {
-                    let message = response.texts[0];
-                    client_cache.SetKey({
-                        key: 'TEXTTABLE' + user,
-                        value: message
-                    }, () => {
-                        res.json({
-                            message: message
-                        });
-                    })
-                } else {
+                if (response.successful) {
                     res.json({
                         message: response.message
                     });
+                    console.log('Got from the Cache!');
+                } else {
+                    client_db.getNote({
+                        start: num,
+                        end: num,
+                        username: user
+                    }, (err, response) => {
+                        console.log(response)
+                        let res_db = response.successful;
+                        if (res_db) {
+                            let message = response.texts[0];
+                            client_cache.SetKey({
+                                key: 'TEXTTABLE' + user + num,
+                                value: message
+                            }, () => {
+                                res.json({
+                                    message: message
+                                });
+                            })
+                        } else {
+                            res.json({
+                                message: response.message
+                            });
+                        }
+                    });
                 }
-            });
+            })
         } else {
             res.json({
                 message: 'Please Login Again!'
@@ -325,8 +335,9 @@ app.get('/Update', async (req, res) => {
                 console.log(response)
                 let res_db = response.successful;
                 if (res_db) {
+                    console.log('num: ' + num)
                     client_cache.SetKey({
-                        key: 'TEXTTABLE' + user,
+                        key: 'TEXTTABLE' + user + num,
                         value: newtext
                     }, () => {
                         res.json({
@@ -334,6 +345,7 @@ app.get('/Update', async (req, res) => {
                         });
                     })
                 } else {
+                    console.log('oldtext: '+oldtext+' , '+'text: '+newtext+' , '+'user: '+user)
                     res.json({
                         message: 'Error!'
                     });
