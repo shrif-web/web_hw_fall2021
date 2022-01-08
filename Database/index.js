@@ -68,7 +68,6 @@ async function DeleteNote(call, callback) {
 }
 
 async function UpdateNote(call, callback) {
-    console.log(call.request)
     const note_updated = await updateNote(call.request.text, call.request.username, call.request.newtext);
     if (note_updated == true){
         callback(null, {successful: true, message: 'note updtated!' });
