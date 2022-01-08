@@ -39,14 +39,11 @@ async function main() {
                                        grpc.credentials.createInsecure());
 
   client.createUser({username:'ali', password:'adfasfasdf'}, function(err, response) {
-    console.log( response.successful, response.message);
-    
-      client.loginUser({username:'erfan', password:'adfasfasdf'}, function(err, response) {
-        console.log( response.successful, response.message);
-      });
+    console.log( response.successful, response.message);;
 
-      client.createNote({text:'salam arsalaasdfsdafns', username:'ali'}, function(err, response) { 
-        console.log( response.successful, response.message);
+      client.getNote({username:'ali'}, function(err, response) { 
+        
+        console.log( response.successful, response.texts);
       });
   });
 }

@@ -9,6 +9,7 @@ import loginUser from './service/loginUser.js'
 import createNote from './service/createNote.js'
 import deleteNote from './service/deleteNote.js'
 import updateNote from './service/updateNote.js'
+import getNote from './service/getNote.js';
 
 
 var packageDefinition = protoLoader.loadSync(
@@ -23,91 +24,66 @@ var db = grpc.loadPackageDefinition(packageDefinition).cache;
 
 
 async function CreateUser(call, callback) {
-    try{
-        const user_created = await createUser(call.request.username, call.request.password);
-        if (user_created == false){
-            callback(null, {successful: false , message: 'user allredy existed!' });
-        }
-        else{
-            callback(null, {successful: true, message: 'user added successfuly!' });
-        }
+    const user_created = await createUser(call.request.username, call.request.password);
+    if (user_created == false){
+        callback(null, {successful: false , message: 'user allredy existed!' });
     }
-    catch (err) {
-        callback(null, {successful: false
-            ,message: 'An error occuerd while creating a User with username =  ' 
-            + call.request.username + " \n " + err});
+    else{
+        callback(null, {successful: true, message: 'user added successfuly!' });
     }
 }
 
 async function LoginUser(call, callback) {
-    try{
-        console.log(call.request)
-        const login_failed =  await loginUser(call.request.username, call.request.password);
+    console.log(call.request)
+    const login_failed =  await loginUser(call.request.username, call.request.password);
 
-        if (login_failed == false){
-            callback(null, {successful: false, message: 'user not existed!'});
-        }
-        
-        else{
-            console.log(login_failed)
-            callback(null, {successful: true, message: 'user found!' });
-        }
+    if (login_failed == false){
+        callback(null, {successful: false, message: 'user not existed!'});
     }
-    catch (err) {
-        callback(null, {successful: false
-            ,message: 'An error occuerd while updateing a Text with NewText =  ' 
-            + call.request.username + " \n " + err});
+    
+    else{
+        console.log(login_failed)
+        callback(null, {successful: true, message: 'user found!' });
     }
 }
 
 async function CreateNote(call, callback) {
-    try{
-        const note_created = await createNote(call.request.text, call.request.username);
-        if (note_created == true){
-            callback(null, {successful: true, message: 'note created!' });
-        }
-        else {
-            callback(null, {successful: false, message: 'There was a problem try again!' });
-        }
+    const note_created = await createNote(call.request.text, call.request.username);
+    if (note_created == true){
+        callback(null, {successful: true, message: 'note created!' });
     }
-    catch (err) {
-        callback(null, { successful: false
-            ,message: 'An error occuerd while creating a Note with text =  '
-            + call.request.text + " \n " + err});
+    else {
+        callback(null, {successful: false, message: 'There was a problem try again!' });
     }
 }
 
 async function DeleteNote(call, callback) {
-    try{
-        const note_deleted = await deleteNote( call.request.text, call.request.username);
-        if (note_deleted == true){
-            callback(null, {successful: true, message: 'note deletetd!' });
-        }
-        else{
-            callback(null, {successful: false, message: 'There was a problem try again!' });
-        }
+    const note_deleted = await deleteNote( call.request.text, call.request.username);
+    if (note_deleted == true){
+        callback(null, {successful: true, message: 'note deletetd!' });
     }
-    catch (err) {
-        callback(null, { successful: false
-            ,message: 'An error occuerd while deleting a Note with text =  ' 
-            + call.request.text + " \n " + err});
+    else{
+        callback(null, {successful: false, message: 'There was a problem try again!' });
     }
 }
 
 async function UpdateNote(call, callback) {
-    try{
-        const note_updated = await updateNote(call.request.text, call.request.username, call.request.NewText);
-        if (note_deleted == true){
-            callback(null, {successful: true, message: 'note updtated!' });
-        }
-        else{
-            callback(null, {successful: false, message: 'Text not found to update!' });
-        }
+    const note_updated = await updateNote(call.request.text, call.request.username, call.request.NewText);
+    if (note_deleted == true){
+        callback(null, {successful: true, message: 'note updtated!' });
     }
-    catch (err) {
-        callback(null,  { successful: false
-            ,message: 'An error occuerd while updateing a Text with NewText =  ' 
-            + call.request.username + " \n " + err});
+    else{
+        callback(null, {successful: false, message: 'Text not found to update!' });
+    }
+}
+
+async function GetNote(call, callback) {
+    const note = await getNote(call.request.username);
+    if (note != null){
+        callback(null, {successful: true, texts: note });
+    }
+    else{
+        callback(null, {successful: false, message: 'An error eccoured nothing to show' });
     }
 }
 
@@ -115,10 +91,11 @@ function main() {
     var server = new grpc.Server();
     server.addService(db.database.service, {
         createUser: CreateUser,
-        loginUser: LoginUser,
+        loginUser:  LoginUser,
         createNote: CreateNote,
         deleteNote: DeleteNote,
-        updateNote: UpdateNote
+        updateNote: UpdateNote,
+        getNote:    GetNote
         });
     server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), () => {
         server.start();
