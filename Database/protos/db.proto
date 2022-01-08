@@ -50,12 +50,12 @@ message ReqParamsCreateNote {
 
 message ReqParamsDeleteNote {
   string text = 1;
-  int64 UserId = 2;
+  string username = 2;
 }
 
 message ReqParamsUpdateNote {
   string text = 1;
-  int64 UserId = 2;
+  string username = 2;
   string newtext = 3;
 }
 

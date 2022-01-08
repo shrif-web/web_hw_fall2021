@@ -45,7 +45,7 @@ async function main() {
         console.log( response.successful, response.message);
       });
 
-      client.createNote({text:'salam arsalans', username:'ali'}, function(err, response) { 
+      client.createNote({text:'salam arsalaasdfsdafns', username:'ali'}, function(err, response) { 
         console.log( response.successful, response.message);
       });
   });
