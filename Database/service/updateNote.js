@@ -10,16 +10,24 @@ async function updateNote(Text, Userid, NewText){
     const newdata = new_hash.update(NewText, 'utf-8');
     const new_text_hash= newdata.digest('base64');
 
-    await Note.update(
-        {
-            text: NewText,
-            hash:new_text_hash
+    const note = await User.findOne({ where: {hash:text_hash , userId:Userid} });
+    if (user === null){
+        return false;
+    }
+    else {
+
+        await Note.update(
+            {
+                text: NewText,
+                hash:new_text_hash
             },
-        {where:{
-            hash:text_hash,
-             userId:Userid
+            {where:{
+                hash:text_hash,
+                userId:Userid
             }
         });
+        return true;
+    }
 }
 
 export default updateNote;
