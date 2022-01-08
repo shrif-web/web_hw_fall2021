@@ -14,7 +14,7 @@ import {
 
 const state = atom({
     key: 'state', // unique ID (with respect to other atoms/selectors)
-    default: 'Signup'
+    default: 'Login'
 });
 
 const Front = () => {

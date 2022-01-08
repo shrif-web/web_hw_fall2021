@@ -45,7 +45,7 @@ message ReqParamsLoginUser {
 
 message ReqParamsCreateNote {
   string text = 1;
-  int64 UserId = 2;
+  string username = 2;
 }
 
 message ReqParamsDeleteNote {
@@ -61,5 +61,6 @@ message ReqParamsUpdateNote {
 
 // The response message containing the greetings
 message Reply {
-  string message = 1;
+  bool successful = 1;
+  string message = 2;
 }

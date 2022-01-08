@@ -29,7 +29,7 @@ class ListNode {
     this.parent = -1;
   }
 }
-let list = -1; // First Node
+let list = -1; // First Node, Most Used
 let last = -1; // Last Node ==> LRU
 let map = {};
 
@@ -151,6 +151,7 @@ function SetKey(call, callback) {
 function Clear(call, callback) {
   mutex.runExclusive(async () => {
     list = -1;
+    // Map 
     callback(null, { message: 'Ok' });
   });
 }

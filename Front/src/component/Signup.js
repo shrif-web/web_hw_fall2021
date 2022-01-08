@@ -22,7 +22,7 @@ const Signup = () => {
     let ans = await fetch('http://localhost:3030/Signup?user=' + username + '&pass=' + password);
     ans = await ans.json();
     console.log(ans);
-    if (ans.message != 'Valid')
+    if (ans.message != 'Done!')
       message.error(ans.message);
     else {
       message.warning('Created')
