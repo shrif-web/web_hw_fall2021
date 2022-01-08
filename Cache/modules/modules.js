@@ -2,22 +2,6 @@ import { Mutex, Semaphore, withTimeout } from 'async-mutex';
 
 const mutex = new Mutex();
 
-var PROTO_PATH = './../protos/cache.proto';
-
-import grpc from '@grpc/grpc-js';
-import protoLoader from '@grpc/proto-loader';
-var packageDefinition = protoLoader.loadSync(
-  PROTO_PATH,
-  {
-    keepCase: true,
-    longs: String,
-    enums: String,
-    defaults: true,
-    oneofs: true
-  });
-var cache = grpc.loadPackageDefinition(packageDefinition).cache;
-
-
 const N_Max = 3; // Cache Storage
 let N = 0;
 
@@ -35,7 +19,7 @@ let map = {};
 
 let id = 1;
 
-function showLinkList() {
+export function showLinkList() {
   let t = list;
   let i = 1;
   while (t != -1) {
@@ -49,7 +33,7 @@ function showLinkList() {
   }
 }
 
-function GetKey(call, callback, op = 0) {
+export function GetKey(call, callback, op = 0) {
   mutex.runExclusive(async () => {
     let { key, value } = call.request;
     let message = 'Not found!';
@@ -93,7 +77,7 @@ function GetKey(call, callback, op = 0) {
   });
 }
 
-function SetKey(call, callback) {
+export function SetKey(call, callback) {
   mutex.runExclusive(async () => {
     let successful = true;
     // console.log('Linked List:')
@@ -157,24 +141,15 @@ function SetKey(call, callback) {
   });
 }
 
-function Clear(call, callback) {
+export function Clear(call, callback) {
   mutex.runExclusive(async () => {
     let successful = true;
     list = -1;
-    // Map 
+    last = -1;
+    map = {};
     callback(null, {
       message: 'Ok',
       successful: successful
     });
   });
 }
-
-function main() {
-  var server = new grpc.Server();
-  server.addService(cache.Greeter.service, { Clear: Clear, SetKey: SetKey, GetKey: GetKey });
-  server.bindAsync('0.0.0.0:50052', grpc.ServerCredentials.createInsecure(), () => {
-    server.start();
-  });
-}
-
-main();
