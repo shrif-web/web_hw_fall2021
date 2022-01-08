@@ -50,16 +50,14 @@ const CreateText = () => {
     const onFinish = useCallback(async (values) => {
         console.log('Success:', values);
         updateprog(true);
-        const { username, password } = values;
-        let ans = await fetch('http://localhost:3030/Login?user=' + username + '&pass=' + password);
+        const { text } = values;
+        let ans = await fetch('http://localhost:3030/Create?text=' + text + '&token=' + tokenval);
         ans = await ans.json();
         console.log(ans);
-        if (ans.message != 'Valid')
+        if (ans.message != 'Done!')
             message.error(ans.message);
         else {
-            tokenupdater(ans.token)
-            onClick('Text')
-            message.warning('Token is received')
+            message.warning('Text is submitted.')
         }
         console.log(token)
         updateprog(false)

@@ -39,14 +39,14 @@ var client_db = new db.database(target, grpc.credentials.createInsecure());
 var target2 = 'localhost:50052';
 var client_cache = new cache.Greeter(target2, grpc.credentials.createInsecure());
 
-function checkvalid() {
+function checkvalid(token) {
     try {
         let t = jwt.verify(token, pKey);
         return t.user;
         console.log(t.user + 'has just logged in');
     } catch (err) {
         console.log('Expired time user');
-        return 'fail';
+        return undefined;
     }
 }
 
@@ -187,6 +187,53 @@ app.get('/Signup', async (req, res) => {
         });
     }
 })
+
+app.get('/Create', async (req, res) => {
+    let token;
+    let text;
+    try {
+        // user = req.body.user;
+        token = req.query.token;
+        if (token == undefined)
+            throw 'Err';
+        text = req.query.text;
+        if (text == undefined)
+            throw 'Err';
+    } catch {
+        token = undefined;
+        text = undefined;
+        res.json({
+            message: 'No Input!'
+        });
+    }
+    if (text != undefined && token != undefined) {
+        let res_cache;
+        let user = checkvalid(token);
+        if (user != undefined) {
+            client_db.createNote({
+                text: text,
+                username: user
+            }, (err, response) => {
+                let res_db = response.successful;
+                if (res_db) {
+                    client_cache.SetKey({
+                        key: 'TEXTTABLE' + user,
+                        value: text
+                    }, () => {
+                        res.json({
+                            message: 'Done!'
+                        });
+                    })
+                }
+            });
+        } else {
+            res.json({
+                message: 'Please Login Again!'
+            });
+        }
+    }
+})
+
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
