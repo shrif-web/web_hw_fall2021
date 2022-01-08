@@ -234,6 +234,114 @@ app.get('/Create', async (req, res) => {
     }
 })
 
+app.get('/See', async (req, res) => {
+    let token;
+    let num;
+    try {
+        // user = req.body.user;
+        token = req.query.token;
+        if (token == undefined)
+            throw 'Err';
+        num = req.query.num;
+        if (num == undefined)
+            throw 'Err';
+    } catch {
+        token = undefined;
+        num = undefined;
+        res.json({
+            message: 'No Input!'
+        });
+    }
+    if (num != undefined && token != undefined) {
+        let res_cache;
+        let user = checkvalid(token);
+        if (user != undefined) {
+            // TODO cahce checking
+            client_db.getNote({
+                start: num,
+                end: num + 2,
+                username: user
+            }, (err, response) => {
+                console.log(response)
+                let res_db = response.successful;
+                if (res_db) {
+                    let message = response.texts[0];
+                    client_cache.SetKey({
+                        key: 'TEXTTABLE' + user,
+                        value: message
+                    }, () => {
+                        res.json({
+                            message: message
+                        });
+                    })
+                }
+            });
+        } else {
+            res.json({
+                message: 'Please Login Again!'
+            });
+        }
+    }
+})
+
+app.get('/Update', async (req, res) => {
+    let oldtext;
+    let newtext;
+    let token;
+    try {
+        // user = req.body.user;
+        token = req.query.token;
+        if (token == undefined)
+            throw 'Err';
+        oldtext = req.query.oldtext;
+        if (oldtext == undefined)
+            throw 'Err';
+        newtext = req.query.newtext;
+        if (newtext == undefined)
+            throw 'Err';
+    } catch {
+        oldtext = undefined;
+        newtext = undefined;
+        token = undefined;
+        res.json({
+            message: 'No Input!'
+        });
+    }
+    if (oldtext != undefined && newtext != undefined && token != undefined) {
+        let res_cache;
+        let user = checkvalid(token);
+        if (user != undefined) {
+            // TODO cahce checking
+            client_db.updateNote({
+                text: oldtext,
+                newtext: newtext,
+                username: user
+            }, (err, response) => {
+                console.log(response)
+                let res_db = response.successful;
+                if (res_db) {
+                    client_cache.SetKey({
+                        key: 'TEXTTABLE' + user,
+                        value: newtext
+                    }, () => {
+                        res.json({
+                            message: 'Done!'
+                        });
+                    })
+                } else {
+                    res.json({
+                        message: 'Error!'
+                    });
+                }
+            });
+        } else {
+            res.json({
+                message: 'Please Login Again!'
+            });
+        }
+    }
+})
+
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

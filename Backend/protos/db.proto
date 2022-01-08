@@ -15,7 +15,7 @@ service database {
   rpc createNote (ReqParamsCreateNote) returns (Reply) {}
   rpc deleteNote (ReqParamsDeleteNote) returns (Reply) {}
   rpc updateNote (ReqParamsUpdateNote) returns (Reply) {}
-  rpc GetNote    (ReqParamsGetNote)    returns (GetNotesReply) {}
+  rpc getNote    (ReqParamsGetNote)    returns (GetNotesReply) {}
   
 }
 
@@ -48,10 +48,10 @@ message ReqParamsUpdateNote {
 
 message ReqParamsGetNote {
   string username = 1;
+  int64 start = 2;
+  int64 end = 3;
 }
 
-
-// The response message containing the greetings
 message Reply {
   bool successful = 1;
   string message = 2;
