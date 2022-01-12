@@ -1,7 +1,9 @@
 import Sequelize from 'sequelize';
+import dotenv from 'dotenv'
+dotenv.config();
 
 // connection string
-const sequelize = new Sequelize('postgres://admin:admin@localhost:5432/admin') 
+const sequelize = new Sequelize('postgres://admin:admin@'+process.env.PG_Path+'/admin') 
 try{
     sequelize.authenticate({
     }).then(()=>

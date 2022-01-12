@@ -14,7 +14,7 @@ RUN npm install
 
 # Bundle app source
 COPY . .
-COPY ./../.env ./.env
+#COPY ./../.env ./.env
 
 # Expose port
 EXPOSE 50052
