@@ -1,7 +1,11 @@
 import grpc from '@grpc/grpc-js';
 import protoLoader from '@grpc/proto-loader';
+import dotenv from 'dotenv'
 import { GetKey, SetKey, Clear } from './modules/modules.js'
-var PROTO_PATH = './protos/cache.proto';
+console.log('Cache Services has just started');
+dotenv.config();
+
+var PROTO_PATH = process.env.Cache_Proto_Path;
 var packageDefinition = protoLoader.loadSync(
   PROTO_PATH,
   {
@@ -16,7 +20,7 @@ var cache = grpc.loadPackageDefinition(packageDefinition).cache;
 function main() {
   var server = new grpc.Server();
   server.addService(cache.Greeter.service, { Clear: Clear, SetKey: SetKey, GetKey: GetKey });
-  server.bindAsync('0.0.0.0:50052', grpc.ServerCredentials.createInsecure(), () => {
+  server.bindAsync(process.env.Cache_Port, grpc.ServerCredentials.createInsecure(), () => {
     server.start();
   });
 }

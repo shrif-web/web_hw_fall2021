@@ -1,8 +1,10 @@
 import { Mutex, Semaphore, withTimeout } from 'async-mutex';
+import dotenv from 'dotenv'
+dotenv.config();
 
 const mutex = new Mutex();
 
-const N_Max = 30; // Cache Storage
+const N_Max = process.env.Cache_Storage; // Cache Storage
 let N = 0;
 
 class ListNode {
@@ -65,11 +67,13 @@ export function GetKey(call, callback, op = 0) {
         last = map[key];
       }
     }
-    console.log('Linked List:')
-    console.log(showLinkList())
-    console.log('Last:')
-    console.log(last)
-    console.log('----------------------------' + id)
+    if (process.env.Cache_DebugMode == 'True') {
+      console.log('Linked List:')
+      console.log(showLinkList())
+      console.log('Last:')
+      console.log(last)
+      console.log('----------------------------' + id)
+    }
     callback(null, {
       message: message,
       successful: successful
@@ -80,53 +84,55 @@ export function GetKey(call, callback, op = 0) {
 export function SetKey(call, callback) {
   mutex.runExclusive(async () => {
     let successful = true;
-    // console.log('Linked List:')
-    // console.log(showLinkList())
     let { key, value } = call.request;
     let message = 'Ok';
-    let flag = 0;
-    if (map[key] != undefined) {
-      console.log('Exist')
-      map[key].data = value;
-      if (map[key].next != -1 && map[key].parent != -1) {
-        console.log('qq2');
-        map[key].next.parent = map[key].parent;
-        map[key].parent.next = map[key].next;
-        map[key].parent = -1;
-        map[key].next = list;
-        list.parent = map[key];
-        list = map[key];
-      } else if (map[key].next == -1 && map[key].parent != -1) {
-        console.log('qq2');
-        map[key].parent.next = -1;
-        last = map[key].parent;
-        map[key].parent = -1;
-        map[key].next = list;
-        list.parent = map[key];
-        list = map[key];
-        if (last.parent == -1) {
-          last.parent = list;
-        }
-      } else if (map[key].next == -1 && map[key].parent == -1) {
-        last = map[key];
-      }
+    if (key.length > 64 || value.length > 2048) {
+      successful = false;
+      message = 'Exceeded number of characters limit!';
     } else {
-      if (N == N_Max) {
-        map[last.key] = undefined;
-        last.parent.next = -1;
-        last = last.parent;
+      if (map[key] != undefined) {
+        console.log('Exist')
+        map[key].data = value;
+        if (map[key].next != -1 && map[key].parent != -1) {
+          console.log('qq2');
+          map[key].next.parent = map[key].parent;
+          map[key].parent.next = map[key].next;
+          map[key].parent = -1;
+          map[key].next = list;
+          list.parent = map[key];
+          list = map[key];
+        } else if (map[key].next == -1 && map[key].parent != -1) {
+          console.log('qq2');
+          map[key].parent.next = -1;
+          last = map[key].parent;
+          map[key].parent = -1;
+          map[key].next = list;
+          list.parent = map[key];
+          list = map[key];
+          if (last.parent == -1) {
+            last.parent = list;
+          }
+        } else if (map[key].next == -1 && map[key].parent == -1) {
+          last = map[key];
+        }
       } else {
-        N = N + 1;
+        if (N == N_Max) {
+          map[last.key] = undefined;
+          last.parent.next = -1;
+          last = last.parent;
+        } else {
+          N = N + 1;
+        }
+        let t = new ListNode(key, value);
+        t.next = list;
+        if (last == -1) {
+          last = t;
+        }
+        map[key] = t;
+        if (list != -1)
+          list.parent = t;
+        list = t;
       }
-      let t = new ListNode(key, value);
-      t.next = list;
-      if (last == -1) {
-        last = t;
-      }
-      map[key] = t;
-      if (list != -1)
-        list.parent = t;
-      list = t;
     }
     callback(null, {
       successful: successful,
