@@ -1,16 +1,17 @@
-var PROTO_PATH = './protos/db.proto';
-
 import grpc from '@grpc/grpc-js';
 import protoLoader from '@grpc/proto-loader';
-
-
 import createUser from './service/createUser.js'
 import loginUser from './service/loginUser.js'
 import createNote from './service/createNote.js'
 import deleteNote from './service/deleteNote.js'
 import updateNote from './service/updateNote.js'
 import getNote from './service/getNote.js';
+import dotenv from 'dotenv'
 
+console.log('Database service has just started');
+dotenv.config();
+
+var PROTO_PATH = process.env.DB_Proto_Path;
 
 var packageDefinition = protoLoader.loadSync(
     PROTO_PATH,
@@ -26,7 +27,7 @@ var db = grpc.loadPackageDefinition(packageDefinition).cache;
 async function CreateUser(call, callback) {
     const user_created = await createUser(call.request.username, call.request.password);
     if (user_created == false){
-        callback(null, {successful: false , message: 'user allredy existed!' });
+        callback(null, {successful: false , message: 'user alredy existed!' });
     }
     else{
         callback(null, {successful: true, message: 'user added successfuly!' });
@@ -97,7 +98,7 @@ function main() {
         updateNote: UpdateNote,
         getNote:    GetNote
         });
-    server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), () => {
+    server.bindAsync(process.env.DB_Port, grpc.ServerCredentials.createInsecure(), () => {
         server.start();
     });
 }
