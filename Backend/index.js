@@ -3,6 +3,9 @@ import cors from 'cors'
 import grpc from '@grpc/grpc-js';
 import protoLoader from '@grpc/proto-loader';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv'
+console.log('Backend service has just started');
+dotenv.config();
 
 // Database
 var PROTO_PATH = './protos/db.proto';
@@ -31,12 +34,12 @@ var cache = grpc.loadPackageDefinition(packageDefinition2).cache;
 
 const app = express()
 app.use(cors())
-const port = 3030
-const pKey = 'ArslanaErfanAmirhossein'
+const port = process.env.Backend_Port;
+const pKey = process.env.Backend_PKey;
 
-var target = 'localhost:50051';
+var target = process.env.Backend_DBPath; // DB
 var client_db = new db.database(target, grpc.credentials.createInsecure());
-var target2 = 'localhost:50052';
+var target2 = process.env.Backend_CachePath; // Cache
 var client_cache = new cache.Greeter(target2, grpc.credentials.createInsecure());
 
 let num;
@@ -358,7 +361,6 @@ app.get('/Update', async (req, res) => {
         }
     }
 })
-
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

@@ -2,7 +2,7 @@ import grpc from '@grpc/grpc-js';
 import protoLoader from '@grpc/proto-loader';
 import dotenv from 'dotenv'
 import { GetKey, SetKey, Clear } from './modules/modules.js'
-console.log('Cache Services has just started');
+console.log('Cache service has just started');
 dotenv.config();
 
 var PROTO_PATH = process.env.Cache_Proto_Path;
