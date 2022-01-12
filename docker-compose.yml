@@ -11,21 +11,20 @@ services:
     volumes:
         - ./Front/default.conf:/etc/nginx/conf.d/default.conf 
         - ./Front/nginx.conf:/etc/nginx/nginx.conf 
-
-  www.db.com: 
-    build: ./Database/ 
-    restart: always
-    container_name: Database_container     
-    volumes:
-        - ./.env:/usr/src/app/.env
- 
-
+  
   www.cache.com: 
     build: ./Cache/ 
     restart: always
     container_name: cache_container
     volumes:
-        - ./.env:/usr/src/app/.env
+        - ./.env:/usr/src/app/.env 
+  www.pg.com:
+    container_name: hw3-db
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
 
   www.backend.com:
     build: ./Backend/
@@ -36,12 +35,10 @@ services:
     ports: 
       - "3030:3030"
 
-  www.pg.com:
-    container_name: hw3-db
-    image: postgres
+  www.db.com: 
+    build: ./Database/ 
     restart: always
-    environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=admin
-  
+    container_name: Database_container     
+    volumes:
+        - ./.env:/usr/src/app/.env
      
