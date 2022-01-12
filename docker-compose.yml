@@ -1,0 +1,35 @@
+version: '3.7'
+services:
+  www.front.com: 
+    build:  
+      context: ./Front/
+      target: production
+    restart: always
+    container_name: Front_container    
+    ports: 
+      - "80:80"
+
+  www.db.com: 
+    build: ./Database/ 
+    restart: always
+    container_name: Database_container      
+
+  www.cache.com: 
+    build: ./Cache/ 
+    restart: always
+    container_name: cache_container
+
+  www.backend.com:
+    build: ./Backend/
+    restart: always
+    container_name: backend_container
+
+  www.pg.com:
+    container_name: hw3-db
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+  
+     
