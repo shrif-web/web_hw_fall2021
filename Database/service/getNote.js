@@ -1,37 +1,45 @@
 import User from "../models/User.js"
 import Note from "../models/Note.js"
-import crypto from 'crypto'
-import sequelize from "../utils/database.js"    
-import e from "express";
+import sequelize from "../utils/database.js"
 
-async function getNote(Username, Start, End){
-    
+async function getNote(Username, id) {
+
     const t = await sequelize.transaction();
-
-    try{
-        const user = await User.findOne({ where: {username:Username} },
-            {transaction: t});
-        
-        if (user === null){
-            await t.commit();
-            return null;
-        } else {
-            console.log(user.id)
-            const notes = await Note.findAll({ where: {userId:user.id} }
-                , {transaction: t});
-            await t.commit();
-            let text = []
-            for (const element in notes)
-            {
-                if (element >= Start && element <= End ){
-                    text.push(notes[element].text)
-                }
+    let note;
+    try {
+        if (Username == "admin") {
+            note = await Note.findAll(
+                {
+                    limit: 1,
+                    offset: id,
+                },
+                { transaction: t });
+            if (note[0] === null) {
+                return null;
             }
-       
-            return text;
+
+        } else {
+            const user = await User.findOne({ where: { username: Username } },
+                { transaction: t });
+
+            note = await Note.findAll(
+                {
+                    where: {
+                        userId: user.id
+                    },
+                    limit: 1,
+                    offset: id,
+                }, { transaction: t });
+            if (user === null || note[0] === null) {
+                return null;
+            }
+
         }
 
-    } catch{
+        return note[0].text;
+
+
+    } catch {
         await t.rollback();
         return null;
     }

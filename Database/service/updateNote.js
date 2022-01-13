@@ -1,43 +1,77 @@
 import Note from "../models/Note.js"
 import User from "../models/User.js"
-import crypto from 'crypto'
-import sequelize from "../utils/database.js" 
+import sequelize from "../utils/database.js"
 
-async function updateNote(Text, Username, NewText){
+async function updateNote(id, username, newtext) {
     const t = await sequelize.transaction();
 
-    const hash = crypto.createHash('sha256');
-    const data = hash.update(Text, 'utf-8');
-    const text_hash= data.digest('base64');
-
-    const new_hash = crypto.createHash('sha256');
-    const newdata = new_hash.update(NewText, 'utf-8');
-    const new_text_hash= newdata.digest('base64');
-    try{
-        const user = await User.findOne({ where: {username:Username} },
-            {transaction: t});
-
-        const note = await Note.findOne({ where: {hash:text_hash , userId:user.id}} 
-            , {transaction:t});
-
-        if (user === null || note === null){
-            await t.commit();
-            return false;
-        }
-        else {
+    try {
+        if (username == "admin") {
+            const note = await Note.findAll(
+                {
+                    limit: 1,
+                    offset: id,
+                }, { transaction: t });
+            if (note[0] === null) {
+                return false;
+            }
+            console.log("id = ", id)
+            console.log("note id = ",note[0].id)
             await Note.update(
                 {
-                    text: NewText,
-                    hash:new_text_hash
+                    text: newtext,
                 },
-                {where:{
-                    hash:text_hash,
-                    userId:user.id
-                }
-            } , {transaction:t} );
+                {
+                    where: {
+                        createdAt: note[0].createdAt,
+                        updatedAt: note[0].updatedAt,
+                    }
+
+                },
+                { transaction: t });
             await t.commit()
             return true;
         }
+        else {
+            const user = await User.findOne({ where: { username: username } },
+                { transaction: t });
+            console.log("user id = ",user.id)
+
+            if (user === null) {
+                await t.commit();
+                return false;
+            }
+
+            else {
+                const note = await Note.findAll(
+                    {
+                        where: {
+                            userId: user.id
+                        },
+                        limit: 1,
+                        offset: id,
+                    }, { transaction: t });
+                if (user === null || note[0] === null) {
+                    return false;
+                }
+                await Note.update(
+                    {
+                        text: newtext,
+                    },
+                    {
+                        where: {
+                            createdAt: note[0].createdAt,
+                            updatedAt: note[0].updatedAt,
+                            userId: user.id
+                        }
+
+                    },
+                    { transaction: t });
+                await t.commit()
+                return true;
+            }
+        }
+
     } catch {
         await t.rollback();
     }

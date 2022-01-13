@@ -1,5 +1,4 @@
 import { DataTypes, Model } from 'sequelize'
-
 import sequelize from "../utils/database.js"
 
 class Note extends Model {}
@@ -15,13 +14,7 @@ Note.init({
     text: {
         type: DataTypes.TEXT,
         allowNull: false
-    },
-    hash: {
-        type: DataTypes.STRING,
-        allowNull: false
     }
-
-
 }, { sequelize, modelName: 'notes' });
 
 

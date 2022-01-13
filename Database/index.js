@@ -11,7 +11,7 @@ import dotenv from 'dotenv'
 console.log('Database service has just started');
 dotenv.config();
 
-var PROTO_PATH = process.env.DB_Proto_Path;
+var PROTO_PATH = './protos/db.proto';
 
 var packageDefinition = protoLoader.loadSync(
     PROTO_PATH,
@@ -59,7 +59,7 @@ async function CreateNote(call, callback) {
 }
 
 async function DeleteNote(call, callback) {
-    const note_deleted = await deleteNote( call.request.text, call.request.username);
+    const note_deleted = await deleteNote( call.request.id, call.request.username);
     if (note_deleted == true){
         callback(null, {successful: true, message: 'note deletetd!' });
     }
@@ -69,7 +69,7 @@ async function DeleteNote(call, callback) {
 }
 
 async function UpdateNote(call, callback) {
-    const note_updated = await updateNote(call.request.text, call.request.username, call.request.newtext);
+    const note_updated = await updateNote(call.request.id, call.request.username, call.request.newtext);
     if (note_updated == true){
         callback(null, {successful: true, message: 'note updtated!' });
     }
@@ -79,12 +79,12 @@ async function UpdateNote(call, callback) {
 }
 
 async function GetNote(call, callback) {
-    const note = await getNote(call.request.username, call.request.start, call.request.end);
+    const note = await getNote(call.request.username, call.request.id);
     if (note != null){
-        callback(null, {successful: true, texts: note });
+        callback(null, {successful: true, text: note });
     }
     else{
-        callback(null, {successful: false, message: 'An error eccoured nothing to show' });
+        callback(null, {successful: false, text: 'An error eccoured nothing to show' });
     }
 }
 
@@ -98,7 +98,7 @@ function main() {
         updateNote: UpdateNote,
         getNote:    GetNote
         });
-    server.bindAsync(process.env.DB_Port, grpc.ServerCredentials.createInsecure(), () => {
+    server.bindAsync('localhost:50051', grpc.ServerCredentials.createInsecure(), () => {
         server.start();
     });
 }

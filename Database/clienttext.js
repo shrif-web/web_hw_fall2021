@@ -22,30 +22,47 @@ import grpc from '@grpc/grpc-js';
 import protoLoader from '@grpc/proto-loader';
 
 var packageDefinition = protoLoader.loadSync(
-    PROTO_PATH,
-    {keepCase: true,
-     longs: String,
-     enums: String,
-     defaults: true,
-     oneofs: true
-    });
+  PROTO_PATH,
+  {
+    keepCase: true,
+    longs: String,
+    enums: String,
+    defaults: true,
+    oneofs: true
+  });
 var db = grpc.loadPackageDefinition(packageDefinition).cache;
 
 async function main() {
 
   var target = 'localhost:50051';
-  
+
   var client = new db.database(target,
-                                       grpc.credentials.createInsecure());
+    grpc.credentials.createInsecure());
 
-  client.createUser({username:'ali', password:'adfasfasdf'}, function(err, response) {
-    console.log( response.successful, response.message);;
+  client.updateNote({ username: 'admin', id: 1, newtext: "adfadsfsadfsadfasd" }, function (err, response) {
+    console.log(response.successful, response.message);;
 
-      client.updateNote({username:'ali' , newtext: "khak" , text: "newtext"}, function(err, response) { 
-        
-        console.log( response.successful, response.message);
-      });
-  });
-}
+    // client.getNote({ username: 'ali', id: 0 }, function (err, response) {
+    //   console.log( response.successful, response.text);
+    // });
+
+      // client.createNote({username:'mamd' ,text: "text1"}, function(err, response) { 
+
+      //   console.log( response.successful, response.message);
+      // });
+      // client.createNote({username:'mamd' ,text: "text2"}, function(err, response) { 
+
+      //   console.log( response.successful, response.message);
+      // });
+      // client.createNote({username:'ali' ,text: "text3"}, function(err, response) { 
+
+      //   console.log( response.successful, response.message);
+      // });
+      // client.createNote({username:'ali' ,text: "text4"}, function(err, response) { 
+
+      //   console.log( response.successful, response.message);
+      // });
+    });
+  }
 
 main()

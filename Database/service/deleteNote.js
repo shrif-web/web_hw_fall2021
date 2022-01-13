@@ -1,29 +1,60 @@
 import Note from "../models/Note.js"
 import User from "../models/User.js"
-import crypto from 'crypto'
-import sequelize from "../utils/database.js" 
+import sequelize from "../utils/database.js"
 
-async function deleteNote(Text, Username){
+async function deleteNote(id, Username) {
     const t = await sequelize.transaction();
-    const hash = crypto.createHash('sha256');
-    const data = hash.update(Text, 'utf-8');
-    const text_hash= data.digest('base64');
-    try{
-        const user = await User.findOne({ 
-            where:
-            {username:Username} },
-            {transaction: t});
-
-        await Note.destroy(
-            {where:{
-                hash:text_hash,
-                userId:user.id
+    try {
+        if (Username == "admin") {
+            const note = await Note.findAll(
+                {
+                    limit: 1,
+                    offset: id,
+                }, { transaction: t });
+            if (note[0] === null) {
+                return false;
+            }
+            console.log ( note[0])
+            await Note.destroy(
+                {
+                    where: {
+                        createdAt: note[0].createdAt,
+                        updatedAt: note[0].updatedAt,
+                        text: note[0].text
+                    }
                 }
-            } , {transaction:t});
+                , { transaction: t })
+        } else {
 
+            const user = await User.findOne({ where: { username: Username } },
+                { transaction: t });
+
+            const note = await Note.findAll(
+                {
+                    where: {
+                        userId: user.id
+                    },
+                    limit: 1,
+                    offset: id,
+                }, { transaction: t });
+            if (user === null || note[0] === null) {
+                return false;
+            }
+
+            await Note.destroy(
+                {
+                    where: {
+                        createdAt: note[0].createdAt,
+                        updatedAt: note[0].updatedAt,
+                        userId: user.id
+                    }
+                }
+                , { transaction: t })
+
+        }
         await t.commit();
         return true;
-    }catch{
+    } catch {
         await t.rollback();
         return false;
     }
