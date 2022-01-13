@@ -4,10 +4,6 @@ import crypto from 'crypto'
 import sequelize from "../utils/database.js"    
 
 async function createNote(Text, Username){
-
-    const hash = crypto.createHash('sha256');
-    const data = hash.update(Text, 'utf-8');
-    const text_hash= data.digest('base64');
     
     const t = await sequelize.transaction();
 
