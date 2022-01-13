@@ -8,6 +8,7 @@ async function deleteNote(id, Username) {
         if (Username == "admin") {
             const note = await Note.findAll(
                 {
+                    order: [['createdAt', 'DESC']],
                     limit: 1,
                     offset: id,
                 }, { transaction: t });
@@ -34,6 +35,7 @@ async function deleteNote(id, Username) {
                     where: {
                         userId: user.id
                     },
+                    order: [['createdAt', 'DESC']],
                     limit: 1,
                     offset: id,
                 }, { transaction: t });

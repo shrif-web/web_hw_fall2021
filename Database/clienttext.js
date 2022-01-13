@@ -39,7 +39,7 @@ async function main() {
   var client = new db.database(target,
     grpc.credentials.createInsecure());
 
-  client.updateNote({ username: 'admin', id: 1, newtext: "adfadsfsadfsadfasd" }, function (err, response) {
+  client.updateNote({ username: 'ali', id: 1, newtext: "adfadsfsadfsadfasd" }, function (err, response) {
     console.log(response.successful, response.message);;
 
     // client.getNote({ username: 'ali', id: 0 }, function (err, response) {
