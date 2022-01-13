@@ -50,20 +50,18 @@ message ReqParamsCreateNote {
 }
 
 message ReqParamsDeleteNote {
-  string text = 1;
-  string username = 2;
+  string username = 1;
+  int64 id = 2;
 }
 
 message ReqParamsUpdateNote {
-  string text = 1;
-  string username = 2;
-  string newtext = 3;
+  string username = 1;
+  int64 id = 2;
 }
 
 message ReqParamsGetNote {
   string username = 1;
-  int64 start = 2;
-  int64 end = 3;
+  int64 id = 2;
 }
 
 message Reply {
@@ -73,5 +71,5 @@ message Reply {
 
 message GetNotesReply {
   bool successful = 1;
-  repeated string texts = 2;
+  string text = 2;
 }
