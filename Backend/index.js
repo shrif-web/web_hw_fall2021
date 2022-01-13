@@ -4,6 +4,16 @@ import grpc from '@grpc/grpc-js';
 import protoLoader from '@grpc/proto-loader';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv'
+import rateLimit from 'express-rate-limit';
+
+const limiter = rateLimit({
+    windowMs: 1 * 60 * 1000, // 15 minutes
+    max: 10, // Limit each IP to 100 requests per window (here, per 15 minutes)
+    standardHeaders: true, // Return rate limit info in the RateLimit-* headers
+    legacyHeaders: false, // Disable the X-RateLimit-* headers
+    message: '{"successful":false,"message":"Too many requests!"}'
+})
+
 console.log('Backend service has just started');
 dotenv.config();
 
@@ -34,6 +44,7 @@ var cache = grpc.loadPackageDefinition(packageDefinition2).cache;
 
 const app = express()
 app.use(cors())
+app.use(limiter)
 const port = process.env.Backend_Port;
 const pKey = process.env.Backend_PKey;
 
@@ -277,7 +288,7 @@ app.get('/See', async (req, res) => {
                         console.log(response)
                         let res_db = response.successful;
                         if (res_db) {
-                            let message = response.texts[0];
+                            let message = response.text;
                             client_cache.SetKey({
                                 key: 'TEXTTABLE' + user + num,
                                 value: message
@@ -348,7 +359,7 @@ app.get('/Update', async (req, res) => {
                         });
                     })
                 } else {
-                    console.log('oldtext: '+oldtext+' , '+'text: '+newtext+' , '+'user: '+user)
+                    console.log('oldtext: ' + oldtext + ' , ' + 'text: ' + newtext + ' , ' + 'user: ' + user)
                     res.json({
                         message: 'Error!'
                     });
