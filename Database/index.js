@@ -89,7 +89,7 @@ async function GetNote(call, callback) {
     }
 }
 
-function main() {
+async function main() {
     var server = new grpc.Server();
     server.addService(db.database.service, {
         createUser: CreateUser,
@@ -102,6 +102,7 @@ function main() {
     server.bindAsync('db:50051', grpc.ServerCredentials.createInsecure(), () => {
         server.start();
     });
+    await createUser('admin', 'admin');
 }
 
 main();
