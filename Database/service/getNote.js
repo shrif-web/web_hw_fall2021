@@ -10,7 +10,7 @@ async function getNote(Username, id) {
         if (Username == "admin") {
             note = await Note.findAll(
                 {
-                    order: [['createdAt', 'DESC']],
+                    order: [['createdAt', 'ASC']],
                     limit: 1,
                     offset: id,
                 },
@@ -29,7 +29,7 @@ async function getNote(Username, id) {
                     where: {
                         userId: user.id
                     },
-                    order: [['createdAt', 'DESC']],
+                    order: [['createdAt', 'ASC']],
                     limit: 1,
                     offset: id,
                 }, { transaction: t });

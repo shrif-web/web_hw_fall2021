@@ -9,7 +9,7 @@ async function updateNote(id, username, newtext) {
         if (username == "admin") {
             const note = await Note.findAll(
                 {
-                    order: [['createdAt', 'DESC']],
+                    order: [['createdAt', 'ASC']],
                     limit: 1,
                     offset: id,
                 }, { transaction: t });
@@ -49,7 +49,7 @@ async function updateNote(id, username, newtext) {
                         where: {
                             userId: user.id
                         },
-                        order: [['createdAt', 'DESC']],
+                        order: [['createdAt', 'ASC']],
                         limit: 1,
                         offset: id,
                     }, { transaction: t });
