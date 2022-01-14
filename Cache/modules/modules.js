@@ -1,5 +1,6 @@
 import { Mutex, Semaphore, withTimeout } from 'async-mutex';
 import dotenv from 'dotenv'
+// import { property } from 'lodash';
 dotenv.config();
 
 const mutex = new Mutex();
@@ -147,6 +148,46 @@ export function SetKey(call, callback) {
   });
 }
 
+export function ClearKey(call, callback) {
+  mutex.runExclusive(async () => {
+    let { key, value } = call.request;
+    let successful = true;
+    if (last == map[key]) {
+      if (last.parent != -1) {
+        last = last.parent;
+        last.next = -1;
+      } else {
+        last = -1;
+      }
+    } else if (list == map[key]) {
+      if (list.next != -1) {
+        list = list.next;
+        list.parent = -1;
+      } else {
+        list = -1;
+      }
+    } else {
+      let t = map[key];
+      t.next.parent = t.parent;
+      t.parent.next = t.next;
+    }
+    map[key] = undefined;
+    let slices = key.split("_");
+    for (property in map) {
+      let tslices = property.split("_");
+      if (tslices[0] == 'TEXTTABLE' && tslices[1] == slices[1] && +tslices[2] > +slices[2]) {
+        let t = map[property];
+        map[property] = undefined;
+        map[tslices[0] + '_' + tslices[1] + '_' + (+tslices[2] - 1)] = t;
+      }
+    }
+    callback(null, {
+      message: 'Ok',
+      successful: successful
+    });
+  });
+}
+
 export function Clear(call, callback) {
   mutex.runExclusive(async () => {
     let successful = true;
@@ -159,3 +200,4 @@ export function Clear(call, callback) {
     });
   });
 }
+

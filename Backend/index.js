@@ -8,7 +8,7 @@ import rateLimit from 'express-rate-limit';
 
 const limiter = rateLimit({
     windowMs: 1 * 60 * 1000, // 15 minutes
-    max: 10, // Limit each IP to 100 requests per window (here, per 15 minutes)
+    max: 1000, // Limit each IP to 100 requests per window (here, per 15 minutes)
     standardHeaders: true, // Return rate limit info in the RateLimit-* headers
     legacyHeaders: false, // Disable the X-RateLimit-* headers
     message: '{"successful":false,"message":"Too many requests!"}'
@@ -83,19 +83,16 @@ app.get('/Login', async (req, res) => {
         user = undefined;
         pass = undefined;
         res.json({
-            message: 'No Input!'
+            message: 'No Input!',
+            successful: false
         });
     }
     if (user != undefined && pass != undefined) {
         let flag = 0;
         // Check if in cache
-        console.log({
-            key: 'USERTable' + user,
-            value: ''
-        })
         let res_cache;
         client_cache.GetKey({
-            key: 'USERTable' + user,
+            key: 'USERTable_' + user,
             value: ''
         }, (err, response) => {
             res_cache = response.successful;
@@ -110,12 +107,14 @@ app.get('/Login', async (req, res) => {
 
                     res.json({
                         token: token,
-                        message: 'Valid'
+                        message: 'Valid',
+                        successful: true
                     });
                 } else {
                     res.json({
                         token: '',
-                        message: 'Username or Password is WRONG!'
+                        message: 'Username or Password is WRONG!',
+                        successful: false
                     });
                 }
                 console.log('Found in Cache')
@@ -137,10 +136,11 @@ app.get('/Login', async (req, res) => {
 
                         res.json({
                             token: token,
-                            message: 'Valid'
+                            message: 'Valid',
+                            successful: true
                         });
                         client_cache.SetKey({
-                            key: 'USERTable' + user,
+                            key: 'USERTable_' + user,
                             value: pass
                         }, (err, response) => {
                             let res_cache2 = response.successful;
@@ -150,7 +150,8 @@ app.get('/Login', async (req, res) => {
                     } else {
                         res.json({
                             token: '',
-                            message: 'Username or Password is WRONG!'
+                            message: 'Username or Password is WRONG!',
+                            successful: false
                         });
                     }
                 });
@@ -174,21 +175,24 @@ app.get('/Signup', async (req, res) => {
         user = undefined;
         pass = undefined;
         res.json({
-            message: 'No Input!'
+            message: 'No Input!',
+            successful: false
         });
     }
     if (user != undefined && pass != undefined) {
         let valid;
         client_db.createUser({ username: user, password: pass }, (err, response) => {
             console.log('Login: ' + user)
+            console.log(response)
             valid = response.successful;
             console.log(valid)
             if (valid == true) {
                 res.json({
-                    message: 'Done!'
+                    message: 'Done!',
+                    successful: true
                 });
                 client_cache.SetKey({
-                    key: 'USERTable' + user,
+                    key: 'USERTable_' + user,
                     value: pass
                 }, (err, response) => {
                     let res_cache = response.successful;
@@ -198,7 +202,8 @@ app.get('/Signup', async (req, res) => {
             } else {
                 res.json({
                     token: '',
-                    message: response.message
+                    message: response.message,
+                    successful: false
                 });
             }
         });
@@ -220,7 +225,8 @@ app.get('/Create', async (req, res) => {
         token = undefined;
         text = undefined;
         res.json({
-            message: 'No Input!'
+            message: 'No Input!',
+            successful: false
         });
     }
     if (text != undefined && token != undefined) {
@@ -233,19 +239,21 @@ app.get('/Create', async (req, res) => {
             }, (err, response) => {
                 let res_db = response.successful;
                 if (res_db) {
-                    client_cache.SetKey({
-                        key: 'TEXTTABLE' + user,
-                        value: text
-                    }, () => {
-                        res.json({
-                            message: 'Done!'
-                        });
-                    })
+                    res.json({
+                        message: 'Done!',
+                        successful: true
+                    });
+                } else {
+                    res.json({
+                        message: 'Failed',
+                        successful: false
+                    });
                 }
             });
         } else {
             res.json({
-                message: 'Please Login Again!'
+                message: 'Please Login Again!',
+                successful: false
             });
         }
     }
@@ -264,25 +272,26 @@ app.get('/See', async (req, res) => {
         token = undefined;
         num = undefined;
         res.json({
-            message: 'No Input!'
+            message: 'No Input!',
+            successful: false
         });
     }
     if (num != undefined && token != undefined) {
         let user = checkvalid(token);
         if (user != undefined) {
             client_cache.GetKey({
-                key: 'TEXTTABLE' + user + num,
+                key: 'TEXTTABLE_' + user + '_' + num,
                 value: ''
             }, (err, response) => {
                 if (response.successful) {
                     res.json({
-                        message: response.message
+                        message: response.message,
+                        successful: true
                     });
                     console.log('Got from the Cache!');
                 } else {
                     client_db.getNote({
-                        start: num,
-                        end: num,
+                        id: num,
                         username: user
                     }, (err, response) => {
                         console.log(response)
@@ -290,16 +299,18 @@ app.get('/See', async (req, res) => {
                         if (res_db) {
                             let message = response.text;
                             client_cache.SetKey({
-                                key: 'TEXTTABLE' + user + num,
+                                key: 'TEXTTABLE_' + user + '_' + num,
                                 value: message
                             }, () => {
                                 res.json({
-                                    message: message
+                                    message: message,
+                                    successful: true
                                 });
                             })
                         } else {
                             res.json({
-                                message: response.message
+                                message: response.message,
+                                successful: false
                             });
                         }
                     });
@@ -307,14 +318,15 @@ app.get('/See', async (req, res) => {
             })
         } else {
             res.json({
-                message: 'Please Login Again!'
+                message: 'Please Login Again!',
+                successful: false
             });
         }
     }
 })
 
 app.get('/Update', async (req, res) => {
-    let oldtext;
+    let id;
     let newtext;
     let token;
     try {
@@ -322,27 +334,28 @@ app.get('/Update', async (req, res) => {
         token = req.query.token;
         if (token == undefined)
             throw 'Err';
-        oldtext = req.query.oldtext;
-        if (oldtext == undefined)
+        id = req.query.id;
+        if (id == undefined)
             throw 'Err';
         newtext = req.query.newtext;
         if (newtext == undefined)
             throw 'Err';
     } catch {
-        oldtext = undefined;
+        id = undefined;
         newtext = undefined;
         token = undefined;
         res.json({
-            message: 'No Input!'
+            message: 'No Input!',
+            successful: false
         });
     }
-    if (oldtext != undefined && newtext != undefined && token != undefined) {
+    if (id != undefined && newtext != undefined && token != undefined) {
         let res_cache;
         let user = checkvalid(token);
         if (user != undefined) {
             // TODO cahce checking
             client_db.updateNote({
-                text: oldtext,
+                id: num,
                 newtext: newtext,
                 username: user
             }, (err, response) => {
@@ -351,25 +364,64 @@ app.get('/Update', async (req, res) => {
                 if (res_db) {
                     console.log('num: ' + num)
                     client_cache.SetKey({
-                        key: 'TEXTTABLE' + user + num,
+                        key: 'TEXTTABLE_' + user + '_' + num,
                         value: newtext
                     }, () => {
                         res.json({
-                            message: 'Done!'
+                            message: 'Done!',
+                            successful: true
                         });
                     })
                 } else {
-                    console.log('oldtext: ' + oldtext + ' , ' + 'text: ' + newtext + ' , ' + 'user: ' + user)
+                    console.log('id: ' + id + ' , ' + 'text: ' + newtext + ' , ' + 'user: ' + user)
                     res.json({
-                        message: 'Error!'
+                        message: 'Error!',
+                        successful: false
                     });
                 }
             });
         } else {
             res.json({
-                message: 'Please Login Again!'
+                message: 'Please Login Again!',
+                successful: false
             });
         }
+    }
+})
+
+app.get('/Remove', async (req, res) => {
+    let user = checkvalid(token);
+    if (user != undefined) {
+        // TODO cahce checking
+        client_db.deleteNote({
+            id: num,
+            username: user
+        }, (err, response) => {
+            console.log(response)
+            let res_db = response.successful;
+            if (res_db) {
+                console.log('num: ' + num)
+                client_cache.deleteNote({
+                    key: 'TEXTTABLE_' + user + '_' + num,
+                    value: ''
+                }, () => {
+                    res.json({
+                        message: 'Done!',
+                        successful: true
+                    });
+                })
+            } else {
+                res.json({
+                    message: 'Error!',
+                    successful: false
+                });
+            }
+        });
+    } else {
+        res.json({
+            message: 'Please Login Again!',
+            successful: false
+        });
     }
 })
 

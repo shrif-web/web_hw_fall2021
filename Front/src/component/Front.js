@@ -30,9 +30,14 @@ const Front = () => {
     console.log(stateval)
     return (
         <>
-            {stateval == 'Login' && <Login />}
-            {stateval == 'Signup' && <Signup />}
-            {stateval == 'Text' && <Text />}
+            <>
+                {stateval == 'Login' && <Login />}
+                {stateval == 'Signup' && <Signup />}
+                {stateval == 'Text' && <Text />}
+            </>
+            <>
+                {stateval == 'Text' && <Delete />}
+            </>
         </>
     );
 };
@@ -59,7 +64,7 @@ const CreateText = () => {
         let ans = await fetch('http://localhost:3030/Create?text=' + text + '&token=' + tokenval);
         ans = await ans.json();
         console.log(ans);
-        if (ans.message != 'Done!')
+        if (ans.successful != true)
             message.error(ans.message);
         else {
             message.warning('Text is submitted.')
@@ -121,12 +126,12 @@ const SeeTexts = () => {
         let ans = await fetch('http://localhost:3030/See?num=' + num + '&token=' + tokenval);
         ans = await ans.json();
         console.log(ans);
-        // if (ans.message != 'Done!')
-        //     message.error(ans.message);
-        // else {
-        message.warning('Printed')
-        // }
-        aUpd(ans.message);
+        if (ans.successful != true)
+            message.error(ans.message);
+        else {
+            aUpd(ans.message);
+            message.warning('Printed')
+        }
         console.log(a);
         updateprog(false)
     };
@@ -188,17 +193,16 @@ const UpdateTexts = () => {
     const onFinish = async (values) => {
         console.log('Success:', values);
         updateprog(true);
-        const { text } = values;
+        const { text, num } = values;
         console.log(t)
-        let ans = await fetch('http://localhost:3030/Update?oldtext=' + t + '&newtext=' + text + '&token=' + tokenval);
+        let ans = await fetch('http://localhost:3030/Update?num=' + num + '&newtext=' + text + '&token=' + tokenval);
         ans = await ans.json();
         console.log(ans);
-        // if (ans.message != 'Done!')
-        //     message.error(ans.message);
-        // else {
-        message.warning('Printed')
-        aUpd(text)
-        // }
+        if (ans.successful != true)
+            message.error(ans.message);
+        else {
+            message.warning('Printed')
+        }
         console.log(t);
         updateprog(false)
     };
@@ -224,6 +228,12 @@ const UpdateTexts = () => {
                 autoComplete="off"
             >
                 <Form.Item
+                    label="Which Note!?"
+                    name="num"
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
                     label="New Text"
                     name="text"
                 >
@@ -243,6 +253,70 @@ const UpdateTexts = () => {
         </Card>
     );
 };
+
+const Delete = () => {
+    const [tokenval, tokenupdater] = useRecoilState(token);
+    const [prog, updateprog] = useState(false);
+    const [a, aUpd] = useRecoilState(textState);
+    let t = a;
+    const onFinish = async (values) => {
+        console.log('Success:', values);
+        updateprog(true);
+        const { num } = values;
+        console.log(t)
+        let ans = await fetch('http://localhost:3030/Remove?num=' + num + '&token=' + tokenval);
+        ans = await ans.json();
+        console.log(ans);
+        if (ans.successful != true)
+            message.error(ans.message);
+        else {
+            message.warning('Printed')
+        }
+        console.log(t);
+        updateprog(false)
+    };
+
+    const onFinishFailed = useCallback((errorInfo) => {
+        console.log('Failed:', errorInfo);
+    }, []);
+    return (
+        <Card title="Delete" style={{ width: "30%", margin: "auto", marginTop: 30 }}>
+            <Form
+                name="basic"
+                labelCol={{
+                    span: 8,
+                }}
+                wrapperCol={{
+                    span: 16,
+                }}
+                initialValues={{
+                    remember: true,
+                }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+            >
+                <Form.Item
+                    label="Which Note!?"
+                    name="num"
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    wrapperCol={{
+                        offset: 8,
+                        span: 16,
+                    }}
+                >
+                    <Button htmlType="submit">
+                        <Spin style={{ marginRight: 8, alignSelf: 'stretch' }} spinning={prog} /> Submit
+                    </Button>
+                </Form.Item>
+            </Form>
+        </Card>
+    );
+}
+
 const Login = () => {
     const onClick = useSetRecoilState(state);
     const [tokenval, tokenupdater] = useRecoilState(token);
@@ -417,6 +491,5 @@ const Signup = () => {
         </Card>
     );
 };
-
 
 export default React.memo(Front)

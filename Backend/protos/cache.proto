@@ -13,6 +13,7 @@ service Greeter {
   rpc Clear (ReqParams) returns (Reply) {}
   rpc SetKey (ReqParams) returns (Reply) {}
   rpc GetKey (ReqParams) returns (Reply) {}
+  rpc ClearKey (ReqParams) returns (Reply) {}
 }
 
 // The request message containing the user's name.

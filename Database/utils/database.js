@@ -3,14 +3,14 @@ import dotenv from 'dotenv'
 dotenv.config();
 
 // connection string
-const sequelize = new Sequelize('postgres://admin:admin@localhost:5432/admin') 
-try{
+const sequelize = new Sequelize('postgres://admin:admin@' + process.env.PG_Path + '/admin')
+try {
     sequelize.authenticate({
-    }).then(()=>
-    sequelize.sync()
+    }).then(() =>
+        sequelize.sync()
     )
 }
-catch(err){
+catch (err) {
     console.log("could not connect to the data base!")
     console.log(err)
 }
