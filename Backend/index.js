@@ -56,8 +56,6 @@ var client_cache = new cache.Greeter(target2, grpc.credentials.createInsecure())
 console.log(target)
 console.log(target2)
 
-let num;
-
 function checkvalid(token) {
     try {
         let t = jwt.verify(token, pKey);
@@ -264,6 +262,7 @@ app.get('/Create', async (req, res) => {
 })
 
 app.get('/See', async (req, res) => {
+    let num;
     let token;
     try {
         token = req.query.token;
@@ -359,16 +358,15 @@ app.get('/Update', async (req, res) => {
         if (user != undefined) {
             // TODO cahce checking
             client_db.updateNote({
-                id: num,
+                id: id,
                 newtext: newtext,
                 username: user
             }, (err, response) => {
                 console.log(response)
                 let res_db = response.successful;
                 if (res_db) {
-                    console.log('num: ' + num)
                     client_cache.SetKey({
-                        key: 'TEXTTABLE_' + user + '_' + num,
+                        key: 'TEXTTABLE_' + user + '_' + id,
                         value: newtext
                     }, () => {
                         res.json({
@@ -395,6 +393,7 @@ app.get('/Update', async (req, res) => {
 
 app.get('/Remove', async (req, res) => {
     let token;
+    let id;
     try {
         token = req.query.token;
         if (token == undefined)
@@ -422,7 +421,7 @@ app.get('/Remove', async (req, res) => {
                 let res_db = response.successful;
                 if (res_db) {
                     console.log('num: ' + id)
-                    client_cache.deleteNote({
+                    client_cache.ClearKey({
                         key: 'TEXTTABLE_' + user + '_' + id,
                         value: ''
                     }, () => {

@@ -211,7 +211,7 @@ const UpdateTexts = () => {
         console.log('Failed:', errorInfo);
     }, []);
     return (
-        <Card title="See Notes" style={{ width: "30%", margin: "auto", marginTop: 30 }}>
+        <Card title="Update Note" style={{ width: "30%", margin: "auto", marginTop: 30 }}>
             <Form
                 name="basic"
                 labelCol={{
