@@ -193,9 +193,9 @@ const UpdateTexts = () => {
     const onFinish = async (values) => {
         console.log('Success:', values);
         updateprog(true);
-        const { text, num } = values;
+        const { text, num2 } = values;
         console.log(t)
-        let ans = await fetch('http://localhost:3030/Update?id=' + num + '&newtext=' + text + '&token=' + tokenval);
+        let ans = await fetch('http://localhost:3030/Update?id=' + num2 + '&newtext=' + text + '&token=' + tokenval);
         ans = await ans.json();
         console.log(ans);
         if (ans.successful != true)
@@ -229,7 +229,7 @@ const UpdateTexts = () => {
             >
                 <Form.Item
                     label="Which Note!?"
-                    name="num"
+                    name="num2"
                 >
                     <Input />
                 </Form.Item>
@@ -262,9 +262,9 @@ const Delete = () => {
     const onFinish = async (values) => {
         console.log('Success:', values);
         updateprog(true);
-        const { num } = values;
+        const { num3 } = values;
         console.log(t)
-        let ans = await fetch('http://localhost:3030/Remove?id=' + num + '&token=' + tokenval);
+        let ans = await fetch('http://localhost:3030/Remove?id=' + num3 + '&token=' + tokenval);
         ans = await ans.json();
         console.log(ans);
         if (ans.successful != true)
@@ -298,7 +298,7 @@ const Delete = () => {
             >
                 <Form.Item
                     label="Which Note!?"
-                    name="num"
+                    name="num3"
                 >
                     <Input />
                 </Form.Item>
