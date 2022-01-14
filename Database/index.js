@@ -99,7 +99,7 @@ function main() {
         updateNote: UpdateNote,
         getNote: GetNote
     });
-    server.bindAsync('localhost:50051', grpc.ServerCredentials.createInsecure(), () => {
+    server.bindAsync('db:50051', grpc.ServerCredentials.createInsecure(), () => {
         server.start();
     });
 }

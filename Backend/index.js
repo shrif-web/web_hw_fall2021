@@ -53,6 +53,9 @@ var client_db = new db.database(target, grpc.credentials.createInsecure());
 var target2 = process.env.Backend_CachePath; // Cache
 var client_cache = new cache.Greeter(target2, grpc.credentials.createInsecure());
 
+console.log(target)
+console.log(target2)
+
 let num;
 
 function checkvalid(token) {
@@ -184,6 +187,7 @@ app.get('/Signup', async (req, res) => {
         client_db.createUser({ username: user, password: pass }, (err, response) => {
             console.log('Login: ' + user)
             console.log(response)
+            console.log(err)
             valid = response.successful;
             console.log(valid)
             if (valid == true) {
@@ -245,7 +249,7 @@ app.get('/Create', async (req, res) => {
                     });
                 } else {
                     res.json({
-                        message: 'Failed',
+                        message: response.message,
                         successful: false
                     });
                 }

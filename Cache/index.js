@@ -6,6 +6,7 @@ console.log('Cache service has just started');
 dotenv.config();
 
 var PROTO_PATH = process.env.Cache_Proto_Path;
+console.log(PROTO_PATH)
 var packageDefinition = protoLoader.loadSync(
   PROTO_PATH,
   {
