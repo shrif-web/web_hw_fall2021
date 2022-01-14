@@ -11,80 +11,81 @@ import dotenv from 'dotenv'
 console.log('Database service has just started');
 dotenv.config();
 
-var PROTO_PATH = './protos/db.proto';
+var PROTO_PATH = process.env.DB_Proto_Path;
 
 var packageDefinition = protoLoader.loadSync(
     PROTO_PATH,
-    {keepCase: true,
-     longs: String,
-     enums: String,
-     defaults: true,
-     oneofs: true
+    {
+        keepCase: true,
+        longs: String,
+        enums: String,
+        defaults: true,
+        oneofs: true
     });
 var db = grpc.loadPackageDefinition(packageDefinition).cache;
 
 
 async function CreateUser(call, callback) {
     const user_created = await createUser(call.request.username, call.request.password);
-    if (user_created == false){
-        callback(null, {successful: false , message: 'user alredy existed!' });
+    if (user_created == false) {
+        callback(null, { successful: false, message: 'user alredy existed!' });
     }
-    else{
-        callback(null, {successful: true, message: 'user added successfuly!' });
+    else {
+        callback(null, { successful: true, message: 'user added successfuly!' });
     }
 }
 
 async function LoginUser(call, callback) {
     console.log(call.request)
-    const login_failed =  await loginUser(call.request.username, call.request.password);
+    const login_failed = await loginUser(call.request.username, call.request.password);
 
-    if (login_failed == false){
-        callback(null, {successful: false, message: 'user not existed!'});
+    if (login_failed == false) {
+        callback(null, { successful: false, message: 'user not existed!' });
     }
-    
-    else{
+
+    else {
         console.log(login_failed)
-        callback(null, {successful: true, message: 'user found!' });
+        callback(null, { successful: true, message: 'user found!' });
     }
 }
 
 async function CreateNote(call, callback) {
     const note_created = await createNote(call.request.text, call.request.username);
-    if (note_created == true){
-        callback(null, {successful: true, message: 'note created!' });
+    if (note_created == true) {
+        callback(null, { successful: true, message: 'note created!' });
     }
     else {
-        callback(null, {successful: false, message: 'There was a problem try again!' });
+        callback(null, { successful: false, message: 'There was a problem try again!' });
     }
 }
 
 async function DeleteNote(call, callback) {
-    const note_deleted = await deleteNote( call.request.id, call.request.username);
-    if (note_deleted == true){
-        callback(null, {successful: true, message: 'note deletetd!' });
+    const note_deleted = await deleteNote(call.request.id, call.request.username);
+    if (note_deleted == true) {
+        callback(null, { successful: true, message: 'note deletetd!' });
     }
-    else{
-        callback(null, {successful: false, message: 'There was a problem try again!' });
+    else {
+        callback(null, { successful: false, message: 'There was a problem try again!' });
     }
 }
 
 async function UpdateNote(call, callback) {
     const note_updated = await updateNote(call.request.id, call.request.username, call.request.newtext);
-    if (note_updated == true){
-        callback(null, {successful: true, message: 'note updtated!' });
+    if (note_updated == true) {
+        callback(null, { successful: true, message: 'note updtated!' });
     }
-    else{
-        callback(null, {successful: false, message: 'Text not found to update!' });
+    else {
+        callback(null, { successful: false, message: 'Text not found to update!' });
     }
 }
 
 async function GetNote(call, callback) {
     const note = await getNote(call.request.username, call.request.id);
-    if (note != null){
-        callback(null, {successful: true, text: note });
+    if (note != null) {
+        callback(null, { successful: true, text: note });
     }
-    else{
-        callback(null, {successful: false, text: 'An error eccoured nothing to show' });
+    else {
+        callback(null, { successful: false, text: 'An error eccoured nothing to show' });
     }
 }
 
@@ -92,15 +93,15 @@ function main() {
     var server = new grpc.Server();
     server.addService(db.database.service, {
         createUser: CreateUser,
-        loginUser:  LoginUser,
+        loginUser: LoginUser,
         createNote: CreateNote,
         deleteNote: DeleteNote,
         updateNote: UpdateNote,
-        getNote:    GetNote
-        });
+        getNote: GetNote
+    });
     server.bindAsync('localhost:50051', grpc.ServerCredentials.createInsecure(), () => {
         server.start();
     });
 }
-  
+
 main();
