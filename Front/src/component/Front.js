@@ -195,7 +195,7 @@ const UpdateTexts = () => {
         updateprog(true);
         const { text, num } = values;
         console.log(t)
-        let ans = await fetch('http://localhost:3030/Update?num=' + num + '&newtext=' + text + '&token=' + tokenval);
+        let ans = await fetch('http://localhost:3030/Update?id=' + num + '&newtext=' + text + '&token=' + tokenval);
         ans = await ans.json();
         console.log(ans);
         if (ans.successful != true)
@@ -264,7 +264,7 @@ const Delete = () => {
         updateprog(true);
         const { num } = values;
         console.log(t)
-        let ans = await fetch('http://localhost:3030/Remove?num=' + num + '&token=' + tokenval);
+        let ans = await fetch('http://localhost:3030/Remove?id=' + num + '&token=' + tokenval);
         ans = await ans.json();
         console.log(ans);
         if (ans.successful != true)

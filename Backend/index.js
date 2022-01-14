@@ -394,38 +394,56 @@ app.get('/Update', async (req, res) => {
 })
 
 app.get('/Remove', async (req, res) => {
-    let user = checkvalid(token);
-    if (user != undefined) {
-        // TODO cahce checking
-        client_db.deleteNote({
-            id: num,
-            username: user
-        }, (err, response) => {
-            console.log(response)
-            let res_db = response.successful;
-            if (res_db) {
-                console.log('num: ' + num)
-                client_cache.deleteNote({
-                    key: 'TEXTTABLE_' + user + '_' + num,
-                    value: ''
-                }, () => {
-                    res.json({
-                        message: 'Done!',
-                        successful: true
-                    });
-                })
-            } else {
-                res.json({
-                    message: 'Error!',
-                    successful: false
-                });
-            }
-        });
-    } else {
+    let token;
+    try {
+        token = req.query.token;
+        if (token == undefined)
+            throw 'Err';
+        id = req.query.id;
+        if (id == undefined)
+            throw 'Err';
+    } catch {
+        token = undefined;
+        id = undefined;
         res.json({
-            message: 'Please Login Again!',
+            message: 'No Input!',
             successful: false
         });
+    }
+    if (id != undefined && token != undefined) {
+        let user = checkvalid(token);
+        if (user != undefined) {
+            // TODO cahce checking
+            client_db.deleteNote({
+                id: id,
+                username: user
+            }, (err, response) => {
+                console.log(response)
+                let res_db = response.successful;
+                if (res_db) {
+                    console.log('num: ' + id)
+                    client_cache.deleteNote({
+                        key: 'TEXTTABLE_' + user + '_' + id,
+                        value: ''
+                    }, () => {
+                        res.json({
+                            message: 'Done!',
+                            successful: true
+                        });
+                    })
+                } else {
+                    res.json({
+                        message: 'Error!',
+                        successful: false
+                    });
+                }
+            });
+        } else {
+            res.json({
+                message: 'Please Login Again!',
+                successful: false
+            });
+        }
     }
 })
 
