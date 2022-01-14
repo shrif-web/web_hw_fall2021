@@ -16,6 +16,7 @@ async function getNote(Username, id) {
                 },
                 { transaction: t });
             if (note[0] === null) {
+                await t.rollback();
                 return null;
             }
 
@@ -33,11 +34,12 @@ async function getNote(Username, id) {
                     offset: id,
                 }, { transaction: t });
             if (user === null || note[0] === null) {
+                await t.rollback();
                 return null;
             }
 
         }
-
+        await t.commit();
         return note[0].text;
 
 

@@ -13,6 +13,7 @@ async function deleteNote(id, Username) {
                     offset: id,
                 }, { transaction: t });
             if (note[0] === null) {
+                await t.rollback();
                 return false;
             }
             console.log ( note[0])
@@ -40,6 +41,7 @@ async function deleteNote(id, Username) {
                     offset: id,
                 }, { transaction: t });
             if (user === null || note[0] === null) {
+                await t.rollback();
                 return false;
             }
 

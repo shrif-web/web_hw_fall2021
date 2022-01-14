@@ -23,6 +23,7 @@ async function createNote(Text, Username) {
 
     } catch {
         await t.rollback();
+        return false;
     }
 }
 

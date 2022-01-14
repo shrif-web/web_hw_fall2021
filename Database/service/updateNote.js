@@ -14,6 +14,7 @@ async function updateNote(id, username, newtext) {
                     offset: id,
                 }, { transaction: t });
             if (note[0] === null) {
+                await t.rollback();
                 return false;
             }
 
@@ -77,6 +78,7 @@ async function updateNote(id, username, newtext) {
 
     } catch {
         await t.rollback();
+        return false;
     }
 
 }

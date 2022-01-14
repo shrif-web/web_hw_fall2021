@@ -22,6 +22,7 @@ async function createUser(Username, Password) {
         }
     } catch {
         await t.rollback();
+        return false;
     }
 }
 

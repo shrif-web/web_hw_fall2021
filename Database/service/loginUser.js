@@ -21,6 +21,7 @@ async function loginUser(Username, Password) {
         }
     } catch {
         await t.rollback();
+        return false;
     }
 }
 
