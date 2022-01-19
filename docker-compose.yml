@@ -1,16 +1,20 @@
 version: '3.7'
 services:
-  front: 
-    build:  
+  front:
+    build:
       context: ./Front/
       target: production
     restart: always
-    container_name: Front_container    
-    ports: 
+    container_name: Front_container
+    ports:
       - "80:80"
+    depends_on:
+      - backend
+    links:
+      - backend
     volumes:
-        - ./Front/default.conf:/etc/nginx/conf.d/default.conf 
-        - ./Front/nginx.conf:/etc/nginx/nginx.conf 
+      - ./Front/default.conf:/etc/nginx/conf.d/default.conf
+      - ./Front/nginx.conf:/etc/nginx/nginx.conf
   pg:
     container_name: hw3-db
     image: postgres
@@ -18,29 +22,37 @@ services:
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
-    ports: 
+    ports:
       - "5432:5432"
-       
-  cache: 
-    build: ./Cache/ 
+
+  cache:
+    build: ./Cache/
     restart: always
     container_name: cache_container
     volumes:
-        - ./.env:/usr/src/app/.env 
-
-  db: 
-    build: ./Database/ 
+      - ./.env:/usr/src/app/.env
+  db:
+    build: ./Database/
     restart: always
-    container_name: Database_container     
+    container_name: Database_container
     volumes:
-        - ./.env:/usr/src/app/.env
+      - ./.env:/usr/src/app/.env
+    depends_on:
+      - pg
+    links:
+      - pg
 
   backend:
     build: ./Backend/
     restart: always
     container_name: backend_container
     volumes:
-        - ./.env:/usr/src/app/.env
-    ports: 
+      - ./.env:/usr/src/app/.env
+    ports:
       - "3030:3030"
-
+    depends_on:
+      - cache
+      - db
+    links:
+      - cache
+      - db
