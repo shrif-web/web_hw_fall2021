@@ -5,17 +5,18 @@ import protoLoader from '@grpc/proto-loader';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv'
 import rateLimit from 'express-rate-limit';
+dotenv.config();
 
 const limiter = rateLimit({
     windowMs: 1 * 60 * 1000, // 15 minutes
-    max: process.env.N_Limit, // Limit each IP to 100 requests per window (here, per 15 minutes)
+    max: +process.env.N_Limit, // Limit each IP to 100 requests per window (here, per 15 minutes)
     standardHeaders: true, // Return rate limit info in the RateLimit-* headers
     legacyHeaders: false, // Disable the X-RateLimit-* headers
     message: '{"successful":false,"message":"Too many requests!"}'
 })
 
 console.log('Backend service has just started');
-dotenv.config();
+console.log('Max Requests: ' + process.env.N_Limit)
 
 // Database
 var PROTO_PATH = './protos/db.proto';
